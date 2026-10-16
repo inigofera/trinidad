@@ -1,4 +1,8 @@
-# // TRINIDAD
+<p align="center">
+  <img src="static/logo-banner.svg" alt="trinidad design system — dual-axis calibration mark" width="100%" />
+</p>
+
+# trinidad
 
 **Industrial-Grade Design System & Interactive Component Lab**  
 *Built with Svelte 5 (Runes), SvelteKit 2, Tailwind CSS v4, and W3C Design Tokens.*
@@ -12,33 +16,33 @@
 
 ## 1. System Thesis: The UX Engineering Trinity
 
-**Trinidad** (*Spanish for Trinity*) is an architectural component library and live telemetry workbench created by **Iñigo Artolozaga**[cite: 1]. 
+**trinidad** (*Spanish for Trinity*) is an architectural component library and live telemetry workbench created by **Iñigo Artolozaga**[cite: 1]. 
 
-In standard software organizations, user research, visual design, and frontend engineering operate in isolated silos. This separation causes translation loss between prototype and production. Trinidad eliminates the handoff gap by uniting the three core disciplines of UX Engineering inside a single codebase:
+In standard software organizations, user research, visual design, and frontend engineering operate in isolated silos. This separation causes translation loss between prototype and production. trinidad eliminates the handoff gap by uniting the three core disciplines of UX Engineering inside a single codebase:
 
 ```text
-                  [ 01. HUMAN FACTORS ]
-            (Ergonomics, Cognitive Load, WAI-ARIA)
-                         /     \
-                        /       \
-                       /         \
-[ 02. VISUAL DESIGN ] ————————————— [ 03. SYSTEMS ENGINEERING ]
-(Swiss Grids, Tactile Tokens,     (Svelte 5 Runes, 60fps Canvas,
- Warm Brutalism, Typography)       Zero-Runtime CSS, Strict TS)
+                    [ HUMAN FACTORS ]
+          (Ergonomics, Cognitive Load, WAI-ARIA)
+                       /     \
+                      /       \
+                     /         \
+   [ VISUAL DESIGN ] ————————————— [ SYSTEMS ENGINEERING ]
+ (Swiss Grids, Tactile Tokens,     (Svelte 5 Runes, 60fps Canvas,
+  Warm Brutalism, Typography)       Zero-Runtime CSS, Strict TS)
 
 ```
 
-| Pillar | Discipline | Implementation in Trinidad |
+| Pillar | Discipline | Implementation in trinidad |
 | :--- | :--- | :--- |
-| **`01 // ERGONOMICS`** | **Human Factors & HCI** | • Deterministic WAI-ARIA 1.2 state machines (`spinbutton`, `combobox`, `grid`)<br>• Roving `tabindex` and cyclic focus traps (`<dialog>`)<br>• Pointer-scrubbing inputs and step modifiers (`Shift`/`Alt`) to minimize operator fatigue<br>• Atomic proposal confirmation gates (`DiffViewer`) to prevent destructive overwrites |
-| **`02 // DESIGN`** | **Interaction & Visual Systems** | • Synthesis of mid-century Swiss grids, warm editorial printing, and technical telemetry<br>• Multi-theme W3C DTCG Token Engine (`Editorial Paper` vs. `Industrial Operator Dark`)<br>• Runtime spatial density scaling (`Comfortable` vs. `Compact`)<br>• Self-hosted `Space Grotesk` and `Space Mono` typography |
-| **`03 // ENGINEERING`** | **Systems Architecture** | • Decoupled headless `.svelte.ts` Runes state machines (`$state`, `$derived`)<br>• $O(1)$ DOM viewport virtualization for `10,000+` row logs (`DataTable`)<br>• Hardware-accelerated `60fps` Retina `<canvas>` rendering (`Sparkline`)<br>• Zero runtime CSS-in-JS overhead; strictly typed HTML attribute forwarding |
+| **`ERGONOMICS`** | **Human Factors & HCI** | • Deterministic WAI-ARIA 1.2 state machines (`spinbutton`, `combobox`, `grid`)<br>• Roving `tabindex` and cyclic focus traps (`<dialog>`)<br>• Pointer-scrubbing inputs and step modifiers (`Shift`/`Alt`) to minimize operator fatigue<br>• Atomic proposal confirmation gates (`DiffViewer`) to prevent destructive overwrites |
+| **`DESIGN`** | **Interaction & Visual Systems** | • Synthesis of mid-century Swiss grids, warm editorial printing, and technical telemetry<br>• Multi-theme W3C DTCG Token Engine (`Editorial Paper` vs. `Industrial Operator Dark`)<br>• Runtime spatial density scaling (`Comfortable` vs. `Compact`)<br>• Self-hosted `Space Grotesk` and `Space Mono` typography |
+| **`ENGINEERING`** | **Systems Architecture** | • Decoupled headless `.svelte.ts` Runes state machines (`$state`, `$derived`)<br>• $O(1)$ DOM viewport virtualization for `10,000+` row logs (`DataTable`)<br>• Hardware-accelerated `60fps` Retina `<canvas>` rendering (`Sparkline`)<br>• Zero runtime CSS-in-JS overhead; strictly typed HTML attribute forwarding |
 
 ---
 
 ## 2. Component Roster
 
-Rather than duplicating generic marketing UI templates, Trinidad focuses on high-precision foundational primitives and complex domain widgets for **Human-Robot Interaction (HRI)**, **B2B CRM systems**, and **Agentic Knowledge Management**.
+Rather than duplicating generic marketing UI templates, trinidad focuses on high-precision foundational primitives and complex domain widgets for **Human-Robot Interaction (HRI)**, **B2B CRM systems**, and **Agentic Knowledge Management**.
 
 ### Tier A: Foundational Primitives
 
@@ -59,7 +63,7 @@ Rather than duplicating generic marketing UI templates, Trinidad focuses on high
 
 ## 3. Three-Tier Design Token Engine
 
-Trinidad uses a zero-runtime CSS Custom Property pipeline compiled from a single W3C Design Tokens Community Group (`tokens.json`) source of truth into static CSS (`tokens.css`) and TypeScript constants (`tokens.ts`).
+trinidad uses a zero-runtime CSS Custom Property pipeline compiled from a single W3C Design Tokens Community Group (`tokens.json`) source of truth into static CSS (`tokens.css`) and TypeScript constants (`tokens.ts`).
 
 ```text
 [ Tier 1: Primitives ] ──> [ Tier 2: Semantic Roles ] ──> [ Tier 3: Environmental Axes ]
@@ -80,7 +84,7 @@ Trinidad uses a zero-runtime CSS Custom Property pipeline compiled from a single
 
 ## 4. The Interactive Workbench (`/lab`)
 
-Instead of relying on third-party documentation frameworks, Trinidad ships with a custom-engineered telemetry workbench inside `src/routes/lab`. Every component page features a 4-zone inspection layout:
+Instead of relying on third-party documentation frameworks, trinidad ships with a custom-engineered telemetry workbench inside `src/routes/lab`. Every component page features a 4-zone inspection layout:
 
 1. **Stage Canvas**: Live interactive component rendering with theme, density, and motion controls, plus a gzipped bundle weight badge (`kB gzip`).
 2. **Reactive Prop Controls**: Real-time inputs bound directly to Svelte 5 `$state` props to test boundary conditions, error states, and high-frequency data bursts.
@@ -93,7 +97,7 @@ Instead of relying on third-party documentation frameworks, Trinidad ships with 
 
 ## 5. Repository Structure
 
-Trinidad is structured as a dual-purpose workspace using `@sveltejs/package`: `src/lib` contains the pure, publishable UI library, while `src/routes` powers the static verification workbench.
+trinidad is structured as a dual-purpose workspace using `@sveltejs/package`: `src/lib` contains the pure, publishable UI library, while `src/routes` powers the static verification workbench.
 
 ```text
 trinidad/
