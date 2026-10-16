@@ -14,7 +14,8 @@ export const tokens = {
       'slate-800': '#1f2d25',
       'crimson-500': '#d9383a',
       'amber-500': '#e59934',
-      'emerald-500': '#2ca568'
+      'emerald-500': '#2ca568',
+      white: '#ffffff'
     },
     font: {
       sans: "'Space Grotesk', sans-serif",
@@ -32,7 +33,8 @@ export const tokens = {
       'accent-interactive': '#a6c856',
       'status-critical': '#d9383a',
       'status-warning': '#e59934',
-      'status-nominal': '#2ca568'
+      'status-nominal': '#2ca568',
+      'brand-primary': '#24422a'
     },
     industrial: {
       'surface-canvas': '#0d1310',
@@ -44,7 +46,8 @@ export const tokens = {
       'accent-interactive': '#a6c856',
       'status-critical': '#d9383a',
       'status-warning': '#e59934',
-      'status-nominal': '#2ca568'
+      'status-nominal': '#2ca568',
+      'brand-primary': '#ffffff'
     }
   },
   density: {

@@ -1,0 +1,56 @@
+<svg width="840" height="220" viewBox="0 0 840 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left Canvas: Editorial Paper (#f8f3e7) -->
+  <rect width="840" height="220" fill="#f8f3e7" />
+  
+  <!-- Right Canvas: Industrial Operator Dark (#0d1310) -->
+  <polygon points="460,0 840,0 840,220 400,220" fill="#0d1310" />
+
+  <!-- Subtle Architectural Grid Lines -->
+  <line x1="0" y1="36" x2="840" y2="36" stroke="#dad2be" stroke-opacity="0.4" stroke-width="1" />
+  <line x1="0" y1="184" x2="840" y2="184" stroke="#dad2be" stroke-opacity="0.4" stroke-width="1" />
+  <line x1="460" y1="0" x2="400" y2="220" stroke="#dad2be" stroke-opacity="0.3" stroke-width="1" />
+
+  <!-- Outer Frame -->
+  <rect x="0.5" y="0.5" width="839" height="219" stroke="#dad2be" stroke-width="1" />
+
+  <!-- ================================================================= -->
+  <!-- LEFT SIDE: LIGHT THEME LOCKUP (EDITORIAL PAPER)                   -->
+  <!-- ================================================================= -->
+  <g transform="translate(56, 62)">
+    <!-- Isometric Mark scaled 1.5x (96x96) -->
+    <g transform="scale(1.5)">
+      <!-- Facet 01: Primary Forest (#24422a) -->
+      <polygon points="32,7 37.2,16 16.41,52.03 6,52.03" fill="#24422a" />
+      <!-- Facet 02: Muted Olive (#5c744e) -->
+      <polygon points="38.64,18.5 58,52.03 47.59,52.03 33.44,27.5" fill="#5c744e" />
+      <!-- Facet 03: Electric Chartreuse (#a6c856) - Flush against 01 and 02 -->
+      <polygon points="21.61,43.03 42.39,43.03 47.59,52.03 16.41,52.03" fill="#a6c856" />
+    </g>
+
+    <!-- Wordmark -->
+    <text x="112" y="54" fill="#24422a" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="46" font-weight="700" letter-spacing="-0.04em">
+      trinidad
+    </text>
+    <text x="114" y="78" fill="#5c744e" font-family="'Space Mono', monospace" font-size="12" letter-spacing="0.04em">
+      ERGONOMICS · DESIGN · ENGINEERING
+    </text>
+  </g>
+
+  <!-- ================================================================= -->
+  <!-- RIGHT SIDE: DARK THEME ICON SHOWCASE (INDUSTRIAL DARK)            -->
+  <!-- ================================================================= -->
+  <g transform="translate(576, 54)">
+    <!-- Elevated Card Container -->
+    <rect x="0" y="0" width="112" height="112" rx="12" fill="#151e19" stroke="#1f2d25" stroke-width="1.5" />
+
+    <!-- Centered Dark-Mode Mark (white/cream left, forest green right, mint bottom flush) -->
+    <g transform="translate(24, 24)">
+      <!-- Left Pillar: White (#ffffff) -->
+      <polygon points="32,7 37.2,16 16.41,52.03 6,52.03" fill="#ffffff" />
+      <!-- Facet 02: Forest Olive (#5c744e) -->
+      <polygon points="38.64,18.5 58,52.03 47.59,52.03 33.44,27.5" fill="#5c744e" />
+      <!-- Facet 03: Electric Chartreuse (#a6c856) - Flush against 01 and 02 -->
+      <polygon points="21.61,43.03 42.39,43.03 47.59,52.03 16.41,52.03" fill="#a6c856" />
+    </g>
+  </g>
+</svg>

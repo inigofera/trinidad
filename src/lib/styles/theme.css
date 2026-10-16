@@ -6,6 +6,15 @@
 @import '@fontsource/space-mono/400.css';
 @import '@fontsource/space-mono/700.css';
 
+:root {
+  --brand-secondary: var(--raw-olive-600);
+  --brand-accent: var(--raw-lime-400);
+}
+
+[data-theme='industrial'] {
+  --brand-primary: var(--raw-white, #ffffff);
+}
+
 @theme {
   --color-surface-canvas: var(--surface-canvas);
   --color-surface-elevated: var(--surface-elevated);
@@ -17,6 +26,10 @@
   --color-status-critical: var(--status-critical);
   --color-status-warning: var(--status-warning);
   --color-status-nominal: var(--status-nominal);
+
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);

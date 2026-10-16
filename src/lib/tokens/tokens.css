@@ -14,6 +14,7 @@
   --raw-crimson-500: #d9383a;
   --raw-amber-500: #e59934;
   --raw-emerald-500: #2ca568;
+  --raw-white: #ffffff;
 
   /* Primitives: Font */
   --font-sans: 'Space Grotesk', sans-serif;
@@ -30,6 +31,7 @@
   --status-critical: var(--raw-crimson-500);
   --status-warning: var(--raw-amber-500);
   --status-nominal: var(--raw-emerald-500);
+  --brand-primary: var(--raw-forest-900);
 
   /* Density: Comfortable (Default) */
   --control-height: 2.25rem;
@@ -52,6 +54,7 @@
   --status-critical: var(--raw-crimson-500);
   --status-warning: var(--raw-amber-500);
   --status-nominal: var(--raw-emerald-500);
+  --brand-primary: var(--raw-white);
 }
 
 [data-density='compact'] {

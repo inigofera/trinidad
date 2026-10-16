@@ -1,0 +1,9 @@
+<svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="12" fill="#24422a" />
+  <!-- Left Pillar: White -->
+  <polygon points="32,7 37.2,16 16.41,52.03 6,52.03" fill="#ffffff" />
+  <!-- Facet 02: Olive (Right Pillar - top-left edge parallel to Cream, separated by top gap) -->
+  <polygon points="38.64,18.5 58,52.03 47.59,52.03 33.44,27.5" fill="#5c744e" />
+  <!-- Facet 03: Chartreuse (Bottom Base - flush against both Cream and Olive) -->
+  <polygon points="21.61,43.03 42.39,43.03 47.59,52.03 16.41,52.03" fill="#a6c856" />
+</svg>
