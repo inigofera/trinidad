@@ -1,0 +1,8 @@
+pre-commit:
+  parallel: true
+  commands:
+    typecheck:
+      run: npm run check
+    format-check:
+      glob: '*.{js,ts,svelte,json,css}'
+      run: npx prettier --check {staged_files}

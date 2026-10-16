@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import '../tokens/tokens.css';
+@import '@fontsource/space-grotesk/400.css';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/space-mono/400.css';
+@import '@fontsource/space-mono/700.css';
+
+@theme {
+  --color-surface-canvas: var(--surface-canvas);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-muted: var(--surface-muted);
+  --color-fg-primary: var(--fg-primary);
+  --color-fg-muted: var(--fg-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-accent-interactive: var(--accent-interactive);
+  --color-status-critical: var(--status-critical);
+  --color-status-warning: var(--status-warning);
+  --color-status-nominal: var(--status-nominal);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+::selection {
+  background-color: var(--accent-interactive);
+  color: var(--raw-forest-900);
+}
