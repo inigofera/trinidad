@@ -11,3 +11,5 @@ dist/
 *.md
 .agents/
 *.pdf
+test-results/
+playwright-report/

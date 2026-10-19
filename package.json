@@ -15,6 +15,7 @@
     "tokens": "node scripts/build-tokens.mjs",
     "dev": "npm run tokens && vite dev",
     "build": "npm run tokens && vite build && svelte-package -i src/lib -o dist && node scripts/measure-bundles.mjs",
+    "preview": "vite preview --port 4173 --outDir build",
     "check": "npm run tokens && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
     "test": "playwright test"
   },
