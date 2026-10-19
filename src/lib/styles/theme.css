@@ -23,6 +23,7 @@
   --color-fg-muted: var(--fg-muted);
   --color-border-subtle: var(--border-subtle);
   --color-accent-interactive: var(--accent-interactive);
+  --color-accent-contrast: var(--raw-forest-900);
   --color-status-critical: var(--status-critical);
   --color-status-warning: var(--status-warning);
   --color-status-nominal: var(--status-nominal);
