@@ -1,10 +1,10 @@
 {
-  "button": "1.7",
-  "combobox": "3.2",
-  "data-table": "3.1",
-  "dialog": "1.8",
-  "diff-viewer": "3.2",
+  "button": "2.0",
+  "combobox": "3.7",
+  "data-table": "3.2",
+  "dialog": "2.5",
+  "diff-viewer": "3.9",
   "logo": "1.0",
-  "number-field": "2.2",
-  "sparkline": "3.4"
+  "number-field": "2.4",
+  "sparkline": "3.6"
 }
