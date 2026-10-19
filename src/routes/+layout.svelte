@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import '../lib/styles/theme.css';
   import { TrinidadLogo } from '$lib/components/logo/index.js';
-  import { env } from '$lib/state/environment.svelte.js';
+  import { setEnvironment } from '$lib/state/environment.svelte.js';
   import { useRovingTabindex, Announcer } from '$lib/actions/index.js';
 
   interface Props {
@@ -11,11 +11,12 @@
 
   let { children }: Props = $props();
 
+  const env = setEnvironment();
   let fps = $state(60);
   let navOpen = $state(false);
 
   $effect(() => {
-    env.init();
+    return env.init();
   });
 
   $effect(() => {

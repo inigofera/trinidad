@@ -1,9 +1,11 @@
 <script lang="ts">
   import { TrinidadLogo } from '$lib/components/logo/index.js';
-  import { env } from '$lib/state/environment.svelte.js';
+  import { getEnvironment } from '$lib/state/environment.svelte.js';
   import { Announcer } from '$lib/actions/index.js';
   import { Sparkline } from '$lib/components/sparkline/index.js';
   import bundleStats from './lab/bundle-stats.json';
+
+  const env = getEnvironment();
 
   // State for Pillar 1: Human Factors (Live Mini-Keyboard Visualizer)
   let activeElementTag = $state<string>('document.body');

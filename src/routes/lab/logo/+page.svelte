@@ -1,6 +1,8 @@
 <script lang="ts">
   import { TrinidadLogo } from '$lib/components/logo/index.js';
-  import { env } from '$lib/state/environment.svelte.js';
+  import { getEnvironment } from '$lib/state/environment.svelte.js';
+
+  const env = getEnvironment();
 
   // Reactive props
   let size = $state<number>(32);

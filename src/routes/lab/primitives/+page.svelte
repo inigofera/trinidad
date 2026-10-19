@@ -1,6 +1,8 @@
 <script lang="ts">
   import { useFocusTrap, useRovingTabindex, Announcer } from '$lib/actions/index.js';
-  import { env } from '$lib/state/environment.svelte.js';
+  import { getEnvironment } from '$lib/state/environment.svelte.js';
+
+  const env = getEnvironment();
 
   // Reactive prop controls
   let activeTab = $state<'composite' | 'focus-trap' | 'roving-tabindex' | 'announcer'>('composite');

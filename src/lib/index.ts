@@ -1,6 +1,7 @@
 // Design tokens and environment
 export * from './tokens/tokens.js';
 export * from './actions/index.js';
+export * from './state/environment.svelte.js';
 
 // The 7-Component Roster
 export * from './components/button/index.js';
