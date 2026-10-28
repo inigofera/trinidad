@@ -1,7 +1,6 @@
 <script lang="ts">
   import {
     Badge,
-    Surface,
     Stack,
     Grid,
     ThemeScope,
@@ -208,28 +207,31 @@
   <Button variant="secondary" onclick={() => openProposalModal(row)}>[Review AI Patch]</Button>
 {/snippet}
 
-<div class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-10">
+<div class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-12">
   <!-- Page Header -->
   <header class="border-b border-border-subtle pb-6">
-    <div class="font-mono text-xs uppercase tracking-widest text-fg-muted mb-2 select-none">
-      // CONTEXTUAL COMPOSITION · IN THE WILD
-    </div>
     <h1 class="text-3xl font-mono font-bold text-fg-primary tracking-tight mb-3">
       Production Patterns
     </h1>
-    <p class="text-sm text-fg-muted max-w-3xl leading-relaxed">
-      Demonstrating how Trinidad primitives combine across editorial portfolio layouts and
-      high-frequency operator consoles. Featuring nested ThemeScope subtrees, 60fps streaming
-      telemetry, and synchronized agentic triage workflows.
-    </p>
   </header>
 
-  <!-- Pattern 01: Portfolio Case Study Card with Nested ThemeScope -->
-  <Surface
-    elevation="elevated"
-    padding="lg"
-    kicker="01 // PORTFOLIO CASE STUDY ARTIFACT (OUTER PAPER SCOPE)"
-  >
+  <!-- What this page demonstrates -->
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">Composition under shared state</h2>
+
+    <p class="text-sm text-fg-muted leading-relaxed max-w-3xl">
+      Patterns show Trinidad once components stop living as isolated demos and start sharing one
+      reactive state. The two compositions below — an editorial portfolio case study embedding a
+      scoped industrial telemetry subtree, and an agentic triage console where every primitive reads
+      the same live event stream — prove that composition stays deterministic when data crosses
+      theme and density boundaries.
+    </p>
+  </section>
+
+  <!-- Pattern 01: Portfolio Case Study with Nested ThemeScope -->
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">Portfolio case study</h2>
+
     <Grid cols={2} gap="lg">
       <!-- Left Column: Narrative Metadata -->
       <Stack direction="vertical" gap="md">
@@ -237,11 +239,6 @@
           <h2 class="text-xl font-mono font-bold text-fg-primary mb-2">
             Vision AI Depalletizing Operator Console
           </h2>
-          <Stack direction="horizontal" gap="xs" wrap={true} class="mb-4">
-            <Badge variant="accent">Svelte 5 Runes</Badge>
-            <Badge variant="nominal" pulse={true}>60fps Telemetry</Badge>
-            <Badge variant="neutral">WCAG 2.1 AA</Badge>
-          </Stack>
           <p class="text-sm text-fg-muted leading-relaxed">
             Non-technical warehouse operators monitor 3D point-cloud pick confidence scores in real
             time. Embedded high-density operator scopes withstand industrial ambient lighting while
@@ -257,7 +254,7 @@
               subtreeDensity = subtreeDensity === 'compact' ? 'comfortable' : 'compact';
             }}
           >
-            [Invert Embedded Subtree: {subtreeTheme.toUpperCase()} / {subtreeDensity.toUpperCase()}]
+            Invert embedded theme
           </Button>
         </div>
       </Stack>
@@ -295,15 +292,15 @@
         </Stack>
       </ThemeScope>
     </Grid>
-  </Surface>
+  </section>
 
   <!-- Pattern 02: Unified HRI & Agentic Triage Console -->
-  <Surface elevation="elevated" padding="lg" kicker="02 // UNIFIED HRI & AGENTIC TRIAGE CONSOLE">
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">Agentic triage console</h2>
+
     <Stack direction="vertical" gap="md">
-      <!-- Toolbar: Combobox + ToggleButton + Filters -->
-      <div
-        class="flex flex-wrap items-center justify-between gap-4 p-3 bg-surface-canvas border border-border-subtle"
-      >
+      <!-- Toolbar: Combobox + ToggleButton + Active Filter Readout -->
+      <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[280px]">
           <div class="w-80 max-w-full">
             <Combobox
@@ -326,45 +323,43 @@
         </div>
       </div>
 
-      <!-- Calibration Rail: Sparkline + Dual NumberFields -->
-      <div class="p-4 bg-surface-canvas border border-border-subtle">
-        <Grid cols={3} gap="md">
-          <div class="col-span-1 md:col-span-2">
-            <Sparkline
-              data={liveLatency}
-              min={0}
-              max={100}
-              warnThreshold={warnLatency}
-              criticalThreshold={critLatency}
-              unit="ms"
-              label="Real-time Subsystem Latency Bus"
-            />
-          </div>
-          <Stack direction="vertical" gap="sm">
-            <NumberField
-              bind:value={warnLatency}
-              min={20}
-              max={60}
-              step={1}
-              unit="ms"
-              label="Warn Latency Gate"
-            />
-            <NumberField
-              bind:value={critLatency}
-              min={60}
-              max={100}
-              step={1}
-              unit="ms"
-              label="Critical Latency Gate"
-            />
-          </Stack>
-        </Grid>
-      </div>
+      <!-- Live Latency Bus with Warning and Critical Gates -->
+      <Grid cols={3} gap="md">
+        <div class="col-span-1 md:col-span-2">
+          <Sparkline
+            data={liveLatency}
+            min={0}
+            max={100}
+            warnThreshold={warnLatency}
+            criticalThreshold={critLatency}
+            unit="ms"
+            label="Real-time Subsystem Latency Bus"
+          />
+        </div>
+        <Stack direction="vertical" gap="sm">
+          <NumberField
+            bind:value={warnLatency}
+            min={20}
+            max={60}
+            step={1}
+            unit="ms"
+            label="Warn Latency Gate"
+          />
+          <NumberField
+            bind:value={critLatency}
+            min={60}
+            max={100}
+            step={1}
+            unit="ms"
+            label="Critical Latency Gate"
+          />
+        </Stack>
+      </Grid>
 
       <!-- Telemetry DataTable -->
       <DataTable rows={filteredRows} {columns} height="400px" />
     </Stack>
-  </Surface>
+  </section>
 
   <!-- Atomic Proposal Modal Dialog -->
   <Dialog

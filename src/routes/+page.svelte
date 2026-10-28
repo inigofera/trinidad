@@ -15,12 +15,8 @@
   // State for Pillar 3: Systems Engineering (Live Frame Delta Sparkline)
   let frameDeltas = $state<number[]>([16.6, 16.7, 16.5, 16.8, 16.6, 16.7, 16.6, 16.5, 16.7, 16.6]);
 
-  // Compute total library gzipped weight
-  const totalBundleWeight = $derived(
-    Object.values(bundleStats)
-      .reduce((acc, val) => acc + parseFloat(val), 0)
-      .toFixed(1)
-  );
+  // Total library gzipped weight (single source of truth: bundle ledger)
+  const totalBundleWeight = $derived(parseFloat(bundleStats.totalKb).toFixed(1));
 
   $effect(() => {
     if (typeof window === 'undefined') return;
@@ -87,284 +83,164 @@
     {
       name: 'Button & ToggleButton',
       href: '/lab/button',
-      focus: 'Polymorphic Actions · Animated Spinners · Width Preservation',
-      module: 'button.svelte.ts',
-      bundle: `${bundleStats.button} kB`
+      focus: 'Polymorphic Actions · Animated Spinners · Width Preservation'
     },
     {
       name: 'NumberField',
       href: '/lab/number-field',
-      focus: 'Scrubbing Ergonomics · Math Clamping · Spinbutton ARIA',
-      module: 'number-field.svelte.ts',
-      bundle: `${bundleStats['number-field']} kB`
+      focus: 'Scrubbing Ergonomics · Math Clamping · Spinbutton ARIA'
     },
     {
       name: 'Dialog',
       href: '/lab/dialog',
-      focus: 'Focus Trapping · Scroll Locking · Backdrop Dismiss',
-      module: 'dialog.svelte.ts',
-      bundle: `${bundleStats.dialog} kB`
+      focus: 'Focus Trapping · Scroll Locking · Backdrop Dismiss'
     },
     {
       name: 'Combobox',
       href: '/lab/combobox',
-      focus: 'Fuzzy Subsequence · Virtual Focus · Keyboard Roving',
-      module: 'combobox.svelte.ts',
-      bundle: `${bundleStats.combobox} kB`
+      focus: 'Fuzzy Subsequence · Virtual Focus · Keyboard Roving'
     },
     {
       name: 'Sparkline',
       href: '/lab/sparkline',
-      focus: '60fps Retina Canvas · Dimension Caching · Crosshair Scrubbing',
-      module: 'sparkline.svelte.ts',
-      bundle: `${bundleStats.sparkline} kB`
+      focus: '60fps Retina Canvas · Dimension Caching · Crosshair Scrubbing'
     },
     {
       name: 'DataTable',
       href: '/lab/data-table',
-      focus: 'O(1) Virtualization · 2D Cell Navigation · Multi-Sort',
-      module: 'data-table.svelte.ts',
-      bundle: `${bundleStats['data-table']} kB`
+      focus: 'O(1) Virtualization · 2D Cell Navigation · Multi-Sort'
     },
     {
       name: 'DiffViewer',
       href: '/lab/diff-viewer',
-      focus: 'LCS Diff Engine · Confirmation Gates · Inline Editor',
-      module: 'diff-viewer.svelte.ts',
-      bundle: `${bundleStats['diff-viewer']} kB`
+      focus: 'LCS Diff Engine · Confirmation Gates · Inline Editor'
     }
   ];
 </script>
 
 <svelte:head>
-  <title>TRINIDAD — System Manifesto & Component Lab</title>
+  <title>Trinidad Design System &amp; Component Lab</title>
 </svelte:head>
 
 <div
   class="min-h-screen bg-surface-canvas text-fg-primary p-6 md:p-12 font-sans transition-colors duration-200"
 >
   <div class="max-w-6xl mx-auto space-y-16">
-    <!-- SECTION 3.1: Hero Manifesto Block -->
-    <section
-      class="bg-surface-elevated border border-border-subtle p-6 md:p-10 space-y-6 shadow-xs"
-    >
-      <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
-        <div class="space-y-3">
-          <div class="text-xs font-mono font-bold text-accent-interactive tracking-wider uppercase">
-            // DESIGN SYSTEM &amp; COMPONENT LAB &middot; v1.0.0
-          </div>
-          <div class="flex items-center gap-4">
-            <TrinidadLogo size={48} variant="lockup" />
-          </div>
-          <p class="text-sm md:text-base text-fg-primary font-mono max-w-3xl leading-relaxed pt-2">
-            &ldquo;Named after the Spanish word for Trinity, Trinidad is an industrial-grade UI
-            primitive library built at the intersection of the three disciplines that define UX
-            Engineering: <strong class="text-accent-interactive">Human Factors</strong>,
-            <strong class="text-fg-primary font-bold">Visual Design</strong>, and
-            <strong class="text-fg-primary font-bold">Systems Engineering</strong>.&rdquo;
-          </p>
-        </div>
-      </div>
+    <!-- Hero -->
+    <section class="space-y-4 max-w-3xl">
+      <TrinidadLogo size={48} variant="lockup" />
 
-      <!-- Live Telemetry Status Bar -->
-      <div
-        class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-border-subtle/50 font-mono text-xs"
-      >
-        <div class="p-2.5 rounded bg-surface-canvas border border-border-subtle">
-          <span class="text-fg-muted block text-[10px] uppercase">// ACTIVE THEME</span>
-          <span class="text-accent-interactive font-bold">[{env.theme.toUpperCase()}]</span>
-        </div>
-        <div class="p-2.5 rounded bg-surface-canvas border border-border-subtle">
-          <span class="text-fg-muted block text-[10px] uppercase">// ACTIVE DENSITY</span>
-          <span class="text-fg-primary font-bold">[{env.density.toUpperCase()}]</span>
-        </div>
-        <div class="p-2.5 rounded bg-surface-canvas border border-border-subtle">
-          <span class="text-fg-muted block text-[10px] uppercase">// TOTAL COMPONENTS</span>
-          <span class="text-status-nominal font-bold">[7 PRIMITIVES]</span>
-        </div>
-        <div class="p-2.5 rounded bg-surface-canvas border border-border-subtle">
-          <span class="text-fg-muted block text-[10px] uppercase">// A11Y TELEMETRY</span>
-          <span class="text-status-nominal font-bold">[WCAG 2.1 AA: VERIFIED]</span>
-        </div>
-      </div>
+      <p class="text-sm md:text-base text-fg-primary font-mono max-w-3xl leading-relaxed">
+        Trinidad is an industrial-grade UI primitive library built at the intersection of the three
+        disciplines that define UX engineering: human factors, visual design, and systems
+        engineering.
+      </p>
     </section>
 
-    <!-- SECTION 3.2: Interactive "Three Pillars" Architecture Cards -->
-    <section class="space-y-4">
-      <div class="text-xs font-mono uppercase text-fg-muted tracking-wider">
-        // THE THREE PILLARS &middot; INTERACTIVE ARCHITECTURAL PROOFS
-      </div>
+    <!-- Interactive "Three Pillars" -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-12 items-start">
+      <!-- Pillar 1: Human Factors (Ergonomics) -->
+      <div class="space-y-4">
+        <h2 class="text-lg md:text-xl font-bold tracking-tight text-fg-primary">
+          Human Factors (Ergonomics)
+        </h2>
+        <p class="text-sm text-fg-muted leading-relaxed">
+          Interfaces engineered for human cognition and physical ergonomics, with strict keyboard
+          navigation and deterministic focus management.
+        </p>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Pillar 1: Human Factors (Ergonomics) -->
-        <div
-          class="bg-surface-elevated border border-border-subtle p-6 flex flex-col justify-between space-y-4 shadow-xs"
-        >
-          <div class="space-y-3">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-accent-interactive"></span>
-              <h2 class="text-sm font-bold font-mono uppercase tracking-wide text-fg-primary">
-                Human Factors (Ergonomics)
-              </h2>
-            </div>
-            <p class="text-xs text-fg-muted leading-relaxed">
-              Interfaces engineered for human cognition and physical ergonomics. Every primitive
-              enforces strict keyboard navigation, deterministic focus management, and screen-reader
-              telemetry.
-            </p>
-          </div>
-
-          <!-- Embedded Micro-Proof: Live Keyboard Visualizer -->
-          <div
-            class="p-3 bg-surface-canvas rounded border border-border-subtle font-mono text-xs space-y-2.5"
-          >
-            <div class="text-[10px] text-fg-muted uppercase">// LIVE KEYBOARD OBSERVER</div>
-            <div class="flex flex-wrap gap-1.5">
-              {#each ['Tab', 'ArrowUp', 'ArrowDown', 'Escape'] as key}
-                {@const isPressed = pressedKeys.has(key)}
-                <span
-                  class="px-2 py-1 rounded text-[11px] font-bold border transition-colors {isPressed
-                    ? 'bg-accent-interactive text-accent-contrast border-accent-interactive scale-105'
-                    : 'bg-surface-elevated text-fg-muted border-border-subtle'}"
-                >
-                  {key === 'ArrowUp' ? '↑' : key === 'ArrowDown' ? '↓' : key}
-                </span>
-              {/each}
-            </div>
-            <div class="text-[11px] text-fg-muted pt-1 border-t border-border-subtle/40 truncate">
-              activeElement: <span class="text-fg-primary font-bold">{activeElementTag}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pillar 2: Interaction Design (Aesthetics) -->
-        <div
-          class="bg-surface-elevated border border-border-subtle p-6 flex flex-col justify-between space-y-4 shadow-xs"
-        >
-          <div class="space-y-3">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-accent-interactive"></span>
-              <h2 class="text-sm font-bold font-mono uppercase tracking-wide text-fg-primary">
-                Interaction Design (Aesthetics)
-              </h2>
-            </div>
-            <p class="text-xs text-fg-muted leading-relaxed">
-              Warm intellectual brutalism meets industrial telemetry. A three-tier W3C token engine
-              adapts seamlessly between editorial reading environments and high-contrast warehouse
-              operator consoles.
-            </p>
-          </div>
-
-          <!-- Embedded Micro-Proof: Swatch Matrix & 1-Click Inverter -->
-          <div
-            class="p-3 bg-surface-canvas rounded border border-border-subtle font-mono text-xs space-y-2.5"
-          >
-            <div class="flex items-center justify-between text-[10px] text-fg-muted uppercase">
-              <span>// SEMANTIC TOKEN SWATCHES</span>
-              <span class="text-fg-primary font-bold">LIVE</span>
-            </div>
-            <div class="grid grid-cols-4 gap-1.5 text-[9px] text-center select-none">
-              <div
-                class="p-1.5 rounded bg-surface-canvas border border-border-subtle text-fg-primary"
+        <!-- Embedded Micro-Proof: Live Keyboard Observer -->
+        <div class="font-mono text-xs space-y-2.5">
+          <div class="text-[10px] text-fg-muted uppercase">Live keyboard observer</div>
+          <div class="flex flex-wrap gap-1.5">
+            {#each ['Tab', 'ArrowUp', 'ArrowDown', 'Escape'] as key}
+              {@const isPressed = pressedKeys.has(key)}
+              <span
+                class="px-2 py-1 rounded text-[11px] font-bold border transition-colors {isPressed
+                  ? 'bg-accent-interactive text-accent-contrast border-accent-interactive scale-105'
+                  : 'bg-surface-elevated text-fg-muted border-border-subtle'}"
               >
-                canvas
-              </div>
-              <div
-                class="p-1.5 rounded bg-surface-elevated border border-border-subtle text-fg-primary"
-              >
-                elevated
-              </div>
-              <div class="p-1.5 rounded bg-accent-interactive text-accent-contrast font-bold">
-                accent
-              </div>
-              <div class="p-1.5 rounded bg-status-critical text-white font-bold">crit</div>
-            </div>
-            <button
-              type="button"
-              onclick={invertThemeAndDensity}
-              class="w-full py-1 rounded bg-surface-elevated border border-border-subtle text-[11px] text-fg-primary hover:border-accent-interactive transition-colors cursor-pointer"
-            >
-              ⇄ Invert Theme &amp; Density
-            </button>
+                {key === 'ArrowUp' ? '↑' : key === 'ArrowDown' ? '↓' : key}
+              </span>
+            {/each}
           </div>
-        </div>
-
-        <!-- Pillar 3: Systems Engineering (Architecture) -->
-        <div
-          class="bg-surface-elevated border border-border-subtle p-6 flex flex-col justify-between space-y-4 shadow-xs"
-        >
-          <div class="space-y-3">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-accent-interactive"></span>
-              <h2 class="text-sm font-bold font-mono uppercase tracking-wide text-fg-primary">
-                Systems Engineering (Architecture)
-              </h2>
-            </div>
-            <p class="text-xs text-fg-muted leading-relaxed">
-              Zero-runtime CSS, headless Svelte 5 Runes state machines, and hardware-accelerated
-              rendering. Built to handle 10,000-row virtualized logs and 60fps sensor streams
-              without frame drops.
-            </p>
-          </div>
-
-          <!-- Embedded Micro-Proof: Mini Sparkline & Bundle Weight -->
-          <div
-            class="p-3 bg-surface-canvas rounded border border-border-subtle font-mono text-xs space-y-2"
-          >
-            <div class="flex items-center justify-between text-[10px] text-fg-muted uppercase">
-              <span>// REAL-TIME FRAME DELTA</span>
-              <span class="text-status-nominal font-bold"
-                >{(frameDeltas[frameDeltas.length - 1] ?? 16.6).toFixed(1)} ms</span
-              >
-            </div>
-            <div class="h-14">
-              <Sparkline
-                label="FRAME_TIMING"
-                data={frameDeltas}
-                min={10}
-                max={30}
-                warnThreshold={20}
-                criticalThreshold={25}
-                unit="ms"
-              />
-            </div>
-            <div
-              class="text-[11px] text-fg-muted pt-1 border-t border-border-subtle/40 flex justify-between"
-            >
-              <span>Total Gzipped Weight:</span>
-              <span class="text-status-nominal font-bold">{totalBundleWeight} kB gzip</span>
-            </div>
+          <div class="text-[11px] text-fg-muted pt-1 border-t border-border-subtle/40 truncate">
+            activeElement: <span class="text-fg-primary font-bold">{activeElementTag}</span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- SECTION 3.3: Component Directory Matrix Table -->
-    <section class="space-y-4">
-      <div class="flex items-center justify-between border-b border-border-subtle pb-3">
+      <!-- Pillar 2: Interaction Design (Aesthetics) -->
+      <div class="space-y-4">
+        <h2 class="text-lg md:text-xl font-bold tracking-tight text-fg-primary">
+          Interaction Design (Aesthetics)
+        </h2>
+        <p class="text-sm text-fg-muted leading-relaxed">
+          A three-tier W3C token engine that adapts between editorial reading environments and
+          high-contrast operator consoles.
+        </p>
+
+        <!-- Embedded Micro-Proof: 1-Click Inverter -->
         <div>
-          <h2 class="text-lg font-bold font-mono tracking-tight text-fg-primary">
-            // COMPONENT DIRECTORY MATRIX
-          </h2>
-          <p class="text-xs text-fg-muted mt-0.5">
-            Architectural index of the 7 production primitives exported by <code>trinidad-ui</code>.
-          </p>
+          <button
+            type="button"
+            onclick={invertThemeAndDensity}
+            class="w-full py-1 rounded bg-surface-elevated border border-border-subtle text-[11px] text-fg-primary hover:border-accent-interactive transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive"
+          >
+            ⇄ Invert Theme &amp; Density
+          </button>
         </div>
-        <span class="text-xs font-mono text-status-nominal font-bold"> [7 / 7 VERIFIED] </span>
       </div>
 
-      <div
-        class="overflow-x-auto border border-border-subtle bg-surface-elevated shadow-xs font-mono text-xs"
-      >
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr
-              class="bg-surface-canvas border-b border-border-subtle text-[11px] text-fg-muted uppercase"
+      <!-- Pillar 3: Systems Engineering (Architecture) -->
+      <div class="space-y-4">
+        <h2 class="text-lg md:text-xl font-bold tracking-tight text-fg-primary">
+          Systems Engineering (Architecture)
+        </h2>
+        <p class="text-sm text-fg-muted leading-relaxed">
+          Zero-runtime CSS and headless Svelte 5 Runes state machines, built for 10,000-row datasets
+          and 60fps sensor streams.
+        </p>
+
+        <!-- Embedded Micro-Proof: Frame-Delta Sparkline -->
+        <div class="font-mono text-xs space-y-2">
+          <div class="flex items-center justify-between text-[10px] text-fg-muted uppercase">
+            <span>Real-time frame delta</span>
+            <span class="text-status-nominal font-bold"
+              >{(frameDeltas[frameDeltas.length - 1] ?? 16.6).toFixed(1)} ms</span
             >
-              <th class="py-2.5 px-4 font-bold">Component &amp; Route</th>
-              <th class="py-2.5 px-4 font-bold">Primary Trinity Focus</th>
-              <th class="py-2.5 px-4 font-bold">Headless State Module</th>
-              <th class="py-2.5 px-4 font-bold text-right">Gzip Weight</th>
+          </div>
+          <div class="h-14">
+            <Sparkline
+              label="FRAME_TIMING"
+              data={frameDeltas}
+              min={10}
+              max={30}
+              warnThreshold={20}
+              criticalThreshold={25}
+              unit="ms"
+            />
+          </div>
+          <div
+            class="text-[11px] text-fg-muted pt-1 border-t border-border-subtle/40 flex justify-between"
+          >
+            <span>Total Gzipped Weight:</span>
+            <span class="text-status-nominal font-bold">{totalBundleWeight} kB gzip</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Component Directory -->
+    <section class="space-y-4">
+      <h2 class="text-lg font-bold tracking-tight text-fg-primary">Component directory</h2>
+
+      <div class="overflow-x-auto font-mono text-xs">
+        <table class="w-full text-left border-collapse border border-border-subtle">
+          <thead>
+            <tr class="border-b border-border-subtle text-[11px] text-fg-muted uppercase">
+              <th scope="col" class="py-2.5 px-4 font-bold">Component &amp; Route</th>
+              <th scope="col" class="py-2.5 px-4 font-bold">Primary Trinity Focus</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-border-subtle/40">
@@ -373,21 +249,12 @@
                 <td class="py-3 px-4 font-bold">
                   <a
                     href={comp.href}
-                    class="text-accent-interactive hover:underline inline-flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-accent-interactive"
+                    class="text-accent-interactive hover:underline focus-visible:outline-2 focus-visible:outline-accent-interactive"
                   >
-                    <span>{comp.name}</span>
-                    <span>&rarr;</span>
+                    {comp.name}
                   </a>
                 </td>
-                <td class="py-3 px-4 text-fg-primary">
-                  {comp.focus}
-                </td>
-                <td class="py-3 px-4 text-fg-muted">
-                  <code>{comp.module}</code>
-                </td>
-                <td class="py-3 px-4 text-right font-bold text-status-nominal">
-                  {comp.bundle}
-                </td>
+                <td class="py-3 px-4 text-fg-primary">{comp.focus}</td>
               </tr>
             {/each}
           </tbody>
@@ -396,44 +263,31 @@
     </section>
 
     <!-- Visual Identity & Logo Calibration Preview -->
-    <section
-      class="bg-surface-elevated border border-border-subtle rounded-lg p-6 space-y-4 shadow-xs font-mono"
-    >
+    <section class="space-y-5">
       <div
         class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-subtle pb-4"
       >
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-accent-interactive"></span>
-            <h3 class="text-sm font-bold uppercase tracking-wide text-fg-primary">
-              The Trinidad Geometric Mark
-            </h3>
-          </div>
-          <p class="text-xs text-fg-muted mt-1">
-            60° isometric parallel facets with flush chartreuse base and single 2.5px negative-space
-            channel.
-          </p>
-        </div>
+        <h2 class="text-lg md:text-xl font-bold tracking-tight text-fg-primary">
+          The Trinidad Geometric Mark
+        </h2>
 
         <div class="flex items-center gap-3">
           <a
             href="/lab/logo"
-            class="px-3 py-1 text-xs rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive transition-colors"
+            class="px-3 py-1 text-xs rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive"
           >
-            Open Logo Lab &rarr;
+            Open Logo Lab
           </a>
           <a
             href="/lab/primitives"
-            class="px-3 py-1 text-xs rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive transition-colors"
+            class="px-3 py-1 text-xs rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive"
           >
-            Open Primitives Lab &rarr;
+            Open Primitives Lab
           </a>
         </div>
       </div>
 
-      <div
-        class="flex flex-wrap items-center justify-around gap-6 p-6 bg-surface-canvas rounded border border-border-subtle"
-      >
+      <div class="flex flex-wrap items-center justify-around gap-x-10 gap-y-4">
         <div class="flex flex-col items-center gap-2">
           <TrinidadLogo size={64} variant="lockup" />
           <span class="text-[10px] text-fg-muted">lockup 64px</span>
@@ -444,9 +298,7 @@
         </div>
         <div class="flex flex-col items-center gap-2">
           <TrinidadLogo size={32} variant="mark" />
-          <span class="text-[10px] text-fg-muted text-accent-interactive font-bold"
-            >mark 32px (optimal)</span
-          >
+          <span class="text-[10px] text-fg-muted">mark 32px</span>
         </div>
         <div class="flex flex-col items-center gap-2">
           <TrinidadLogo size={20} variant="mark" />

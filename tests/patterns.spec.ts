@@ -10,7 +10,7 @@ test.describe('Phase 7: Contextual Patterns & Fault Isolation', () => {
     await expect(scopedWidget).toHaveAttribute('data-theme', 'industrial');
     await expect(scopedWidget).toHaveAttribute('data-density', 'compact');
 
-    await page.getByRole('button', { name: /Invert Embedded Subtree/i }).click();
+    await page.getByRole('button', { name: /Invert embedded theme/i }).click();
     await expect(scopedWidget).toHaveAttribute('data-theme', 'paper');
   });
 

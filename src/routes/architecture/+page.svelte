@@ -1,6 +1,6 @@
 <script lang="ts">
   import bundleStats from '../lab/bundle-stats.json';
-  import { Badge, Surface, Stack, Grid, FaultBoundary } from '$lib';
+  import { Stack, FaultBoundary } from '$lib';
   import BuggyTelemetryNode from './BuggyTelemetryNode.svelte';
 
   const componentBudgets = [
@@ -21,6 +21,69 @@
           return acc + val;
         }, 0);
 
+  const trinityNotes = [
+    {
+      name: 'Button',
+      ergonomics:
+        'Predictable Enter/Space activation + locked geometry during loading states to prevent layout shift',
+      design:
+        'Warm brutalist hairline borders, tactile active:translate-y-[1px], and high-contrast focus rings',
+      engineering:
+        'Zero-runtime overhead headless ButtonState with cycling frame spinner [/], [-], [\\], [|]'
+    },
+    {
+      name: 'NumberField',
+      ergonomics:
+        'Pointer scrubbing on label + Shift/Alt step modifiers reduce repetitive typing strain in telemetry consoles',
+      design:
+        'Tabular numeral alignment and discrete stepper controls prevent visual layout jitter',
+      engineering: 'IEEE 754 precision clamping with decimal stepping in headless NumberFieldState'
+    },
+    {
+      name: 'Dialog',
+      ergonomics:
+        'Focus trapped inside modal boundary, backdrop click dismiss, and Escape restoration to trigger element',
+      design: 'Tactile hairline border, backdrop blur-xs, and high-contrast header hierarchy',
+      engineering:
+        'Native HTMLDialogElement synchronization via .showModal() with automatic document.body scroll locking'
+    },
+    {
+      name: 'Combobox',
+      ergonomics:
+        'Virtual focus with aria-activedescendant maintains real DOM focus in input while navigating options with arrow keys',
+      design:
+        'Terminal-inspired prompt character, hairline group headers, and compact shortcut badges',
+      engineering:
+        'Subsequence fuzzy scoring with consecutive character and word-boundary bonuses in headless ComboboxState'
+    },
+    {
+      name: 'Sparkline',
+      ergonomics:
+        'Pause on hover/focus and ArrowLeft/Right scrub inspection allows micro-investigation of historical anomalies',
+      design:
+        'Dynamic threshold stroke mutation (lime-400 -> amber-500 -> crimson-500) and crosshair readout',
+      engineering:
+        '60fps Retina 2D canvas rendering with cached ResizeObserver dimensions to prevent layout thrashing'
+    },
+    {
+      name: 'DataTable',
+      ergonomics:
+        '2D grid cell roving navigation (Arrow keys, PageUp/Down, Home/End) keeps operator hands on home row',
+      design: 'Sub-pixel hairline separators, sticky telemetry header, and aligned numeral columns',
+      engineering:
+        'O(1) DOM virtualization slicing: only 20-30 rows instantiated in DOM even when hosting 10,000+ items'
+    },
+    {
+      name: 'DiffViewer',
+      ergonomics:
+        'Atomic confirmation gates ([Accept], [Reject], [Modify Inline]) prevent accidental configuration overwrites',
+      design:
+        'Subtle nominal green / critical red tinting and aligned line numbering maintain visual readability',
+      engineering:
+        'Line-by-line Longest Common Subsequence (LCS) matrix backtracking in headless DiffViewerState'
+    }
+  ];
+
   let simulateCrash = $state(false);
 </script>
 
@@ -28,95 +91,79 @@
   <title>Architecture &amp; Contracts // Trinidad Design System</title>
 </svelte:head>
 
-<div class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-10">
+<div class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-12">
   <!-- Page Header -->
   <header class="border-b border-border-subtle pb-6">
-    <div class="font-mono text-xs uppercase tracking-widest text-fg-muted mb-2 select-none">
-      // PRODUCTION READINESS & CONTRACTS
-    </div>
     <h1 class="text-3xl font-mono font-bold text-fg-primary tracking-tight mb-3">
       Architecture &amp; Contracts
     </h1>
-    <p class="text-sm text-fg-muted max-w-3xl leading-relaxed">
-      Formal production engineering guarantees, automated byte budget ledgers, deterministic SSR
-      contracts, and fault isolation mechanisms powering the Trinidad design system.
-    </p>
   </header>
 
+  <!-- What this page demonstrates -->
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">The production contract</h2>
+
+    <p class="text-sm text-fg-muted leading-relaxed max-w-3xl">
+      Every guarantee on this page is enforced by tooling or demonstrated live rather than asserted:
+      per-component gzip budgets measured against hard CI ceilings at build time, deterministic SSR
+      and hydration rendering, and a fault boundary that isolates runtime crashes without taking
+      down the rest of the interface.
+    </p>
+  </section>
+
   <!-- Section 1: Enforced Gzip Bundle Budget Ledger -->
-  <Surface kicker="01 // ENFORCED CI BUNDLE BUDGET LEDGER" padding="lg">
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">
+      Enforced CI bundle budget ledger
+    </h2>
+
     <Stack direction="vertical" gap="lg">
-      <div>
-        <p class="text-sm text-fg-muted max-w-2xl">
-          Every component in Trinidad is audited against hard CI ceiling budgets. Builds breach and
-          fail if any single component exceeds 4.0 kB gzipped, or if total library weight exceeds
-          18.0 kB gzipped.
-        </p>
-      </div>
+      <p class="text-sm text-fg-muted max-w-2xl">
+        Every component in Trinidad is audited against hard CI ceiling budgets. Builds breach and
+        fail if any single component exceeds 4.0 kB gzipped, or if total library weight exceeds 18.0
+        kB gzipped.
+      </p>
 
-      <!-- Component Cards Grid -->
-      <Grid cols={4} gap="md">
-        {#each componentBudgets as comp}
-          {@const sizeStr = bundleStats[comp.key as keyof typeof bundleStats] || '0'}
-          {@const sizeNum = parseFloat(sizeStr)}
-          {@const pct = Math.min(100, Math.round((sizeNum / 4.0) * 100))}
-          <div
-            class="p-4 bg-surface-canvas border border-border-subtle flex flex-col justify-between gap-3"
+      <div class="overflow-x-auto">
+        <table class="w-full text-left font-mono text-xs border border-border-subtle">
+          <caption class="sr-only">Enforced CI bundle budget ledger</caption>
+          <thead
+            class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
           >
-            <div class="flex items-center justify-between gap-2">
-              <span class="font-mono font-bold text-sm text-fg-primary">{comp.name}</span>
-              <Badge variant="nominal">PASS (&lt; 4.0 kB)</Badge>
-            </div>
-
-            <div>
-              <div class="flex items-baseline justify-between font-mono text-xs mb-1.5">
-                <span class="text-fg-primary font-bold">{sizeStr} kB gzip</span>
-                <span class="text-fg-muted">Ceiling: 4.00 kB</span>
-              </div>
-              <div class="w-full h-1.5 bg-surface-muted overflow-hidden">
-                <div
-                  class="h-full bg-accent-interactive transition-all duration-300"
-                  style="width: {pct}%"
-                ></div>
-              </div>
-            </div>
-          </div>
-        {/each}
-      </Grid>
-
-      <!-- Total Weight Summary Bar -->
-      <div
-        class="p-4 bg-surface-canvas border border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-      >
-        <div class="space-y-1">
-          <div class="font-mono font-bold text-xs uppercase tracking-wider text-fg-primary">
-            Total Trinidad Roster Footprint
-          </div>
-          <div class="font-mono text-xs text-fg-muted">
-            Aggregated ES Modules (Tree-shaken, Gzipped): <span class="font-bold text-fg-primary"
-              >{totalGzipKb.toFixed(1)} kB</span
-            >
-            vs. <span class="text-fg-muted">18.0 kB Hard CI Ceiling</span>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4 min-w-[200px]">
-          <div class="flex-1">
-            <div class="w-full h-2 bg-surface-muted overflow-hidden">
-              <div
-                class="h-full bg-accent-interactive"
-                style="width: {Math.min(100, (totalGzipKb / 18.0) * 100)}%"
-              ></div>
-            </div>
-          </div>
-          <Badge variant="nominal">PASS (&lt; 18.0 kB)</Badge>
-        </div>
+            <tr>
+              <th scope="col" class="p-3 border-r border-border-subtle">Component</th>
+              <th scope="col" class="p-3 border-r border-border-subtle">Size (gzip)</th>
+              <th scope="col" class="p-3">Ceiling</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border-subtle/60 bg-surface-elevated">
+            {#each componentBudgets as comp}
+              {@const sizeStr = bundleStats[comp.key as keyof typeof bundleStats] || '0'}
+              <tr>
+                <th scope="row" class="p-3 border-r border-border-subtle font-bold text-fg-primary">
+                  {comp.name}
+                </th>
+                <td class="p-3 border-r border-border-subtle text-fg-primary">{sizeStr} kB</td>
+                <td class="p-3 text-fg-muted">4.0 kB</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
       </div>
+
+      <p class="font-mono text-xs">
+        Total: <span class="text-fg-primary font-bold">{totalGzipKb.toFixed(1)} kB</span> gzip / 18.0
+        kB budget
+      </p>
     </Stack>
-  </Surface>
+  </section>
 
   <!-- Section 2: SSR, Hydration & Rendering Contracts Matrix -->
-  <Surface kicker="02 // DETERMINISTIC RENDERING & SSR CONTRACTS" padding="lg">
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">
+      Deterministic rendering &amp; SSR contracts
+    </h2>
+
     <div class="overflow-x-auto">
       <table class="w-full text-left font-mono text-xs border border-border-subtle">
         <caption class="sr-only">Deterministic Rendering &amp; SSR Contracts</caption>
@@ -146,9 +193,7 @@
                 >prefers-reduced-motion</code
               > prior to First Contentful Paint.
             </td>
-            <td class="p-3 font-mono text-[11px] text-fg-primary align-top">
-              <Badge variant="nominal">CLS = 0.000</Badge>
-            </td>
+            <td class="p-3 font-mono text-[11px] text-fg-primary align-top">CLS = 0.000</td>
           </tr>
           <tr>
             <th
@@ -163,9 +208,7 @@
               > nodes to &lt; 40 rows regardless of 10,000+ item dataset size, eliminating DOM bloat and
               scroll jank.
             </td>
-            <td class="p-3 font-mono text-[11px] text-fg-primary align-top">
-              <Badge variant="nominal">&lt; 40 DOM Rows</Badge>
-            </td>
+            <td class="p-3 font-mono text-[11px] text-fg-primary align-top">&lt; 40 DOM Rows</td>
           </tr>
           <tr>
             <th
@@ -181,9 +224,7 @@
               caches pixel dimensions outside the high-frequency animation loop, preventing forced synchronous
               reflows (<code class="text-fg-primary">getBoundingClientRect</code> layout thrashing).
             </td>
-            <td class="p-3 font-mono text-[11px] text-fg-primary align-top">
-              <Badge variant="nominal">60fps Zero-Thrash</Badge>
-            </td>
+            <td class="p-3 font-mono text-[11px] text-fg-primary align-top">60fps Zero-Thrash</td>
           </tr>
           <tr>
             <th
@@ -200,16 +241,20 @@
               exact hydration parity between server prerender and client takeover.
             </td>
             <td class="p-3 font-mono text-[11px] text-fg-primary align-top">
-              <Badge variant="nominal">Zero Hydration Mismatch</Badge>
+              Zero Hydration Mismatch
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </Surface>
+  </section>
 
   <!-- Section 3: Interactive Fault-Isolation Sandbox (<svelte:boundary>) -->
-  <Surface kicker="03 // FAULT ISOLATION & RUNTIME RECOVERY (<svelte:boundary>)" padding="lg">
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">
+      Fault isolation &amp; runtime recovery
+    </h2>
+
     <Stack direction="vertical" gap="md">
       <div>
         <p class="text-sm text-fg-muted max-w-2xl leading-relaxed">
@@ -236,5 +281,45 @@
         />
       </FaultBoundary>
     </Stack>
-  </Surface>
+  </section>
+
+  <!-- Section 4: Component Trinity -->
+  <section>
+    <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">Component trinity</h2>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left font-mono text-xs border border-border-subtle">
+        <caption class="sr-only">Component ergonomics, design and engineering notes</caption>
+        <thead
+          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
+        >
+          <tr>
+            <th scope="col" class="p-3 border-r border-border-subtle">Component</th>
+            <th scope="col" class="p-3 border-r border-border-subtle">Ergonomics</th>
+            <th scope="col" class="p-3 border-r border-border-subtle">Design</th>
+            <th scope="col" class="p-3">Engineering</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-border-subtle/60 bg-surface-elevated">
+          {#each trinityNotes as row}
+            <tr>
+              <th
+                scope="row"
+                class="p-3 border-r border-border-subtle font-bold text-fg-primary align-top"
+              >
+                {row.name}
+              </th>
+              <td class="p-3 border-r border-border-subtle text-fg-muted leading-relaxed align-top">
+                {row.ergonomics}
+              </td>
+              <td class="p-3 border-r border-border-subtle text-fg-muted leading-relaxed align-top">
+                {row.design}
+              </td>
+              <td class="p-3 text-fg-muted leading-relaxed align-top">{row.engineering}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>
