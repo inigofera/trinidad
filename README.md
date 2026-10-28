@@ -72,13 +72,14 @@ trinidad uses a zero-runtime CSS Custom Property pipeline compiled from a single
 
 ```
 
+* **Primitive tiers**: Raw color ramps plus font family, weight (400/500/700), size (`xs`–`3xl`), a 4px-based spacing scale, and 8px/10px radii compile from `tokens.json` into CSS custom properties and Tailwind theme namespaces.
 * **Theme Axis**: Switch instantaneously between two compiled themes — **Editorial Paper** (unbleached cream `#f8f3e7` and deep forest ink `#24422a`) and **Industrial Operator Dark** (high-contrast slate `#0d1310` and electric chartreuse `#a6c856` for low-light warehouse/operator floors).
 
 
 * **Density Axis**: Toggle UI dimensions between **Comfortable** (`36px` controls, generous whitespace) and **Compact** (`28px` controls, high-density data tables).
 * **Kinetics Axis**: Respects OS `prefers-reduced-motion` and provides a manual lab override to test instant state transitions.
 
-
+The compiled result is documented at `/foundations`, which renders the primitive palette, semantic matrix, type scale, spacing, radius, and scoped theme panels alongside the Tailwind utilities generated from them.
 
 ---
 
@@ -112,6 +113,9 @@ trinidad/
 │   │   └── components/         # Headless .svelte.ts state + .svelte view components
 │   └── routes/                 # Interactive Component Lab & Documentation
 │       ├── +page.svelte        # System Manifesto & Trinity Overview
+│       ├── foundations/        # Token foundations: color, type, spacing
+│       ├── patterns/           # In the Wild composition showcase
+│       ├── architecture/       # Production contracts & fault isolation
 │       └── lab/                # 4-Zone Component Workbench & A11y Inspector
 └── tests/                      # Playwright + Axe-Core WCAG 2.1 AA test suites
 
