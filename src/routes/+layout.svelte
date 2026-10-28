@@ -14,6 +14,9 @@
   const env = setEnvironment();
   let fps = $state(60);
   let navOpen = $state(false);
+  let componentsOpen = $state(false);
+  let componentsNavEl = $state<HTMLElement | null>(null);
+  let componentsTriggerBtn = $state<HTMLElement | null>(null);
 
   $effect(() => {
     if (typeof window !== 'undefined') {
@@ -98,6 +101,31 @@
     { name: 'DataTable', href: '/lab/data-table' },
     { name: 'DiffViewer', href: '/lab/diff-viewer' }
   ];
+
+  $effect(() => {
+    if (!componentsOpen || typeof window === 'undefined') return;
+
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        componentsOpen = false;
+        componentsTriggerBtn?.focus();
+      }
+    };
+
+    const handleMousedown = (event: MouseEvent) => {
+      if (!componentsNavEl || !componentsNavEl.contains(event.target as Node)) {
+        componentsOpen = false;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeydown);
+    document.addEventListener('mousedown', handleMousedown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+      document.removeEventListener('mousedown', handleMousedown);
+    };
+  });
 </script>
 
 <div
@@ -105,9 +133,9 @@
 >
   <!-- Sticky Global Telemetry Header -->
   <header
-    class="sticky top-0 z-50 bg-surface-elevated/90 backdrop-blur border-b border-border-subtle px-4 md:px-8 py-2.5 flex items-center justify-between gap-4"
+    class="sticky top-0 z-50 bg-surface-canvas border-b border-border-subtle px-4 md:px-8 py-2.5 flex items-center justify-between gap-2 xl:gap-4"
   >
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-3 xl:gap-6">
       <a
         href="/"
         class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive rounded"
@@ -117,62 +145,91 @@
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-3 text-xs font-mono">
+      <nav
+        aria-label="Primary"
+        class="hidden lg:flex items-center gap-2 xl:gap-3 text-xs font-mono"
+      >
         <a
           href="/"
-          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
+          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1 xl:px-1.5 py-0.5 whitespace-nowrap"
         >
           Overview
         </a>
 
-        <div class="h-3 w-px bg-border-subtle"></div>
+        <a
+          href="/foundations"
+          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1 xl:px-1.5 py-0.5 whitespace-nowrap"
+        >
+          Foundations
+        </a>
 
         <a
           href="/patterns"
-          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
+          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1 xl:px-1.5 py-0.5 whitespace-nowrap"
         >
           In the Wild
         </a>
         <a
           href="/architecture"
-          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
+          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1 xl:px-1.5 py-0.5 whitespace-nowrap"
         >
           Contracts
         </a>
 
-        <div class="h-3 w-px bg-border-subtle"></div>
-
-        {#each labComponents as comp}
-          <a
-            href={comp.href}
-            class="text-fg-muted hover:text-fg-primary hover:bg-surface-canvas transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
+        <!-- Components Disclosure Menu -->
+        <div class="relative" bind:this={componentsNavEl}>
+          <button
+            type="button"
+            aria-haspopup="true"
+            aria-expanded={componentsOpen}
+            onclick={() => (componentsOpen = !componentsOpen)}
+            class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1 xl:px-1.5 py-0.5 whitespace-nowrap flex items-center gap-1"
           >
-            {comp.name}
-          </a>
-        {/each}
+            Components
+            <span aria-hidden="true">&#9662;</span>
+          </button>
 
-        <div class="h-3 w-px bg-border-subtle"></div>
+          {#if componentsOpen}
+            <div
+              class="absolute left-0 top-full z-40 mt-1 w-48 flex flex-col gap-0.5 p-1 bg-surface-canvas border border-border-subtle rounded shadow-xs"
+            >
+              {#each labComponents as comp}
+                <a
+                  href={comp.href}
+                  onclick={() => (componentsOpen = false)}
+                  class="px-2 py-1 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
+                >
+                  {comp.name}
+                </a>
+              {/each}
 
-        <a
-          href="/lab/primitives"
-          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
-        >
-          Primitives
-        </a>
-        <a
-          href="/lab/logo"
-          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
-        >
-          Logo
-        </a>
+              <div aria-hidden="true" class="mx-1 my-1 h-px bg-border-subtle"></div>
+
+              <a
+                href="/lab/primitives"
+                onclick={() => (componentsOpen = false)}
+                class="px-2 py-1 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
+              >
+                Primitives
+              </a>
+              <a
+                href="/lab/logo"
+                onclick={() => (componentsOpen = false)}
+                class="px-2 py-1 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
+              >
+                Logo
+              </a>
+            </div>
+          {/if}
+        </div>
       </nav>
     </div>
 
     <!-- Telemetry & Environment Switchers -->
-    <div class="flex items-center gap-2 font-mono text-xs">
+    <div class="flex items-center gap-1.5 xl:gap-2 font-mono text-xs whitespace-nowrap">
       <!-- Live FPS Telemetry Badge -->
       <span
-        class="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-border-subtle bg-surface-canvas text-[11px] text-fg-primary font-bold"
+        class="hidden sm:inline-flex lg:hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-border-subtle bg-surface-canvas text-[11px] text-fg-primary font-bold"
         title="Live requestAnimationFrame frequency"
       >
         <span
@@ -183,7 +240,7 @@
               : 'bg-status-critical'}"
           aria-hidden="true"
         ></span>
-        <span>[FPS: {fps}]</span>
+        <span>{fps} fps</span>
       </span>
 
       <!-- Theme Switcher -->
@@ -289,49 +346,63 @@
   <!-- Mobile Nav Drawer -->
   {#if navOpen}
     <div
-      class="lg:hidden bg-surface-elevated border-b border-border-subtle p-4 font-mono text-xs flex flex-wrap gap-2"
+      class="lg:hidden bg-surface-elevated border-b border-border-subtle p-4 font-mono text-xs flex flex-wrap items-center gap-x-3 gap-y-1"
     >
       <a
         href="/"
         onclick={() => (navOpen = false)}
-        class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary"
+        class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
       >
         Overview
       </a>
       <a
+        href="/foundations"
+        onclick={() => (navOpen = false)}
+        class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
+      >
+        Foundations
+      </a>
+      <a
         href="/patterns"
         onclick={() => (navOpen = false)}
-        class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive"
+        class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
       >
         In the Wild
       </a>
       <a
         href="/architecture"
         onclick={() => (navOpen = false)}
-        class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive"
+        class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
       >
         Contracts
       </a>
+
+      <span
+        class="w-full mt-2 border-t border-border-subtle pb-1 pt-3 text-[10px] uppercase tracking-wider text-fg-muted"
+        >Components</span
+      >
+
       {#each labComponents as comp}
         <a
           href={comp.href}
           onclick={() => (navOpen = false)}
-          class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive"
+          class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
         >
           {comp.name}
         </a>
       {/each}
+
       <a
         href="/lab/primitives"
         onclick={() => (navOpen = false)}
-        class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary"
+        class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
       >
         Primitives
       </a>
       <a
         href="/lab/logo"
         onclick={() => (navOpen = false)}
-        class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary"
+        class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
       >
         Logo
       </a>
