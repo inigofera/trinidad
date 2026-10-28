@@ -1,6 +1,5 @@
 <script lang="ts">
   import WorkbenchShell from '../WorkbenchShell.svelte';
-  import bundleStats from '../bundle-stats.json';
   import { Button, ToggleButton, type ButtonVariant } from '$lib/components/button/index.js';
 
   let variant = $state<ButtonVariant>('primary');
@@ -10,15 +9,6 @@
   let label = $state('Initiate Telemetry Sequence');
   let isToggle = $state(false);
   let pressed = $state(false);
-
-  const trinity = {
-    ergonomics:
-      'Predictable Enter/Space activation + locked geometry during loading states to prevent layout shift',
-    design:
-      'Warm brutalist hairline borders, tactile active:translate-y-[1px], and high-contrast focus rings',
-    engineering:
-      'Zero-runtime overhead headless ButtonState with cycling frame spinner [/], [-], [\\], [|]'
-  };
 
   const generatedCode = $derived.by(() => {
     if (isToggle) {
@@ -56,8 +46,6 @@
 <WorkbenchShell
   name="Button & ToggleButton"
   description="Polymorphic action and toggle primitives with animated spinners, state-preserving width locking, and high-contrast tactile feedback."
-  bundleSize={bundleStats.button}
-  {trinity}
   {generatedCode}
 >
   {#snippet stage()}
@@ -74,7 +62,8 @@
         </Button>
       {:else}
         <ToggleButton {variant} bind:pressed {disabled} shortcut={shortcut || undefined}>
-          {label} [STATE: {pressed ? 'ON' : 'OFF'}]
+          {label}
+          {pressed ? 'ON' : 'OFF'}
         </ToggleButton>
       {/if}
     </div>
@@ -83,7 +72,7 @@
   {#snippet controls()}
     <div class="space-y-4 font-mono text-xs">
       <div class="space-y-1">
-        <label for="ctrl-mode" class="text-fg-muted font-bold block">// Component Mode</label>
+        <label for="ctrl-mode" class="text-fg-muted font-bold block">Component Mode</label>
         <div class="grid grid-cols-2 gap-2" id="ctrl-mode">
           <button
             type="button"
@@ -107,7 +96,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-variant" class="text-fg-muted font-bold block">// Variant</label>
+        <label for="ctrl-variant" class="text-fg-muted font-bold block">Variant</label>
         <select
           id="ctrl-variant"
           bind:value={variant}
@@ -121,7 +110,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-label" class="text-fg-muted font-bold block">// Label Content</label>
+        <label for="ctrl-label" class="text-fg-muted font-bold block">Label Content</label>
         <input
           id="ctrl-label"
           type="text"
@@ -131,7 +120,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-shortcut" class="text-fg-muted font-bold block">// Shortcut Badge</label>
+        <label for="ctrl-shortcut" class="text-fg-muted font-bold block">Shortcut Badge</label>
         <input
           id="ctrl-shortcut"
           type="text"
@@ -143,16 +132,16 @@
       <div class="flex items-center gap-4 pt-2">
         <label class="flex items-center gap-2 cursor-pointer select-none">
           <input type="checkbox" bind:checked={loading} disabled={isToggle} />
-          <span>loading</span>
+          <span>Loading</span>
         </label>
         <label class="flex items-center gap-2 cursor-pointer select-none">
           <input type="checkbox" bind:checked={disabled} />
-          <span>disabled</span>
+          <span>Disabled</span>
         </label>
         {#if isToggle}
           <label class="flex items-center gap-2 cursor-pointer select-none">
             <input type="checkbox" bind:checked={pressed} />
-            <span>pressed</span>
+            <span>Pressed</span>
           </label>
         {/if}
       </div>

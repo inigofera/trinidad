@@ -1,9 +1,5 @@
 <script lang="ts">
   import { TrinidadLogo } from '$lib/components/logo/index.js';
-  import { getEnvironment } from '$lib/state/environment.svelte.js';
-
-  const env = getEnvironment();
-
   // Reactive props
   let size = $state<number>(32);
   let variant = $state<'mark' | 'lockup'>('lockup');
@@ -94,7 +90,7 @@
 </script>
 
 <svelte:head>
-  <title>trinidad lab — logo & calibration mark component</title>
+  <title>trinidad lab: logo &amp; calibration mark component</title>
 </svelte:head>
 
 <div class="p-6 md:p-10 max-w-7xl mx-auto space-y-8 font-sans">
@@ -102,71 +98,23 @@
   <div
     class="border-b border-border-subtle pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4"
   >
-    <div>
-      <div class="flex items-center gap-2 font-mono text-xs text-fg-muted uppercase tracking-wider">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-accent-interactive"></span>
-        <span>Component Lab &bull; Logo</span>
-      </div>
-      <h1 class="text-3xl font-bold tracking-tight text-fg-primary mt-1 lowercase">
-        trinidad logo
-      </h1>
-      <p class="text-fg-muted font-mono text-xs mt-1">
-        Isometric 3-facet trinity mark with proportional wordmark typography, flush vertex
-        interlock, and parallel negative-space channel.
-      </p>
-    </div>
-
-    <!-- Trinity Breakdown Strip -->
-    <div
-      class="bg-surface-elevated p-3 rounded border border-border-subtle font-mono text-[11px] space-y-1"
-    >
-      <div class="text-fg-primary">
-        <span class="text-accent-interactive font-bold">Ergonomics:</span> Proportional typographic scaling
-        maintains optical balance across all sizes (16px–128px)
-      </div>
-      <div class="text-fg-primary">
-        <span class="text-fg-muted font-bold">Design:</span> Swiss isometric brutalism with precision
-        2.5px negative-space top channel
-      </div>
-      <div class="text-fg-primary">
-        <span class="text-fg-muted font-bold">Engineering:</span> Shared vertex seams (21.61, 43.03) &rarr;
-        (16.41, 52.03) ensure zero raster gap
-      </div>
-    </div>
+    <h1 class="text-3xl font-bold tracking-tight text-fg-primary lowercase">trinidad logo</h1>
   </div>
 
   <!-- Standardized Workbench Layout -->
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
     <!-- Stage Canvas (Top-Left, 8 Cols) -->
     <div class="lg:col-span-8 flex flex-col space-y-3">
-      <div class="flex items-center justify-between text-xs font-mono text-fg-muted">
+      <div class="text-xs font-mono text-fg-muted">
         <span>Stage Canvas</span>
-        <div class="flex items-center gap-3">
-          <span>THEME: [{env.theme.toUpperCase()}]</span>
-          <span>DENSITY: [{env.density.toUpperCase()}]</span>
-        </div>
       </div>
 
       <div
         bind:this={stageElement}
         role="region"
         aria-label="Component preview stage"
-        class="relative min-h-[360px] rounded-lg border border-border-subtle bg-surface-elevated flex items-center justify-center p-8 overflow-hidden select-none"
+        class="relative min-h-[360px] rounded border border-border-subtle flex items-center justify-center p-8 overflow-hidden select-none"
       >
-        <!-- Hairline Stage Grid -->
-        <div
-          class="absolute inset-0 pointer-events-none opacity-20"
-          style="background-size: 24px 24px; background-image: linear-gradient(to right, var(--border-subtle) 1px, transparent 1px), linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);"
-        ></div>
-
-        <!-- Axis Center Reticle Marks -->
-        <div
-          class="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-border-subtle/40 pointer-events-none"
-        ></div>
-        <div
-          class="absolute inset-y-0 left-1/2 -translate-x-1/2 border-l border-border-subtle/40 pointer-events-none"
-        ></div>
-
         <!-- Rendered Component -->
         <div class="relative z-10 transition-transform duration-150">
           <TrinidadLogo {size} {variant} class={customClass} />
@@ -180,9 +128,7 @@
         <span>Reactive Prop Controls</span>
       </div>
 
-      <div
-        class="bg-surface-elevated border border-border-subtle rounded-lg p-5 space-y-5 font-mono text-xs"
-      >
+      <div class="space-y-5 font-mono text-xs">
         <!-- Size Control -->
         <div class="space-y-2">
           <div class="flex items-center justify-between">
@@ -204,7 +150,7 @@
                 type="button"
                 class="px-2 py-0.5 rounded border border-border-subtle text-[10px] {size ===
                 presetSize
-                  ? 'bg-accent-interactive text-[#24422a] font-bold'
+                  ? 'bg-accent-interactive text-accent-contrast font-bold'
                   : 'bg-surface-canvas text-fg-muted hover:text-fg-primary'}"
                 onclick={() => (size = presetSize)}
               >
@@ -222,7 +168,7 @@
               type="button"
               class="py-1.5 px-3 rounded border border-border-subtle text-center transition-colors {variant ===
               'lockup'
-                ? 'bg-accent-interactive text-[#24422a] font-bold'
+                ? 'bg-accent-interactive text-accent-contrast font-bold'
                 : 'bg-surface-canvas text-fg-muted hover:text-fg-primary'}"
               onclick={() => (variant = 'lockup')}
               aria-pressed={variant === 'lockup'}
@@ -233,7 +179,7 @@
               type="button"
               class="py-1.5 px-3 rounded border border-border-subtle text-center transition-colors {variant ===
               'mark'
-                ? 'bg-accent-interactive text-[#24422a] font-bold'
+                ? 'bg-accent-interactive text-accent-contrast font-bold'
                 : 'bg-surface-canvas text-fg-muted hover:text-fg-primary'}"
               onclick={() => (variant = 'mark')}
               aria-pressed={variant === 'mark'}
@@ -263,9 +209,7 @@
         <span>Live A11y &amp; DOM Telemetry Drawer</span>
       </div>
 
-      <div
-        class="bg-surface-elevated border border-border-subtle rounded-lg p-5 font-mono text-xs space-y-3 shadow-xs"
-      >
+      <div class="font-mono text-xs space-y-3">
         <div class="flex items-center justify-between border-b border-border-subtle pb-2">
           <span class="text-fg-muted">activeElement:</span>
           <span class="font-bold text-fg-primary">{activeElementTag}</span>
@@ -310,9 +254,7 @@
         </button>
       </div>
 
-      <div
-        class="bg-surface-elevated border border-border-subtle rounded-lg p-5 font-mono text-xs shadow-xs flex-1 flex flex-col justify-between"
-      >
+      <div class="space-y-4">
         <pre
           class="p-4 bg-surface-canvas border border-border-subtle rounded text-xs overflow-x-auto text-accent-interactive flex-1">{generatedCode}</pre>
 

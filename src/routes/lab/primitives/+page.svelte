@@ -1,8 +1,5 @@
 <script lang="ts">
   import { useFocusTrap, useRovingTabindex, Announcer } from '$lib/actions/index.js';
-  import { getEnvironment } from '$lib/state/environment.svelte.js';
-
-  const env = getEnvironment();
 
   // Reactive prop controls
   let activeTab = $state<'composite' | 'focus-trap' | 'roving-tabindex' | 'announcer'>('composite');
@@ -220,7 +217,7 @@
 </script>
 
 <svelte:head>
-  <title>trinidad lab — headless core & a11y primitives</title>
+  <title>trinidad lab: headless core &amp; a11y primitives</title>
 </svelte:head>
 
 <div class="p-6 md:p-10 max-w-7xl mx-auto space-y-8 font-sans">
@@ -229,16 +226,7 @@
     class="border-b border-border-subtle pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4"
   >
     <div>
-      <div class="flex items-center gap-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-accent-interactive"></span>
-        <span class="font-mono text-xs text-fg-muted uppercase tracking-wider">
-          COMPONENT LAB &middot; ACCESSIBILITY CORE
-        </span>
-      </div>
-      <h1 class="text-3xl font-bold tracking-tight mt-1">Headless Core & A11y Primitives</h1>
-      <p class="text-xs md:text-sm text-fg-muted font-mono mt-1">
-        useFocusTrap · useRovingTabindex · Announcer Singleton
-      </p>
+      <h1 class="text-3xl font-bold tracking-tight">Headless Core & A11y Primitives</h1>
     </div>
 
     <!-- Primitive Mode Selector Tabs -->
@@ -252,7 +240,7 @@
         role="tab"
         aria-selected={activeTab === 'composite'}
         class="px-3 py-1.5 rounded transition-colors {activeTab === 'composite'
-          ? 'bg-accent-interactive text-[#24422a] font-bold shadow-xs'
+          ? 'bg-accent-interactive text-accent-contrast font-bold shadow-xs'
           : 'text-fg-muted hover:text-fg-primary'}"
         onclick={() => (activeTab = 'composite')}
       >
@@ -263,7 +251,7 @@
         role="tab"
         aria-selected={activeTab === 'focus-trap'}
         class="px-3 py-1.5 rounded transition-colors {activeTab === 'focus-trap'
-          ? 'bg-accent-interactive text-[#24422a] font-bold shadow-xs'
+          ? 'bg-accent-interactive text-accent-contrast font-bold shadow-xs'
           : 'text-fg-muted hover:text-fg-primary'}"
         onclick={() => (activeTab = 'focus-trap')}
       >
@@ -274,7 +262,7 @@
         role="tab"
         aria-selected={activeTab === 'roving-tabindex'}
         class="px-3 py-1.5 rounded transition-colors {activeTab === 'roving-tabindex'
-          ? 'bg-accent-interactive text-[#24422a] font-bold shadow-xs'
+          ? 'bg-accent-interactive text-accent-contrast font-bold shadow-xs'
           : 'text-fg-muted hover:text-fg-primary'}"
         onclick={() => (activeTab = 'roving-tabindex')}
       >
@@ -285,7 +273,7 @@
         role="tab"
         aria-selected={activeTab === 'announcer'}
         class="px-3 py-1.5 rounded transition-colors {activeTab === 'announcer'
-          ? 'bg-accent-interactive text-[#24422a] font-bold shadow-xs'
+          ? 'bg-accent-interactive text-accent-contrast font-bold shadow-xs'
           : 'text-fg-muted hover:text-fg-primary'}"
         onclick={() => (activeTab = 'announcer')}
       >
@@ -295,26 +283,10 @@
   </div>
 
   <!-- Architectural Concept & Role of Primitives in Trinidad -->
-  <div
-    class="bg-surface-elevated rounded-xl border border-border-subtle p-6 space-y-4 shadow-sm font-mono text-xs"
-  >
-    <div
-      class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-3"
-    >
-      <div class="flex items-center gap-2">
-        <span
-          class="px-2 py-0.5 rounded text-[10px] font-bold bg-accent-interactive text-[#24422a]"
-        >
-          DESIGN SYSTEM SUBSTRATE
-        </span>
-        <h2 class="text-sm font-bold uppercase tracking-wider text-fg-primary">
-          The Role of Primitives in Trinidad
-        </h2>
-      </div>
-      <span class="text-fg-muted text-[11px]"
-        >HEADLESS RUNES ACTIONS &middot; ZERO DOM OVERHEAD</span
-      >
-    </div>
+  <div class="max-w-3xl">
+    <h2 class="text-lg md:text-xl font-bold tracking-tight text-fg-primary">
+      The Role of Primitives in Trinidad
+    </h2>
 
     <p class="text-xs text-fg-muted font-sans leading-relaxed">
       In the Trinidad Design System, <strong>Primitives</strong> are low-level, headless Svelte 5
@@ -327,74 +299,31 @@
       guarantees deterministic, WAI-ARIA 1.2-compliant ergonomics across the entire interface while
       leaving 100% of the visual styling to the design token pipeline.
     </p>
-
-    <!-- Trinity Role Breakdown -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
-      <div class="p-3 bg-surface-canvas rounded-lg border border-border-subtle space-y-1">
-        <div class="flex items-center gap-1.5 text-accent-interactive font-bold">
-          <span>// ERGONOMICS</span>
-        </div>
-        <p class="text-[11px] text-fg-muted font-sans leading-normal">
-          Reduces operator cognitive load in high-frequency consoles by ensuring focus never gets
-          lost or stranded outside modal boundaries.
-        </p>
-      </div>
-
-      <div class="p-3 bg-surface-canvas rounded-lg border border-border-subtle space-y-1">
-        <div class="flex items-center gap-1.5 text-fg-primary font-bold">
-          <span>// DESIGN</span>
-        </div>
-        <p class="text-[11px] text-fg-muted font-sans leading-normal">
-          100% headless and unstyled. Imposes zero layout or aesthetic constraints on Paper or
-          Industrial theme tokens.
-        </p>
-      </div>
-
-      <div class="p-3 bg-surface-canvas rounded-lg border border-border-subtle space-y-1">
-        <div class="flex items-center gap-1.5 text-fg-primary font-bold">
-          <span>// ENGINEERING</span>
-        </div>
-        <p class="text-[11px] text-fg-muted font-sans leading-normal">
-          Deterministic Svelte 5 Runes state machines (<code class="text-accent-interactive"
-            >$state</code
-          >, <code class="text-accent-interactive">$effect.root</code>) with automatic teardown and
-          zero extra DOM wrappers.
-        </p>
-      </div>
-    </div>
   </div>
 
-  <!-- Tab Description & Technical Context Banner -->
-  <div
-    class="bg-surface-elevated rounded-lg border border-border-subtle p-5 font-mono text-xs space-y-3 shadow-xs transition-colors duration-150"
-  >
-    <div
-      class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-2.5"
-    >
-      <div class="flex items-center gap-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-accent-interactive"></span>
-        <span class="text-fg-primary font-bold text-sm tracking-tight">{tabExplanations.title}</span
-        >
-      </div>
-      <span class="text-[10px] text-fg-muted uppercase tracking-wider">// TAB SPECIFICATION</span>
-    </div>
+  <!-- Active Primitive Description & Keyboard/ARIA Contract -->
+  <div class="max-w-3xl space-y-3">
+    <h2 class="text-lg md:text-xl font-bold tracking-tight text-fg-primary">
+      {tabExplanations.title}
+    </h2>
 
     <p class="text-xs text-fg-muted font-sans leading-relaxed">
       {tabExplanations.summary}
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-      <div class="p-2.5 bg-surface-canvas rounded border border-border-subtle space-y-1">
+    <div class="space-y-3 pt-1">
+      <div class="space-y-0.5">
         <span class="text-fg-muted block uppercase text-[10px] font-bold"
-          >// Active Keyboard Keys:</span
+          >Active Keyboard Keys:</span
         >
         <span class="text-fg-primary font-semibold text-[11px] leading-snug"
           >{tabExplanations.keys}</span
         >
       </div>
-      <div class="p-2.5 bg-surface-canvas rounded border border-border-subtle space-y-1">
+
+      <div class="space-y-0.5">
         <span class="text-fg-muted block uppercase text-[10px] font-bold"
-          >// ARIA Contract &amp; DOM Mapping:</span
+          >ARIA Contract &amp; DOM Mapping:</span
         >
         <span class="text-accent-interactive font-semibold text-[11px] leading-snug"
           >{tabExplanations.aria}</span
@@ -407,21 +336,12 @@
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
     <!-- Zone 1: Stage Canvas (Top-Left, 7 Cols) -->
     <section class="lg:col-span-7 space-y-4">
-      <div class="flex items-center justify-between font-mono text-xs">
-        <span class="text-fg-muted uppercase tracking-wider">// ZONE 1: STAGE CANVAS</span>
-        <span class="text-accent-interactive font-bold">MODE: [{activeTab.toUpperCase()}]</span>
-      </div>
+      <span class="text-xs font-mono text-fg-muted">Stage</span>
 
       <div
         bind:this={stageElement}
-        class="relative min-h-[380px] bg-surface-elevated rounded-lg border border-border-subtle p-6 flex flex-col justify-between shadow-xs overflow-hidden"
+        class="relative min-h-[380px] border border-border-subtle p-6 flex flex-col justify-between overflow-hidden"
       >
-        <!-- Hairline Precision Calibration Grid Background -->
-        <div
-          class="absolute inset-0 pointer-events-none opacity-20"
-          style="background-image: linear-gradient(to right, var(--border-subtle) 1px, transparent 1px), linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px); background-size: 24px 24px;"
-        ></div>
-
         <!-- Live Interactive Primitive Demo Container -->
         <div class="relative z-10 w-full my-auto">
           {#if activeTab === 'composite'}
@@ -449,7 +369,7 @@
                   </p>
                   <button
                     type="button"
-                    class="px-4 py-2 rounded bg-accent-interactive text-[#24422a] font-mono text-xs font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive shadow-xs"
+                    class="px-4 py-2 rounded bg-accent-interactive text-accent-contrast font-mono text-xs font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive shadow-xs"
                     onclick={() => {
                       labGateOpen = true;
                       labGateStatus = 'Gate locked. Roving toolbar active.';
@@ -484,13 +404,13 @@
                   <div
                     class="p-2.5 bg-surface-elevated rounded border border-border-subtle font-mono text-xs"
                   >
-                    <span class="text-fg-muted">// Status:</span>
+                    <span class="text-fg-muted">Status:</span>
                     <div class="text-accent-interactive font-bold mt-0.5">{labGateStatus}</div>
                   </div>
 
                   <div class="space-y-1">
                     <span class="text-[10px] font-mono text-fg-muted uppercase"
-                      >// Roving Action Toolbar (&larr; &rarr; to cycle):</span
+                      >Roving Action Toolbar (&larr; &rarr; to cycle):</span
                     >
                     <div
                       role="toolbar"
@@ -578,7 +498,7 @@
                 <div class="space-y-3 font-mono text-xs">
                   <div>
                     <label for="trap-input-1" class="block text-fg-muted mb-1"
-                      >// Telemetry Input Alpha</label
+                      >Telemetry Input Alpha</label
                     >
                     <input
                       id="trap-input-1"
@@ -590,7 +510,7 @@
 
                   <div>
                     <label for="trap-select-1" class="block text-fg-muted mb-1"
-                      >// Modality Channel</label
+                      >Modality Channel</label
                     >
                     <select
                       id="trap-select-1"
@@ -718,7 +638,8 @@
               >
                 <div>
                   <label for="announcer-message-input" class="block text-fg-muted mb-1"
-                    >// Message Payload</label
+                    >Message Payload</label
+                  >
                   >
                   <input
                     id="announcer-message-input"
@@ -731,7 +652,7 @@
                 <div class="flex items-center gap-2">
                   <button
                     type="button"
-                    class="flex-1 px-3 py-1.5 rounded font-bold transition-colors bg-accent-interactive text-[#24422a] focus-visible:outline-2 focus-visible:outline-accent-interactive"
+                    class="flex-1 px-3 py-1.5 rounded font-bold transition-colors bg-accent-interactive text-accent-contrast focus-visible:outline-2 focus-visible:outline-accent-interactive"
                     onclick={() => {
                       announcePoliteness = 'polite';
                       sendAnnouncement();
@@ -755,7 +676,8 @@
               <!-- Recent Announcements Log -->
               <div class="space-y-1 font-mono text-xs">
                 <span class="text-[10px] text-fg-muted uppercase tracking-wider"
-                  >// Recent Dispatch Log:</span
+                  >Recent Dispatch Log:</span
+                >
                 >
                 {#if announcementLog.length === 0}
                   <div
@@ -788,26 +710,14 @@
             </div>
           {/if}
         </div>
-
-        <!-- Stage Footer Information Bar -->
-        <div
-          class="relative z-10 pt-4 border-t border-border-subtle flex items-center justify-between font-mono text-[11px] text-fg-muted"
-        >
-          <span>STATUS: RUNTIME HEALTHY</span>
-          <span>COMPILER: SVELTE 5 RUNES</span>
-        </div>
       </div>
     </section>
 
     <!-- Zone 2: Reactive Prop Controls (Top-Right, 5 Cols) -->
     <section class="lg:col-span-5 space-y-4">
-      <div class="flex items-center justify-between font-mono text-xs">
-        <span class="text-fg-muted uppercase tracking-wider">// ZONE 2: REACTIVE CONTROLS</span>
-      </div>
+      <span class="text-xs font-mono text-fg-muted">Controls</span>
 
-      <div
-        class="bg-surface-elevated rounded-lg border border-border-subtle p-6 space-y-5 shadow-xs font-mono text-xs"
-      >
+      <div class="space-y-5 font-mono text-xs">
         {#if activeTab === 'composite'}
           <div class="space-y-4">
             <div class="flex items-center justify-between">
@@ -869,7 +779,7 @@
                   type="button"
                   class="flex-1 py-1 rounded text-center transition-colors {rovingOrientation ===
                   'horizontal'
-                    ? 'bg-accent-interactive text-[#24422a] font-bold'
+                    ? 'bg-accent-interactive text-accent-contrast font-bold'
                     : 'text-fg-muted'}"
                   onclick={() => (rovingOrientation = 'horizontal')}
                 >
@@ -879,7 +789,7 @@
                   type="button"
                   class="flex-1 py-1 rounded text-center transition-colors {rovingOrientation ===
                   'vertical'
-                    ? 'bg-accent-interactive text-[#24422a] font-bold'
+                    ? 'bg-accent-interactive text-accent-contrast font-bold'
                     : 'text-fg-muted'}"
                   onclick={() => (rovingOrientation = 'vertical')}
                 >
@@ -889,7 +799,7 @@
                   type="button"
                   class="flex-1 py-1 rounded text-center transition-colors {rovingOrientation ===
                   'both'
-                    ? 'bg-accent-interactive text-[#24422a] font-bold'
+                    ? 'bg-accent-interactive text-accent-contrast font-bold'
                     : 'text-fg-muted'}"
                   onclick={() => (rovingOrientation = 'both')}
                 >
@@ -903,7 +813,7 @@
               <button
                 type="button"
                 class="px-3 py-1 rounded transition-colors font-bold {rovingLoop
-                  ? 'bg-accent-interactive text-[#24422a]'
+                  ? 'bg-accent-interactive text-accent-contrast'
                   : 'bg-surface-canvas text-fg-muted border border-border-subtle'}"
                 onclick={() => (rovingLoop = !rovingLoop)}
               >
@@ -934,7 +844,7 @@
                   type="button"
                   class="flex-1 py-1 rounded text-center transition-colors {announcePoliteness ===
                   'polite'
-                    ? 'bg-accent-interactive text-[#24422a] font-bold'
+                    ? 'bg-accent-interactive text-accent-contrast font-bold'
                     : 'text-fg-muted'}"
                   onclick={() => (announcePoliteness = 'polite')}
                 >
@@ -959,16 +869,9 @@
 
     <!-- Zone 3: Live A11y & DOM Telemetry Drawer (Bottom-Left, 7 Cols) -->
     <section class="lg:col-span-7 space-y-4">
-      <div class="flex items-center justify-between font-mono text-xs">
-        <span class="text-fg-muted uppercase tracking-wider"
-          >// ZONE 3: LIVE A11Y & DOM TELEMETRY</span
-        >
-        <span class="text-fg-muted">MUTATION OBSERVER ACTIVE</span>
-      </div>
+      <span class="text-xs font-mono text-fg-muted">Telemetry</span>
 
-      <div
-        class="bg-surface-elevated rounded-lg border border-border-subtle p-5 font-mono text-xs space-y-3 shadow-xs"
-      >
+      <div class="font-mono text-xs space-y-3">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="p-3 bg-surface-canvas rounded border border-border-subtle">
             <div class="text-fg-muted text-[10px] uppercase">activeElement</div>
@@ -995,7 +898,7 @@
         </div>
 
         <div class="p-3 bg-surface-canvas rounded border border-border-subtle space-y-1">
-          <div class="text-fg-muted text-[10px] uppercase">// ariaAttributes Map:</div>
+          <div class="text-fg-muted text-[10px] uppercase">ariaAttributes Map:</div>
           <pre
             class="text-[11px] text-fg-primary overflow-x-auto p-1 leading-relaxed">{JSON.stringify(
               ariaState,
@@ -1008,8 +911,8 @@
 
     <!-- Zone 4: Dynamic Svelte 5 Code Output (Bottom-Right, 5 Cols) -->
     <section class="lg:col-span-5 space-y-4">
-      <div class="flex items-center justify-between font-mono text-xs">
-        <span class="text-fg-muted uppercase tracking-wider">// ZONE 4: DYNAMIC SVELTE 5 CODE</span>
+      <div class="flex items-center justify-between gap-2 font-mono text-xs">
+        <span class="text-fg-muted">Code</span>
         <button
           type="button"
           class="text-xs text-accent-interactive hover:underline focus-visible:outline-2 focus-visible:outline-accent-interactive rounded"
@@ -1019,12 +922,10 @@
         </button>
       </div>
 
-      <div
-        class="bg-surface-elevated rounded-lg border border-border-subtle p-4 font-mono text-xs shadow-xs relative"
-      >
-        <pre
-          class="text-[11px] text-fg-primary overflow-x-auto leading-relaxed p-1">{generatedCode}</pre>
-      </div>
+      <pre
+        class="p-3 bg-surface-canvas border border-border-subtle rounded text-[11px] text-fg-primary overflow-x-auto leading-relaxed">
+        {generatedCode}
+      </pre>
     </section>
   </div>
 </div>

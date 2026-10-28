@@ -1,6 +1,5 @@
 <script lang="ts">
   import WorkbenchShell from '../WorkbenchShell.svelte';
-  import bundleStats from '../bundle-stats.json';
   import { Combobox, type CommandItem } from '$lib/components/combobox/index.js';
 
   let open = $state(false);
@@ -53,15 +52,6 @@
     }
   ];
 
-  const trinity = {
-    ergonomics:
-      'Virtual focus with aria-activedescendant maintains real DOM focus in input while navigating options with arrow keys',
-    design:
-      'Terminal-inspired prompt character, hairline group headers, and compact shortcut badges',
-    engineering:
-      'Subsequence fuzzy scoring with consecutive character and word-boundary bonuses in headless ComboboxState'
-  };
-
   const generatedCode = $derived.by(() => {
     return `<script lang="ts">
   import { Combobox, type CommandItem } from 'trinidad-ui';
@@ -85,8 +75,6 @@
 <WorkbenchShell
   name="Combobox (Command Palette)"
   description="Command palette and omnibar with subsequence fuzzy search scoring, virtual focus (aria-activedescendant), keyboard listbox scrolling, and ARIA announcements."
-  bundleSize={bundleStats.combobox}
-  {trinity}
   {generatedCode}
 >
   {#snippet stage()}
@@ -109,7 +97,7 @@
   {#snippet controls()}
     <div class="space-y-4 font-mono text-xs">
       <div class="space-y-1">
-        <label for="ctrl-open" class="text-fg-muted font-bold block">// Dropdown State</label>
+        <label for="ctrl-open" class="text-fg-muted font-bold block">Dropdown State</label>
         <button
           id="ctrl-open"
           type="button"
@@ -123,7 +111,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-q" class="text-fg-muted font-bold block">// Active Query</label>
+        <label for="ctrl-q" class="text-fg-muted font-bold block">Active Query</label>
         <input
           id="ctrl-q"
           type="text"
@@ -134,7 +122,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-ph" class="text-fg-muted font-bold block">// Placeholder</label>
+        <label for="ctrl-ph" class="text-fg-muted font-bold block">Placeholder</label>
         <input
           id="ctrl-ph"
           type="text"

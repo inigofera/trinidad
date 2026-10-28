@@ -1,20 +1,11 @@
 <script lang="ts">
   import WorkbenchShell from '../WorkbenchShell.svelte';
-  import bundleStats from '../bundle-stats.json';
   import { Dialog } from '$lib/components/dialog/index.js';
   import { Button } from '$lib/components/button/index.js';
 
   let open = $state(false);
   let title = $state('OVERRIDE_TELEMETRY_CALIBRATION');
   let description = $state('You are about to re-zero telemetry bias across all channels.');
-
-  const trinity = {
-    ergonomics:
-      'Focus trapped inside modal boundary, backdrop click dismiss, and Escape restoration to trigger element',
-    design: 'Tactile hairline border, backdrop blur-xs, and high-contrast header hierarchy',
-    engineering:
-      'Native HTMLDialogElement synchronization via .showModal() with automatic document.body scroll locking'
-  };
 
   const generatedCode = $derived.by(() => {
     return `<script lang="ts">
@@ -52,8 +43,6 @@
 <WorkbenchShell
   name="Dialog"
   description="Native modal system utilizing HTML5 <dialog> with focus trapping, body scroll locking, Escape cancellation, and backdrop click dismiss."
-  bundleSize={bundleStats.dialog}
-  {trinity}
   {generatedCode}
 >
   {#snippet stage()}
@@ -63,19 +52,10 @@
           <Button variant="primary" {onclick}>Open Operator Dialog [Modal]</Button>
         {/snippet}
 
-        <div class="space-y-3 font-mono text-xs">
-          <p class="text-fg-primary">
-            Confirming this operation will trigger a zero-point re-calibration of the high-frequency
-            telemetry channels.
-          </p>
-          <div
-            class="p-3 bg-surface-canvas rounded border border-border-subtle text-[11px] text-fg-muted"
-          >
-            CHANNEL_01: 0.000 mV bias<br />
-            CHANNEL_02: 0.000 mV bias<br />
-            STATUS: Ready for operator commit
-          </div>
-        </div>
+        <p class="font-mono text-xs">
+          Confirming this operation will trigger a zero-point re-calibration of the high-frequency
+          telemetry channels.
+        </p>
 
         {#snippet footer()}
           <Button variant="ghost" onclick={() => (open = false)}>Cancel</Button>
@@ -96,7 +76,7 @@
   {#snippet controls()}
     <div class="space-y-4 font-mono text-xs">
       <div class="space-y-1">
-        <label for="ctrl-open" class="text-fg-muted font-bold block">// Modal State</label>
+        <label for="ctrl-open" class="text-fg-muted font-bold block">Modal State</label>
         <button
           id="ctrl-open"
           type="button"
@@ -110,7 +90,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-title" class="text-fg-muted font-bold block">// Title</label>
+        <label for="ctrl-title" class="text-fg-muted font-bold block">Title</label>
         <input
           id="ctrl-title"
           type="text"
@@ -120,7 +100,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-desc" class="text-fg-muted font-bold block">// Description</label>
+        <label for="ctrl-desc" class="text-fg-muted font-bold block">Description</label>
         <textarea
           id="ctrl-desc"
           rows="3"

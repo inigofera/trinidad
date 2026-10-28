@@ -1,6 +1,5 @@
 <script lang="ts">
   import WorkbenchShell from '../WorkbenchShell.svelte';
-  import bundleStats from '../bundle-stats.json';
   import { DiffViewer, type DiffStatus, type DiffMode } from '$lib/components/diff-viewer/index.js';
 
   let original = $state(`// Mission Telemetry Baseline v1.4
@@ -22,15 +21,6 @@ STATUS_HEARTBEAT_SEC = 2`);
   let title = $state('RATE_AND_SAFETY_THRESHOLD_ADJUSTMENT');
   let status = $state<DiffStatus>('pending');
   let lastResolvedOutput = $state<string>('');
-
-  const trinity = {
-    ergonomics:
-      'Atomic confirmation gates ([Accept], [Reject], [Modify Inline]) prevent accidental configuration overwrites',
-    design:
-      'Subtle nominal green / critical red tinting and aligned line numbering maintain visual readability',
-    engineering:
-      'Line-by-line Longest Common Subsequence (LCS) matrix backtracking in headless DiffViewerState'
-  };
 
   const generatedCode = $derived.by(() => {
     return `<script lang="ts">
@@ -55,8 +45,6 @@ STATUS_HEARTBEAT_SEC = 2`);
 <WorkbenchShell
   name="DiffViewer"
   description="Interactive proposal gate and code diff viewer powered by an LCS algorithm with unified/split views, line number alignment, and inline modification."
-  bundleSize={bundleStats['diff-viewer']}
-  {trinity}
   {generatedCode}
 >
   {#snippet stage()}
@@ -86,7 +74,7 @@ STATUS_HEARTBEAT_SEC = 2`);
   {#snippet controls()}
     <div class="space-y-4 font-mono text-xs">
       <div class="space-y-1">
-        <label for="ctrl-mode" class="text-fg-muted font-bold block">// Diff View Mode</label>
+        <label for="ctrl-mode" class="text-fg-muted font-bold block">Diff View Mode</label>
         <div class="grid grid-cols-2 gap-2" id="ctrl-mode">
           <button
             type="button"
@@ -110,7 +98,7 @@ STATUS_HEARTBEAT_SEC = 2`);
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-status" class="text-fg-muted font-bold block">// Status Gate State</label>
+        <label for="ctrl-status" class="text-fg-muted font-bold block">Status Gate State</label>
         <select
           id="ctrl-status"
           bind:value={status}
@@ -124,7 +112,7 @@ STATUS_HEARTBEAT_SEC = 2`);
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-title" class="text-fg-muted font-bold block">// Proposal Title</label>
+        <label for="ctrl-title" class="text-fg-muted font-bold block">Proposal Title</label>
         <input
           id="ctrl-title"
           type="text"
@@ -134,7 +122,7 @@ STATUS_HEARTBEAT_SEC = 2`);
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-orig" class="text-fg-muted font-bold block">// Original Text</label>
+        <label for="ctrl-orig" class="text-fg-muted font-bold block">Original Text</label>
         <textarea
           id="ctrl-orig"
           rows="4"
@@ -144,7 +132,7 @@ STATUS_HEARTBEAT_SEC = 2`);
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-mod" class="text-fg-muted font-bold block">// Modified Proposal</label>
+        <label for="ctrl-mod" class="text-fg-muted font-bold block">Modified Proposal</label>
         <textarea
           id="ctrl-mod"
           rows="4"

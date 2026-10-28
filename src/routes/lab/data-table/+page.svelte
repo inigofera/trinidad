@@ -1,6 +1,5 @@
 <script lang="ts">
   import WorkbenchShell from '../WorkbenchShell.svelte';
-  import bundleStats from '../bundle-stats.json';
   import { DataTable, type DataTableColumn } from '$lib/components/data-table/index.js';
 
   interface TelemetryRecord {
@@ -50,14 +49,6 @@
     { key: 'status', header: 'Status', width: '110px', sortable: true }
   ];
 
-  const trinity = {
-    ergonomics:
-      '2D grid cell roving navigation (Arrow keys, PageUp/Down, Home/End) keeps operator hands on home row',
-    design: 'Sub-pixel hairline separators, sticky telemetry header, and aligned numeral columns',
-    engineering:
-      'O(1) DOM virtualization slicing: only 20-30 rows instantiated in DOM even when hosting 10,000+ items'
-  };
-
   const generatedCode = $derived.by(() => {
     return `<script lang="ts">
   import { DataTable, type DataTableColumn } from 'trinidad-ui';
@@ -84,8 +75,6 @@
 <WorkbenchShell
   name="DataTable"
   description="High-frequency virtualized log and data grid handling 10,000+ rows with O(1) DOM node allocation, multi-column sorting, and 2D grid accessibility."
-  bundleSize={bundleStats['data-table']}
-  {trinity}
   {generatedCode}
 >
   {#snippet stage()}
@@ -97,7 +86,7 @@
   {#snippet controls()}
     <div class="space-y-4 font-mono text-xs">
       <div class="space-y-1">
-        <label for="ctrl-dataset" class="text-fg-muted font-bold block">// Dataset Scale</label>
+        <label for="ctrl-dataset" class="text-fg-muted font-bold block">Dataset Scale</label>
         <div class="grid grid-cols-3 gap-2" id="ctrl-dataset">
           <button
             type="button"
@@ -130,7 +119,7 @@
       </div>
 
       <div class="space-y-1">
-        <label for="ctrl-rh" class="text-fg-muted font-bold block">// Row Height (px)</label>
+        <label for="ctrl-rh" class="text-fg-muted font-bold block">Row Height (px)</label>
         <input
           id="ctrl-rh"
           type="number"
@@ -139,24 +128,6 @@
           bind:value={rowHeight}
           class="w-full px-2 py-1 bg-surface-canvas border border-border-subtle text-fg-primary"
         />
-      </div>
-
-      <div
-        class="p-3 bg-surface-canvas rounded border border-border-subtle text-[11px] space-y-1 text-fg-muted"
-      >
-        <div>
-          ACTIVE ROW COUNT: <span class="text-fg-primary font-bold"
-            >{rowCount.toLocaleString()}</span
-          >
-        </div>
-        <div>
-          TOTAL VIRTUAL HEIGHT: <span class="text-fg-primary font-bold"
-            >{(rowCount * rowHeight).toLocaleString()} px</span
-          >
-        </div>
-        <div>
-          DOM MEMORY FOOTPRINT: <span class="text-fg-primary font-bold">&lt; 35 table rows</span>
-        </div>
       </div>
     </div>
   {/snippet}

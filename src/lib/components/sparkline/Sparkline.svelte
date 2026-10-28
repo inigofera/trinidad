@@ -69,7 +69,7 @@
   <!-- Monospace Header & Status Readout -->
   <div class="flex items-center justify-between text-[11px] text-fg-muted select-none">
     <div class="flex items-center gap-2">
-      <span class="font-bold text-fg-primary">// {label}</span>
+      <span class="font-bold text-fg-primary">{label}</span>
       {#if logic.isPaused}
         <span
           class="px-1 py-0.2 rounded bg-accent-interactive/20 text-fg-primary text-[10px] font-bold"

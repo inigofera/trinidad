@@ -1,6 +1,5 @@
 <script lang="ts">
   import WorkbenchShell from '../WorkbenchShell.svelte';
-  import bundleStats from '../bundle-stats.json';
   import { Sparkline } from '$lib/components/sparkline/index.js';
 
   let data = $state<number[]>([
@@ -14,15 +13,6 @@
   let unit = $state('ms');
   let label = $state('TELEMETRY_LATENCY_RING_BUFFER');
   let streaming = $state(false);
-
-  const trinity = {
-    ergonomics:
-      'Pause on hover/focus and ArrowLeft/Right scrub inspection allows micro-investigation of historical anomalies',
-    design:
-      'Dynamic threshold stroke mutation (lime-400 -> amber-500 -> crimson-500) and crosshair readout',
-    engineering:
-      '60fps Retina 2D canvas rendering with cached ResizeObserver dimensions to prevent layout thrashing'
-  };
 
   // Simulated live telemetry stream
   $effect(() => {
@@ -61,8 +51,6 @@
 <WorkbenchShell
   name="Sparkline"
   description="High-frequency telemetry stream visualizer rendering to Retina 2D canvas with threshold warnings, dimension caching, and pause-on-hover crosshair inspection."
-  bundleSize={bundleStats.sparkline}
-  {trinity}
   {generatedCode}
 >
   {#snippet stage()}
@@ -83,7 +71,7 @@
   {#snippet controls()}
     <div class="space-y-4 font-mono text-xs">
       <div class="space-y-1">
-        <label for="ctrl-stream" class="text-fg-muted font-bold block">// Stream Generator</label>
+        <label for="ctrl-stream" class="text-fg-muted font-bold block">Stream Generator</label>
         <div class="grid grid-cols-2 gap-2" id="ctrl-stream">
           <button
             type="button"
@@ -99,14 +87,14 @@
             class="px-2 py-1.5 rounded border border-border-subtle bg-surface-canvas text-fg-primary font-bold hover:border-status-critical"
             onclick={triggerSpike}
           >
-            ⚡ Inject Spike [94ms]
+            Inject spike
           </button>
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-2">
         <div class="space-y-1">
-          <label for="ctrl-warn" class="text-fg-muted font-bold block">// Warn Threshold</label>
+          <label for="ctrl-warn" class="text-fg-muted font-bold block">Warn Threshold</label>
           <input
             id="ctrl-warn"
             type="number"
@@ -115,7 +103,7 @@
           />
         </div>
         <div class="space-y-1">
-          <label for="ctrl-crit" class="text-fg-muted font-bold block">// Crit Threshold</label>
+          <label for="ctrl-crit" class="text-fg-muted font-bold block">Crit Threshold</label>
           <input
             id="ctrl-crit"
             type="number"
@@ -127,7 +115,7 @@
 
       <div class="grid grid-cols-2 gap-2">
         <div class="space-y-1">
-          <label for="ctrl-min" class="text-fg-muted font-bold block">// Min Scale</label>
+          <label for="ctrl-min" class="text-fg-muted font-bold block">Min Scale</label>
           <input
             id="ctrl-min"
             type="number"
@@ -136,7 +124,7 @@
           />
         </div>
         <div class="space-y-1">
-          <label for="ctrl-max" class="text-fg-muted font-bold block">// Max Scale</label>
+          <label for="ctrl-max" class="text-fg-muted font-bold block">Max Scale</label>
           <input
             id="ctrl-max"
             type="number"
@@ -148,7 +136,7 @@
 
       <div class="grid grid-cols-2 gap-2">
         <div class="space-y-1">
-          <label for="ctrl-label" class="text-fg-muted font-bold block">// Label</label>
+          <label for="ctrl-label" class="text-fg-muted font-bold block">Label</label>
           <input
             id="ctrl-label"
             type="text"
@@ -157,7 +145,7 @@
           />
         </div>
         <div class="space-y-1">
-          <label for="ctrl-unit" class="text-fg-muted font-bold block">// Unit</label>
+          <label for="ctrl-unit" class="text-fg-muted font-bold block">Unit</label>
           <input
             id="ctrl-unit"
             type="text"
