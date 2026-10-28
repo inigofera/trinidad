@@ -16,7 +16,10 @@
   --critical-contrast: var(--raw-slate-950);
 }
 
-@theme {
+/* `inline` makes Tailwind emit `var(--token)` directly in utilities instead of
+   resolving `--color-*` aliases once at `:root`. Root-resolved aliases would not
+   follow `data-theme` / `data-density` overrides inside a nested ThemeScope. */
+@theme inline {
   --color-surface-canvas: var(--surface-canvas);
   --color-surface-elevated: var(--surface-elevated);
   --color-surface-muted: var(--surface-muted);
@@ -36,6 +39,32 @@
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+
+  --font-weight-regular: var(--font-weight-regular);
+  --font-weight-medium: var(--font-weight-medium);
+  --font-weight-bold: var(--font-weight-bold);
+
+  --text-xs: var(--font-size-xs);
+  --text-sm: var(--font-size-sm);
+  --text-base: var(--font-size-base);
+  --text-lg: var(--font-size-lg);
+  --text-xl: var(--font-size-xl);
+  --text-2xl: var(--font-size-2xl);
+  --text-3xl: var(--font-size-3xl);
+
+  --spacing-1: var(--spacing-1);
+  --spacing-2: var(--spacing-2);
+  --spacing-3: var(--spacing-3);
+  --spacing-4: var(--spacing-4);
+  --spacing-5: var(--spacing-5);
+  --spacing-6: var(--spacing-6);
+  --spacing-8: var(--spacing-8);
+  --spacing-10: var(--spacing-10);
+  --spacing-12: var(--spacing-12);
+  --spacing-16: var(--spacing-16);
+
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
 }
 
 ::selection {

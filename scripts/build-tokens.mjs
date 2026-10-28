@@ -72,6 +72,30 @@ for (const [name, token] of Object.entries(tokens.primitive.font)) {
   cssLines.push(`  --font-${name}: ${token.$value};`);
 }
 
+if (tokens.primitive['font-weight']) {
+  cssLines.push('');
+  cssLines.push('  /* Primitives: Font Weight */');
+  for (const [name, token] of Object.entries(tokens.primitive['font-weight'])) {
+    cssLines.push(`  --font-weight-${name}: ${token.$value};`);
+  }
+}
+
+if (tokens.primitive['font-size']) {
+  cssLines.push('');
+  cssLines.push('  /* Primitives: Font Size */');
+  for (const [name, token] of Object.entries(tokens.primitive['font-size'])) {
+    cssLines.push(`  --font-size-${name}: ${token.$value};`);
+  }
+}
+
+if (tokens.primitive.spacing) {
+  cssLines.push('');
+  cssLines.push('  /* Primitives: Spacing */');
+  for (const [name, token] of Object.entries(tokens.primitive.spacing)) {
+    cssLines.push(`  --spacing-${name}: ${token.$value};`);
+  }
+}
+
 if (tokens.primitive.dimension) {
   cssLines.push('');
   cssLines.push('  /* Primitives: Dimension */');
