@@ -35,7 +35,7 @@ In standard software organizations, user research, visual design, and frontend e
 | Pillar | Discipline | Implementation in trinidad |
 | :--- | :--- | :--- |
 | **`ERGONOMICS`** | **Human Factors & HCI** | • Deterministic WAI-ARIA 1.2 state machines (`spinbutton`, `combobox`, `grid`)<br>• Roving `tabindex` and cyclic focus traps (`<dialog>`)<br>• Pointer-scrubbing inputs and step modifiers (`Shift`/`Alt`) to minimize operator fatigue<br>• Atomic proposal confirmation gates (`DiffViewer`) to prevent destructive overwrites |
-| **`DESIGN`** | **Interaction & Visual Systems** | • Synthesis of mid-century Swiss grids, warm editorial printing, and technical telemetry<br>• Multi-theme W3C DTCG Token Engine (`Editorial Paper` vs. `Industrial Operator Dark`)<br>• Runtime spatial density scaling (`Comfortable` vs. `Compact`)<br>• Self-hosted `Space Grotesk` and `Space Mono` typography |
+| **`DESIGN`** | **Interaction & Visual Systems** | • Synthesis of mid-century Swiss grids, warm editorial printing, and technical telemetry<br>• Multi-theme W3C DTCG Token Engine (`Editorial Paper` vs. `Industrial Operator Dark`)<br>• Runtime spatial density scaling (`Comfortable` vs. `Compact`)<br>• Self-hosted `Manrope` (MIT geometric-humanist sans, mi.com-adjacent lookalike via `@fontsource/manrope`) as the single typeface for body copy and telemetry labels (`--font-mono` aliased to the same stack; Space Mono retired in Phase 9) |
 | **`ENGINEERING`** | **Systems Architecture** | • Decoupled headless `.svelte.ts` Runes state machines (`$state`, `$derived`)<br>• $O(1)$ DOM viewport virtualization for `10,000+` row logs (`DataTable`)<br>• Hardware-accelerated `60fps` Retina `<canvas>` rendering (`Sparkline`)<br>• Zero runtime CSS-in-JS overhead; strictly typed HTML attribute forwarding |
 
 ---
@@ -72,7 +72,7 @@ trinidad uses a zero-runtime CSS Custom Property pipeline compiled from a single
 
 ```
 
-* **Theme Axis**: Switch instantaneously between **Editorial Paper** (unbleached cream `#f8f3e7` and deep forest ink `#24422a`) and **Industrial Operator Dark** (high-contrast slate `#0d1310` and electric chartreuse `#a6c856` for low-light warehouse/operator floors).
+* **Theme Axis**: Switch instantaneously between two compiled themes — **Editorial Paper** (unbleached cream `#f8f3e7` and deep forest ink `#24422a`) and **Industrial Operator Dark** (high-contrast slate `#0d1310` and electric chartreuse `#a6c856` for low-light warehouse/operator floors).
 
 
 * **Density Axis**: Toggle UI dimensions between **Comfortable** (`36px` controls, generous whitespace) and **Compact** (`28px` controls, high-density data tables).
@@ -149,7 +149,7 @@ Every pull request and commit is gated by strict static analysis, package compil
 
  |
 | `npm run build` | Builds the static workbench (`build/`), packages the library (`dist/`), and calculates gzipped bundle sizes. |
-| `npm test` | Executes Playwright keyboard navigation tests and `@axe-core/playwright` WCAG 2.1 AA audits across both `paper` and `industrial` themes. |
+| `npm test` | Executes Playwright keyboard navigation tests and `@axe-core/playwright` WCAG 2.1 AA audits across both (`paper` and `industrial`) themes. |
 
 ---
 
