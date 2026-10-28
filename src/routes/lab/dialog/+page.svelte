@@ -11,8 +11,7 @@
   const trinity = {
     ergonomics:
       'Focus trapped inside modal boundary, backdrop click dismiss, and Escape restoration to trigger element',
-    design:
-      'Tactile hairline border, backdrop blur-xs, and high-contrast monospace header hierarchy',
+    design: 'Tactile hairline border, backdrop blur-xs, and high-contrast header hierarchy',
     engineering:
       'Native HTMLDialogElement synchronization via .showModal() with automatic document.body scroll locking'
   };

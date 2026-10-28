@@ -11,39 +11,47 @@
   --raw-slate-950: #0d1310;
   --raw-slate-900: #151e19;
   --raw-slate-800: #1f2d25;
+  --raw-crimson-400: #f87171;
   --raw-crimson-500: #d9383a;
+  --raw-crimson-700: #b91c1c;
   --raw-amber-500: #e59934;
+  --raw-amber-800: #9a580a;
   --raw-emerald-500: #2ca568;
+  --raw-emerald-700: #15803d;
+  --raw-olive-700: #4b603f;
   --raw-white: #ffffff;
 
   /* Primitives: Font */
-  --font-sans: 'Space Grotesk', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  --font-sans:
+    'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono:
+    'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
 
-  /* Semantic: Paper (Default) */
+  /* Primitives: Dimension */
+  --radius-card: 10px;
+  --radius-control: 8px;
+}
+
+:root,
+[data-theme='paper'] {
+  /* Semantic: paper (Default) */
   --surface-canvas: var(--raw-cream-100);
   --surface-elevated: var(--raw-cream-50);
   --surface-muted: var(--raw-stone-200);
   --fg-primary: var(--raw-forest-900);
-  --fg-muted: var(--raw-olive-600);
+  --fg-muted: var(--raw-olive-700);
   --border-subtle: var(--raw-stone-300);
   --accent-interactive: var(--raw-lime-400);
-  --status-critical: var(--raw-crimson-500);
-  --status-warning: var(--raw-amber-500);
-  --status-nominal: var(--raw-emerald-500);
+  --status-critical: var(--raw-crimson-700);
+  --status-warning: var(--raw-amber-800);
+  --status-nominal: var(--raw-emerald-700);
   --brand-primary: var(--raw-forest-900);
-
-  /* Density: Comfortable (Default) */
-  --control-height: 2.25rem;
-  --control-px: 0.75rem;
-  --control-py: 0.5rem;
-  --row-height: 2.5rem;
-  --font-size-ui: 0.875rem;
-  --gap-ui: 0.5rem;
 }
 
 [data-theme='industrial'] {
-  /* Semantic: Industrial Override */
+  /* Semantic: industrial */
   --surface-canvas: var(--raw-slate-950);
   --surface-elevated: var(--raw-slate-900);
   --surface-muted: var(--raw-slate-800);
@@ -51,10 +59,21 @@
   --fg-muted: var(--raw-stone-300);
   --border-subtle: var(--raw-olive-600);
   --accent-interactive: var(--raw-lime-400);
-  --status-critical: var(--raw-crimson-500);
+  --status-critical: var(--raw-crimson-400);
   --status-warning: var(--raw-amber-500);
   --status-nominal: var(--raw-emerald-500);
   --brand-primary: var(--raw-white);
+}
+
+:root,
+[data-density='comfortable'] {
+  /* Density: Comfortable (Default) */
+  --control-height: 2.25rem;
+  --control-px: 0.75rem;
+  --control-py: 0.5rem;
+  --row-height: 2.5rem;
+  --font-size-ui: 0.875rem;
+  --gap-ui: 0.5rem;
 }
 
 [data-density='compact'] {
@@ -67,9 +86,12 @@
   --gap-ui: 0.25rem;
 }
 
+[data-motion='reduced'],
 [data-motion='reduced'] *,
 [data-motion='reduced'] *::before,
 [data-motion='reduced'] *::after {
   animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }

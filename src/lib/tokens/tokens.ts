@@ -12,14 +12,23 @@ export const tokens = {
       'slate-950': '#0d1310',
       'slate-900': '#151e19',
       'slate-800': '#1f2d25',
+      'crimson-400': '#f87171',
       'crimson-500': '#d9383a',
+      'crimson-700': '#b91c1c',
       'amber-500': '#e59934',
+      'amber-800': '#9a580a',
       'emerald-500': '#2ca568',
+      'emerald-700': '#15803d',
+      'olive-700': '#4b603f',
       white: '#ffffff'
     },
     font: {
-      sans: "'Space Grotesk', sans-serif",
-      mono: "'Space Mono', monospace"
+      sans: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      mono: "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    },
+    dimension: {
+      'radius-card': '10px',
+      'radius-control': '8px'
     }
   },
   semantic: {
@@ -28,12 +37,12 @@ export const tokens = {
       'surface-elevated': '#fcf9f3',
       'surface-muted': '#eae3d1',
       'fg-primary': '#24422a',
-      'fg-muted': '#5c744e',
+      'fg-muted': '#4b603f',
       'border-subtle': '#dad2be',
       'accent-interactive': '#a6c856',
-      'status-critical': '#d9383a',
-      'status-warning': '#e59934',
-      'status-nominal': '#2ca568',
+      'status-critical': '#b91c1c',
+      'status-warning': '#9a580a',
+      'status-nominal': '#15803d',
       'brand-primary': '#24422a'
     },
     industrial: {
@@ -44,7 +53,7 @@ export const tokens = {
       'fg-muted': '#dad2be',
       'border-subtle': '#5c744e',
       'accent-interactive': '#a6c856',
-      'status-critical': '#d9383a',
+      'status-critical': '#f87171',
       'status-warning': '#e59934',
       'status-nominal': '#2ca568',
       'brand-primary': '#ffffff'

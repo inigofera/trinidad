@@ -119,14 +119,14 @@
   </div>
 
   <!-- Footer Scale Metadata -->
-  <div class="flex items-center justify-between text-[10px] text-fg-muted opacity-80 select-none">
-    <span>MIN: {logic.min} {unit}</span>
+  <div class="flex items-center justify-between text-[10px] select-none font-mono">
+    <span class="text-fg-muted">MIN: {logic.min} {unit}</span>
     {#if warnThreshold !== undefined}
-      <span class="text-status-warning">WARN: {warnThreshold} {unit}</span>
+      <span class="text-status-warning font-bold">WARN: {warnThreshold} {unit}</span>
     {/if}
     {#if criticalThreshold !== undefined}
-      <span class="text-status-critical">CRIT: {criticalThreshold} {unit}</span>
+      <span class="text-status-critical font-bold">CRIT: {criticalThreshold} {unit}</span>
     {/if}
-    <span>MAX: {logic.max} {unit}</span>
+    <span class="text-fg-muted">MAX: {logic.max} {unit}</span>
   </div>
 </div>

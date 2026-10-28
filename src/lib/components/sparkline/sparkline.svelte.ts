@@ -141,6 +141,16 @@ export class SparklineState {
     const d = this.data;
     const len = d.length;
 
+    // Theme-aware palette for canvas readouts. Resolved semantic CSS variables are
+    // read from the canvas' computed style so nested ThemeScope subtrees render with
+    // their active theme; token primitives act as fallbacks when the variables are
+    // unavailable (SSR / pre-hydration). One computed-style read per draw.
+    const style = getComputedStyle(canvas);
+    const themedColor = (prop: string, fallback: string): string => {
+      const value = style.getPropertyValue(prop).trim();
+      return value || fallback;
+    };
+
     canvas.width = Math.floor(w * dpr);
     canvas.height = Math.floor(h * dpr);
 
@@ -231,15 +241,17 @@ export class SparklineState {
     ctx.fillStyle = grad;
     ctx.fill();
 
-    // Inspection Crosshair & Monospace Readout
+    // Inspection Crosshair & Readout (unified face via --font-mono)
     if (this.scrubIndex !== null && this.scrubIndex >= 0 && this.scrubIndex < len) {
       const idx = this.scrubIndex;
       const scrubX = getX(idx);
       const scrubY = getY(d[idx]!);
       const scrubVal = d[idx]!;
 
+      const hairline = themedColor('--fg-muted', tokens.primitive.color['stone-300']);
+
       // Vertical hairline
-      ctx.strokeStyle = '#ffffff';
+      ctx.strokeStyle = hairline;
       ctx.lineWidth = 1;
       ctx.setLineDash([2, 2]);
       ctx.beginPath();
@@ -253,14 +265,15 @@ export class SparklineState {
       ctx.beginPath();
       ctx.arc(scrubX, scrubY, 3.5, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = '#ffffff';
+      ctx.strokeStyle = hairline;
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
       // Readout Box
       const relIdx = -(len - 1 - idx);
       const readoutText = `[idx: ${relIdx} | ${scrubVal.toFixed(1)} ${this.unit}]`;
-      ctx.font = '10px "Space Mono", monospace';
+      const readoutFont = themedColor('--font-mono', tokens.primitive.font.mono);
+      ctx.font = `10px ${readoutFont}`;
       const textWidth = ctx.measureText(readoutText).width;
       const boxW = textWidth + 12;
       const boxH = 18;
@@ -274,13 +287,16 @@ export class SparklineState {
         boxY = scrubY + 8;
       }
 
-      ctx.fillStyle = '#151e19';
+      const readoutFill = themedColor('--surface-elevated', tokens.primitive.color['slate-900']);
+      const readoutStroke = themedColor('--border-subtle', tokens.primitive.color['stone-300']);
+      ctx.fillStyle = readoutFill;
       ctx.fillRect(boxX, boxY, boxW, boxH);
-      ctx.strokeStyle = '#dad2be';
+      ctx.strokeStyle = readoutStroke;
       ctx.lineWidth = 1;
       ctx.strokeRect(boxX, boxY, boxW, boxH);
 
-      ctx.fillStyle = '#fcf9f3';
+      const readoutInk = themedColor('--fg-primary', tokens.primitive.color['cream-50']);
+      ctx.fillStyle = readoutInk;
       ctx.textBaseline = 'middle';
       ctx.fillText(readoutText, boxX + 6, boxY + boxH / 2);
     }

@@ -57,7 +57,7 @@
     ergonomics:
       'Virtual focus with aria-activedescendant maintains real DOM focus in input while navigating options with arrow keys',
     design:
-      'Terminal-inspired prompt character, hairline group headers, and monospace shortcut badges',
+      'Terminal-inspired prompt character, hairline group headers, and compact shortcut badges',
     engineering:
       'Subsequence fuzzy scoring with consecutive character and word-boundary bonuses in headless ComboboxState'
   };

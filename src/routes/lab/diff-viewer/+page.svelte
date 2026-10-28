@@ -27,7 +27,7 @@ STATUS_HEARTBEAT_SEC = 2`);
     ergonomics:
       'Atomic confirmation gates ([Accept], [Reject], [Modify Inline]) prevent accidental configuration overwrites',
     design:
-      'Subtle nominal green / critical red tinting and Space Mono line numbering maintain visual readability',
+      'Subtle nominal green / critical red tinting and aligned line numbering maintain visual readability',
     engineering:
       'Line-by-line Longest Common Subsequence (LCS) matrix backtracking in headless DiffViewerState'
   };

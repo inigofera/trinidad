@@ -53,8 +53,7 @@
   const trinity = {
     ergonomics:
       '2D grid cell roving navigation (Arrow keys, PageUp/Down, Home/End) keeps operator hands on home row',
-    design:
-      'Sub-pixel hairline separators, sticky telemetry header, and Space Mono tabular numeral columns',
+    design: 'Sub-pixel hairline separators, sticky telemetry header, and aligned numeral columns',
     engineering:
       'O(1) DOM virtualization slicing: only 20-30 rows instantiated in DOM even when hosting 10,000+ items'
   };

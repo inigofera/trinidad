@@ -16,8 +16,7 @@
   const trinity = {
     ergonomics:
       'Pointer scrubbing on label + Shift/Alt step modifiers reduce repetitive typing strain in telemetry consoles',
-    design:
-      'Monospace tabular-nums alignment and discrete stepper controls prevent visual layout jitter',
+    design: 'Tabular numeral alignment and discrete stepper controls prevent visual layout jitter',
     engineering: 'IEEE 754 precision clamping with decimal stepping in headless NumberFieldState'
   };
 

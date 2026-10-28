@@ -17,7 +17,7 @@
     design:
       'Warm brutalist hairline borders, tactile active:translate-y-[1px], and high-contrast focus rings',
     engineering:
-      'Zero-runtime overhead headless ButtonState with cycling monospace frame spinner [/], [-], [\\], [|]'
+      'Zero-runtime overhead headless ButtonState with cycling frame spinner [/], [-], [\\], [|]'
   };
 
   const generatedCode = $derived.by(() => {
@@ -55,7 +55,7 @@
 
 <WorkbenchShell
   name="Button & ToggleButton"
-  description="Polymorphic action and toggle primitives with monospace animated spinners, state-preserving width locking, and high-contrast tactile feedback."
+  description="Polymorphic action and toggle primitives with animated spinners, state-preserving width locking, and high-contrast tactile feedback."
   bundleSize={bundleStats.button}
   {trinity}
   {generatedCode}

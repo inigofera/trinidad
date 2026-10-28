@@ -31,7 +31,7 @@
     <text x="112" y="54" fill="#24422a" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="46" font-weight="700" letter-spacing="-0.04em">
       trinidad
     </text>
-    <text x="114" y="78" fill="#5c744e" font-family="'Space Mono', monospace" font-size="12" letter-spacing="0.04em">
+    <text x="114" y="78" fill="#5c744e" font-family="Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" letter-spacing="0.04em">
       ERGONOMICS · DESIGN · ENGINEERING
     </text>
   </g>
