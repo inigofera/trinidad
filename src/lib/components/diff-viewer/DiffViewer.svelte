@@ -130,7 +130,7 @@
         <button
           type="button"
           onclick={() => logic.reject()}
-          class="px-2.5 py-1 rounded bg-status-critical text-white font-bold hover:brightness-110 active:translate-y-[1px] transition-transform cursor-pointer select-none"
+          class="px-2.5 py-1 rounded bg-status-critical text-critical-contrast font-bold hover:brightness-110 active:translate-y-[1px] transition-transform cursor-pointer select-none"
         >
           ✕ Reject Proposal
         </button>

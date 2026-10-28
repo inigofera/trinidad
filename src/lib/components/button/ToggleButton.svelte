@@ -47,7 +47,7 @@
     switch (variant) {
       case 'primary':
         return pressed
-          ? 'bg-accent-interactive text-accent-contrast font-bold border-transparent'
+          ? 'bg-accent-interactive text-accent-contrast border-transparent'
           : 'bg-surface-elevated text-fg-primary border-border-subtle hover:bg-surface-muted';
       case 'secondary':
         return pressed
@@ -59,7 +59,7 @@
           : 'bg-transparent text-fg-muted border-transparent hover:text-fg-primary hover:bg-surface-elevated';
       case 'danger':
         return pressed
-          ? 'bg-status-critical text-white font-bold border-transparent'
+          ? 'bg-status-critical text-white border-transparent'
           : 'bg-surface-elevated text-status-critical border-status-critical/30 hover:bg-surface-muted';
       default:
         return 'bg-surface-elevated text-fg-primary border-border-subtle hover:bg-surface-muted';
@@ -73,7 +73,7 @@
   aria-pressed={pressed}
   aria-label={ariaLabel}
   onclick={handleClick}
-  class="relative inline-flex items-center justify-center border font-mono select-none cursor-pointer transition-transform active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive h-[var(--control-height)] px-[var(--control-px)] text-[length:var(--font-size-ui)] {variantClass} {className}"
+  class="relative inline-flex items-center justify-center rounded-[var(--radius-control)] border font-medium select-none cursor-pointer transition-transform active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive h-[var(--control-height)] px-[var(--control-px)] text-[length:var(--font-size-ui)] {variantClass} {className}"
   {...rest}
 >
   <span class="inline-flex items-center gap-2">

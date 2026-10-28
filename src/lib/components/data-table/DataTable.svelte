@@ -83,7 +83,7 @@
       <!-- Fixed Header -->
       <thead class="sticky top-0 z-20 bg-surface-canvas border-b border-border-subtle shadow-xs">
         <tr>
-          {#each logic.columns as col, colIdx (col.key)}
+          {#each logic.columns as col, colIdx (col.key + '_' + colIdx)}
             {@const isSorted = logic.sortKey === col.key}
             {@const sortAria = isSorted ? logic.sortDir : 'none'}
             <th
@@ -143,7 +143,7 @@
                       : ''}"
                     style="height: {logic.rowHeight}px;"
                   >
-                    {#each logic.columns as col, colIdx (col.key)}
+                    {#each logic.columns as col, colIdx (col.key + '_' + colIdx)}
                       {@const isActiveCell =
                         logic.activeRowIndex === rowIdx && logic.activeColIndex === colIdx}
                       <td

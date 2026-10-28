@@ -49,15 +49,15 @@
   const variantClass = $derived.by(() => {
     switch (variant) {
       case 'primary':
-        return 'bg-accent-interactive text-accent-contrast font-bold border-transparent hover:opacity-90';
+        return 'bg-accent-interactive text-accent-contrast border-transparent hover:opacity-90';
       case 'secondary':
         return 'bg-surface-elevated text-fg-primary border-border-subtle hover:bg-surface-muted';
       case 'ghost':
         return 'bg-transparent text-fg-muted border-transparent hover:text-fg-primary hover:bg-surface-elevated';
       case 'danger':
-        return 'bg-status-critical text-white font-bold border-transparent hover:opacity-90';
+        return 'bg-status-critical text-critical-contrast border-transparent hover:opacity-90';
       default:
-        return 'bg-accent-interactive text-accent-contrast font-bold border-transparent hover:opacity-90';
+        return 'bg-accent-interactive text-accent-contrast border-transparent hover:opacity-90';
     }
   });
 </script>
@@ -67,7 +67,7 @@
   disabled={disabled || loading}
   aria-label={ariaLabel}
   {...state.ariaAttrs}
-  class="relative inline-flex items-center justify-center border font-mono select-none cursor-pointer transition-transform active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive h-[var(--control-height)] px-[var(--control-px)] text-[length:var(--font-size-ui)] {variantClass} {className}"
+  class="relative inline-flex items-center justify-center rounded-[var(--radius-control)] border font-medium select-none cursor-pointer transition-transform active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-interactive h-[var(--control-height)] px-[var(--control-px)] text-[length:var(--font-size-ui)] {variantClass} {className}"
   {...rest}
 >
   {#if loading}

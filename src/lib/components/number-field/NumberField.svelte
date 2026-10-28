@@ -67,7 +67,7 @@
     </label>
 
     {#if unit}
-      <span class="text-fg-muted opacity-75">[{unit}]</span>
+      <span class="text-fg-muted">[{unit}]</span>
     {/if}
   </div>
 
