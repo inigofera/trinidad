@@ -72,25 +72,39 @@ for (const [name, token] of Object.entries(tokens.primitive.font)) {
   cssLines.push(`  --font-${name}: ${token.$value};`);
 }
 
-cssLines.push('');
-cssLines.push('  /* Semantic: Paper (Default) */');
-for (const [name, token] of Object.entries(tokens.semantic.paper)) {
-  cssLines.push(`  --${name}: ${resolveCssVar(token.$value)};`);
-}
-
-cssLines.push('');
-cssLines.push('  /* Density: Comfortable (Default) */');
-for (const [name, token] of Object.entries(tokens.density.comfortable)) {
-  cssLines.push(`  --${name}: ${token.$value};`);
+if (tokens.primitive.dimension) {
+  cssLines.push('');
+  cssLines.push('  /* Primitives: Dimension */');
+  for (const [name, token] of Object.entries(tokens.primitive.dimension)) {
+    cssLines.push(`  --${name}: ${token.$value};`);
+  }
 }
 
 cssLines.push('}');
 cssLines.push('');
 
-cssLines.push('[data-theme="industrial"] {');
-cssLines.push('  /* Semantic: Industrial Override */');
-for (const [name, token] of Object.entries(tokens.semantic.industrial)) {
-  cssLines.push(`  --${name}: ${resolveCssVar(token.$value)};`);
+// The first semantic theme in tokens.json is the default: it is emitted on :root
+// so pages render correctly before any data-theme attribute exists (SSR/FOUC),
+// and again scoped under its [data-theme] hook. Every later theme becomes a pure
+// override block, which also enables nested ThemeScope subtrees.
+const semanticThemes = Object.entries(tokens.semantic);
+for (let index = 0; index < semanticThemes.length; index += 1) {
+  const [themeName, themeTokens] = semanticThemes[index];
+  const selector =
+    index === 0 ? `:root, [data-theme="${themeName}"]` : `[data-theme="${themeName}"]`;
+  cssLines.push(selector + ' {');
+  cssLines.push(`  /* Semantic: ${themeName}${index === 0 ? ' (Default)' : ''} */`);
+  for (const [name, token] of Object.entries(themeTokens)) {
+    cssLines.push(`  --${name}: ${resolveCssVar(token.$value)};`);
+  }
+  cssLines.push('}');
+  cssLines.push('');
+}
+
+cssLines.push(':root, [data-density="comfortable"] {');
+cssLines.push('  /* Density: Comfortable (Default) */');
+for (const [name, token] of Object.entries(tokens.density.comfortable)) {
+  cssLines.push(`  --${name}: ${token.$value};`);
 }
 cssLines.push('}');
 cssLines.push('');
@@ -104,10 +118,12 @@ cssLines.push('}');
 cssLines.push('');
 
 cssLines.push(
-  '[data-motion="reduced"] *, [data-motion="reduced"] *::before, [data-motion="reduced"] *::after {'
+  '[data-motion="reduced"], [data-motion="reduced"] *, [data-motion="reduced"] *::before, [data-motion="reduced"] *::after {'
 );
 cssLines.push('  animation-duration: 0.01ms !important;');
+cssLines.push('  animation-iteration-count: 1 !important;');
 cssLines.push('  transition-duration: 0.01ms !important;');
+cssLines.push('  scroll-behavior: auto !important;');
 cssLines.push('}');
 cssLines.push('');
 

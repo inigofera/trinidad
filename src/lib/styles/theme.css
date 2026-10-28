@@ -9,10 +9,13 @@
 :root {
   --brand-secondary: var(--raw-olive-600);
   --brand-accent: var(--raw-lime-400);
+  --critical-contrast: #ffffff;
+  --accent-contrast: var(--raw-forest-900);
 }
 
 [data-theme='industrial'] {
   --brand-primary: var(--raw-white, #ffffff);
+  --critical-contrast: var(--raw-slate-950);
 }
 
 @theme {
@@ -23,7 +26,8 @@
   --color-fg-muted: var(--fg-muted);
   --color-border-subtle: var(--border-subtle);
   --color-accent-interactive: var(--accent-interactive);
-  --color-accent-contrast: var(--raw-forest-900);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-critical-contrast: var(--critical-contrast);
   --color-status-critical: var(--status-critical);
   --color-status-warning: var(--status-warning);
   --color-status-nominal: var(--status-nominal);
