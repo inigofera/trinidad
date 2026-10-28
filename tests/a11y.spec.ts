@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const labRoutes = [
+const routes = [
   '/lab/button',
   '/lab/number-field',
   '/lab/dialog',
@@ -10,12 +10,13 @@ const labRoutes = [
   '/lab/data-table',
   '/lab/diff-viewer',
   '/patterns',
-  '/architecture'
+  '/architecture',
+  '/foundations'
 ];
 
 const themes = ['paper', 'industrial'] as const;
 
-for (const route of labRoutes) {
+for (const route of routes) {
   for (const theme of themes) {
     test(`A11y verification: ${route} [data-theme="${theme}"]`, async ({ page }) => {
       // Seed the persisted theme before any script runs so app.html's FOUC-prevention
