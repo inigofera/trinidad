@@ -5,6 +5,20 @@
     <link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/favicon.svg" />
     <link rel="icon" type="image/png" href="%sveltekit.assets%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('trinidad-theme') || 'paper';
+          var density = localStorage.getItem('trinidad-density') || 'comfortable';
+          var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var motion = localStorage.getItem('trinidad-motion') || (reduced ? 'reduced' : 'full');
+          var root = document.documentElement;
+          root.setAttribute('data-theme', theme);
+          root.setAttribute('data-density', density);
+          root.setAttribute('data-motion', motion);
+        } catch (e) {}
+      })();
+    </script>
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover">

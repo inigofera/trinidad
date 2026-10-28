@@ -14,3 +14,8 @@ export * from './components/diff-viewer/index.js';
 
 // Visual identity
 export * from './components/logo/index.js';
+
+// Layout, Composition, and Fault Isolation
+export * from './components/badge/index.js';
+export * from './components/layout/index.js';
+export * from './components/error-boundary/index.js';

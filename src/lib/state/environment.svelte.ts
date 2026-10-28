@@ -28,6 +28,9 @@ export class EnvironmentState {
     this.theme = next;
     if (this.syncDom && typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('trinidad-theme', next);
+      } catch (e) {}
     }
   }
 
@@ -35,6 +38,9 @@ export class EnvironmentState {
     this.density = next;
     if (this.syncDom && typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-density', next);
+      try {
+        localStorage.setItem('trinidad-density', next);
+      } catch (e) {}
     }
   }
 
@@ -42,11 +48,28 @@ export class EnvironmentState {
     this.motion = next;
     if (this.syncDom && typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-motion', next);
+      try {
+        localStorage.setItem('trinidad-motion', next);
+      } catch (e) {}
     }
   }
 
   init(): () => void {
     if (this.syncDom && typeof document !== 'undefined') {
+      try {
+        const storedTheme = localStorage.getItem('trinidad-theme') as Theme | null;
+        if (storedTheme === 'paper' || storedTheme === 'industrial') {
+          this.theme = storedTheme;
+        }
+        const storedDensity = localStorage.getItem('trinidad-density') as Density | null;
+        if (storedDensity === 'comfortable' || storedDensity === 'compact') {
+          this.density = storedDensity;
+        }
+        const storedMotion = localStorage.getItem('trinidad-motion') as Motion | null;
+        if (storedMotion === 'full' || storedMotion === 'reduced') {
+          this.motion = storedMotion;
+        }
+      } catch (e) {}
       document.documentElement.setAttribute('data-theme', this.theme);
       document.documentElement.setAttribute('data-density', this.density);
       document.documentElement.setAttribute('data-motion', this.motion);

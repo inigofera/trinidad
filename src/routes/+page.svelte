@@ -1,6 +1,7 @@
 <script lang="ts">
   import { TrinidadLogo } from '$lib/components/logo/index.js';
   import { getEnvironment } from '$lib/state/environment.svelte.js';
+  import type { Theme } from '$lib/state/environment.svelte.js';
   import { Announcer } from '$lib/actions/index.js';
   import { Sparkline } from '$lib/components/sparkline/index.js';
   import bundleStats from './lab/bundle-stats.json';
@@ -72,8 +73,10 @@
     };
   });
 
+  const nextThemeOf: Record<Theme, Theme> = { paper: 'industrial', industrial: 'paper' };
+
   function invertThemeAndDensity() {
-    const nextTheme = env.theme === 'paper' ? 'industrial' : 'paper';
+    const nextTheme = nextThemeOf[env.theme];
     const nextDensity = env.density === 'comfortable' ? 'compact' : 'comfortable';
     env.setTheme(nextTheme);
     env.setDensity(nextDensity);

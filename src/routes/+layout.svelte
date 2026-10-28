@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import '../lib/styles/theme.css';
   import { TrinidadLogo } from '$lib/components/logo/index.js';
-  import { setEnvironment } from '$lib/state/environment.svelte.js';
+  import { setEnvironment, type Theme } from '$lib/state/environment.svelte.js';
   import { useRovingTabindex, Announcer } from '$lib/actions/index.js';
 
   interface Props {
@@ -16,8 +16,58 @@
   let navOpen = $state(false);
 
   $effect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const storedTheme = localStorage.getItem('trinidad-theme');
+        const theme: Theme = storedTheme === 'industrial' ? 'industrial' : 'paper';
+        const density = (localStorage.getItem('trinidad-density') || 'comfortable') as
+          'comfortable' | 'compact';
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const motion = (localStorage.getItem('trinidad-motion') ||
+          (reduced ? 'reduced' : 'full')) as 'full' | 'reduced';
+        env.setTheme(theme);
+        env.setDensity(density);
+        env.setMotion(motion);
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-density', density);
+        document.documentElement.setAttribute('data-motion', motion);
+      } catch (e) {}
+    }
     return env.init();
   });
+
+  function setTheme(t: Theme) {
+    env.setTheme(t);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('trinidad-theme', t);
+      } catch (e) {}
+      document.documentElement.setAttribute('data-theme', t);
+    }
+    Announcer.announce(`Active theme set to ${t}`, 'polite');
+  }
+
+  function setDensity(d: 'comfortable' | 'compact') {
+    env.setDensity(d);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('trinidad-density', d);
+      } catch (e) {}
+      document.documentElement.setAttribute('data-density', d);
+    }
+    Announcer.announce(`Active density set to ${d}`, 'polite');
+  }
+
+  function setMotion(m: 'full' | 'reduced') {
+    env.setMotion(m);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('trinidad-motion', m);
+      } catch (e) {}
+      document.documentElement.setAttribute('data-motion', m);
+    }
+    Announcer.announce(`Motion set to ${m}`, 'polite');
+  }
 
   $effect(() => {
     if (typeof window === 'undefined') return;
@@ -73,6 +123,21 @@
           class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
         >
           Overview
+        </a>
+
+        <div class="h-3 w-px bg-border-subtle"></div>
+
+        <a
+          href="/patterns"
+          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
+        >
+          In the Wild
+        </a>
+        <a
+          href="/architecture"
+          class="text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive rounded px-1.5 py-0.5"
+        >
+          Contracts
         </a>
 
         <div class="h-3 w-px bg-border-subtle"></div>
@@ -133,10 +198,7 @@
           class="px-2 py-0.5 rounded transition-colors {env.theme === 'paper'
             ? 'bg-accent-interactive text-accent-contrast font-bold'
             : 'text-fg-muted hover:text-fg-primary'}"
-          onclick={() => {
-            env.setTheme('paper');
-            Announcer.announce('Active theme set to paper', 'polite');
-          }}
+          onclick={() => setTheme('paper')}
           aria-pressed={env.theme === 'paper'}
         >
           Paper
@@ -146,10 +208,7 @@
           class="px-2 py-0.5 rounded transition-colors {env.theme === 'industrial'
             ? 'bg-accent-interactive text-accent-contrast font-bold'
             : 'text-fg-muted hover:text-fg-primary'}"
-          onclick={() => {
-            env.setTheme('industrial');
-            Announcer.announce('Active theme set to industrial', 'polite');
-          }}
+          onclick={() => setTheme('industrial')}
           aria-pressed={env.theme === 'industrial'}
         >
           Industrial
@@ -168,10 +227,7 @@
           class="px-2 py-0.5 rounded transition-colors {env.density === 'comfortable'
             ? 'bg-accent-interactive text-accent-contrast font-bold'
             : 'text-fg-muted hover:text-fg-primary'}"
-          onclick={() => {
-            env.setDensity('comfortable');
-            Announcer.announce('Active density set to comfortable', 'polite');
-          }}
+          onclick={() => setDensity('comfortable')}
           aria-pressed={env.density === 'comfortable'}
         >
           Comfortable
@@ -181,10 +237,7 @@
           class="px-2 py-0.5 rounded transition-colors {env.density === 'compact'
             ? 'bg-accent-interactive text-accent-contrast font-bold'
             : 'text-fg-muted hover:text-fg-primary'}"
-          onclick={() => {
-            env.setDensity('compact');
-            Announcer.announce('Active density set to compact', 'polite');
-          }}
+          onclick={() => setDensity('compact')}
           aria-pressed={env.density === 'compact'}
         >
           Compact
@@ -203,10 +256,7 @@
           class="px-2 py-0.5 rounded transition-colors {env.motion === 'full'
             ? 'bg-accent-interactive text-accent-contrast font-bold'
             : 'text-fg-muted hover:text-fg-primary'}"
-          onclick={() => {
-            env.setMotion('full');
-            Announcer.announce('Motion set to full', 'polite');
-          }}
+          onclick={() => setMotion('full')}
           aria-pressed={env.motion === 'full'}
         >
           Motion
@@ -216,10 +266,7 @@
           class="px-2 py-0.5 rounded transition-colors {env.motion === 'reduced'
             ? 'bg-accent-interactive text-accent-contrast font-bold'
             : 'text-fg-muted hover:text-fg-primary'}"
-          onclick={() => {
-            env.setMotion('reduced');
-            Announcer.announce('Motion set to reduced', 'polite');
-          }}
+          onclick={() => setMotion('reduced')}
           aria-pressed={env.motion === 'reduced'}
         >
           Reduced
@@ -250,6 +297,20 @@
         class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary"
       >
         Overview
+      </a>
+      <a
+        href="/patterns"
+        onclick={() => (navOpen = false)}
+        class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive"
+      >
+        In the Wild
+      </a>
+      <a
+        href="/architecture"
+        onclick={() => (navOpen = false)}
+        class="px-2.5 py-1 rounded bg-surface-canvas border border-border-subtle text-fg-primary hover:border-accent-interactive"
+      >
+        Contracts
       </a>
       {#each labComponents as comp}
         <a

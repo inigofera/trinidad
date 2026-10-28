@@ -1,9 +1,12 @@
-import { existsSync, readdirSync, statSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readdirSync, statSync, writeFileSync, unlinkSync, mkdirSync } from 'node:fs';
 import { resolve, join, dirname } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { build } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+
+const MAX_COMPONENT_KB = 4.0;
+const MAX_TOTAL_KB = 18.0;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -56,6 +59,67 @@ async function measureComponent(name, entryPath) {
   return null;
 }
 
+async function measureTotalLibrary(targetDir) {
+  const roster = [
+    'button',
+    'number-field',
+    'dialog',
+    'combobox',
+    'sparkline',
+    'data-table',
+    'diff-viewer'
+  ];
+  const imports = [];
+  for (const comp of roster) {
+    const compDir = join(targetDir, comp);
+    const jsEntry = join(compDir, 'index.js');
+    const tsEntry = join(compDir, 'index.ts');
+    const entry = existsSync(jsEntry) ? jsEntry : existsSync(tsEntry) ? tsEntry : null;
+    if (entry) {
+      imports.push(`export * from '${entry.replace(/\\/g, '/')}';`);
+    }
+  }
+
+  const tempEntry = resolve(rootDir, '.temp-roster.js');
+  writeFileSync(tempEntry, imports.join('\n'), 'utf-8');
+
+  try {
+    const output = await build({
+      configFile: false,
+      logLevel: 'error',
+      plugins: [svelte({ compilerOptions: { runes: true } })],
+      build: {
+        write: false,
+        minify: true,
+        lib: {
+          entry: tempEntry,
+          formats: ['es'],
+          fileName: 'trinidad-roster'
+        },
+        rollupOptions: {
+          external: ['svelte', /^svelte\//]
+        }
+      }
+    });
+
+    const chunk = Array.isArray(output) ? output[0].output[0] : output.output[0];
+    if (chunk && chunk.code) {
+      const gzipped = gzipSync(Buffer.from(chunk.code));
+      return (gzipped.length / 1024).toFixed(1);
+    }
+  } catch (err) {
+    console.warn(
+      '[measure-bundles] Warning: Programmatic bundle of total library failed.',
+      err.message
+    );
+  } finally {
+    if (existsSync(tempEntry)) {
+      unlinkSync(tempEntry);
+    }
+  }
+  return null;
+}
+
 async function run() {
   const targetDir = existsSync(distComponentsDir) ? distComponentsDir : srcComponentsDir;
   if (!existsSync(targetDir)) {
@@ -76,12 +140,31 @@ async function run() {
       const size = await measureComponent(entry, chosenEntry);
       if (size !== null) {
         stats[entry] = size;
+        const kb = parseFloat(size);
+        if (kb > MAX_COMPONENT_KB) {
+          console.error(`[BUDGET BREACH] Component ${entry} (${kb} kB) exceeded limit!`);
+          process.exit(1);
+        }
       }
     }
   }
 
+  const measuredTotal = await measureTotalLibrary(targetDir);
+  const totalKb =
+    measuredTotal ??
+    Object.values(stats)
+      .reduce((acc, s) => acc + parseFloat(s), 0)
+      .toFixed(1);
+  stats.totalKb = totalKb;
+
+  if (parseFloat(totalKb) > MAX_TOTAL_KB) {
+    console.error(`[BUDGET BREACH] Total library (${totalKb} kB) exceeded limit!`);
+    process.exit(1);
+  }
+
   mkdirSync(dirname(outputStatsPath), { recursive: true });
   writeFileSync(outputStatsPath, JSON.stringify(stats, null, 2) + '\n', 'utf-8');
+  console.log(`[BUDGET VERIFIED] All components within gzip ceiling.`);
   console.log(`✓ Measured real minified bundle sizes:`, stats);
 }
 
