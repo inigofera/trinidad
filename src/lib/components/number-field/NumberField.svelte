@@ -121,7 +121,11 @@
   </div>
 
   {#if invalid && errorMessage}
-    <span id={errorId} role="alert" class="text-status-critical text-[11px] font-mono mt-0.5">
+    <span
+      id={errorId}
+      role="alert"
+      class="block w-0 min-w-full text-status-critical text-[11px] font-mono mt-0.5"
+    >
       ! {errorMessage}
     </span>
   {/if}
