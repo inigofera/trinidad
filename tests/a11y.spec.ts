@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 const routes = [
+  '/',
   '/lab/button',
   '/lab/number-field',
   '/lab/dialog',
@@ -9,6 +10,11 @@ const routes = [
   '/lab/sparkline',
   '/lab/data-table',
   '/lab/diff-viewer',
+  '/lab/editorial',
+  '/lab/media',
+  '/lab/engineering',
+  '/lab/showcase',
+  '/case-study/trinidad-hri',
   '/patterns',
   '/architecture',
   '/foundations'

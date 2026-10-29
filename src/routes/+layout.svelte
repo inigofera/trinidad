@@ -99,7 +99,12 @@
     { name: 'Combobox', href: '/lab/combobox' },
     { name: 'Sparkline', href: '/lab/sparkline' },
     { name: 'DataTable', href: '/lab/data-table' },
-    { name: 'DiffViewer', href: '/lab/diff-viewer' }
+    { name: 'DiffViewer', href: '/lab/diff-viewer' },
+    { name: 'Editorial', href: '/lab/editorial' },
+    { name: 'Media', href: '/lab/media' },
+    { name: 'Engineering', href: '/lab/engineering' },
+    { name: 'Showcase', href: '/lab/showcase' },
+    { name: 'Case Study', href: '/case-study/trinidad-hri' }
   ];
 
   $effect(() => {
@@ -375,6 +380,13 @@
         class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
       >
         Contracts
+      </a>
+      <a
+        href="/case-study/trinidad-hri"
+        onclick={() => (navOpen = false)}
+        class="px-1.5 py-0.5 rounded text-fg-muted hover:text-fg-primary transition-colors focus-visible:outline-2 focus-visible:outline-accent-interactive"
+      >
+        Case Study
       </a>
 
       <span class="w-full mt-2 border-t border-border-subtle pb-1 pt-3 text-[10px] text-fg-muted"
