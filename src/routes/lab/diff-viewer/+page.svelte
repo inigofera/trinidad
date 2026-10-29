@@ -2,14 +2,14 @@
   import WorkbenchShell from '../WorkbenchShell.svelte';
   import { DiffViewer, type DiffStatus, type DiffMode } from '$lib/components/diff-viewer/index.js';
 
-  let original = $state(`// Mission Telemetry Baseline v1.4
+  let original = $state(`# Mission Telemetry Baseline v1.4
 CHANNEL_01_RATE = 50.0
 CHANNEL_02_GAIN = 1.024
 SAFETY_INTERLOCK_THRESHOLD = 95.0
 SAMPLING_FREQ_HZ = 60
 STATUS_HEARTBEAT_SEC = 5`);
 
-  let modified = $state(`// Mission Telemetry Baseline v1.4
+  let modified = $state(`# Mission Telemetry Baseline v1.4
 CHANNEL_01_RATE = 60.0
 CHANNEL_02_GAIN = 1.045
 CHANNEL_03_PRESSURE = 101.3
@@ -18,7 +18,7 @@ SAMPLING_FREQ_HZ = 60
 STATUS_HEARTBEAT_SEC = 2`);
 
   let mode = $state<DiffMode>('unified');
-  let title = $state('RATE_AND_SAFETY_THRESHOLD_ADJUSTMENT');
+  let title = $state('Rate and safety threshold adjustment');
   let status = $state<DiffStatus>('pending');
   let lastResolvedOutput = $state<string>('');
 
@@ -63,7 +63,7 @@ STATUS_HEARTBEAT_SEC = 2`);
         <div
           class="mt-4 p-2.5 rounded bg-surface-elevated border border-border-subtle font-mono text-[11px] text-fg-muted"
         >
-          GATE RESOLUTION: <span class="text-accent-interactive font-bold"
+          Gate resolution: <span class="text-accent-interactive font-bold"
             >{lastResolvedOutput}</span
           >
         </div>

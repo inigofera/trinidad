@@ -36,7 +36,7 @@ test.describe('Phase 7: Contextual Patterns & Fault Isolation', () => {
     await crashBtn.click();
 
     const alertBox = page.getByRole('alert');
-    await expect(alertBox).toContainText('SUBSYSTEM FAULT ISOLATED: VISION_TELEMETRY_NODE');
+    await expect(alertBox).toContainText('Subsystem fault isolated: VISION_TELEMETRY_NODE');
 
     const resetBtn = alertBox.getByRole('button', { name: /\[Reset Subsystem\]/i });
     await resetBtn.click();

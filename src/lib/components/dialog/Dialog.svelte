@@ -99,7 +99,7 @@
     <div class="flex items-start justify-between border-b border-border-subtle p-4 gap-4">
       <div class="space-y-1">
         <h2 id={titleId} class="text-sm font-bold tracking-tight text-fg-primary">
-          // {title}
+          {title}
         </h2>
         {#if description}
           <p id={descId} class="text-fg-muted text-[11px] leading-relaxed">

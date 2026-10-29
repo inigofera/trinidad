@@ -51,16 +51,16 @@
     class="flex items-center justify-between px-3 py-1.5 border-b border-border-subtle bg-surface-canvas text-[11px] text-fg-muted select-none"
   >
     <div class="flex items-center gap-2">
-      <span class="font-bold text-fg-primary">// DATA GRID</span>
+      <span class="font-bold text-fg-primary">Data grid</span>
       <span>[{logic.rows.length} total rows]</span>
       {#if logic.sortKey}
         <span class="text-fg-primary font-bold">
-          [SORT: {logic.sortKey} ({logic.sortDir})]
+          [Sort: {logic.sortKey} ({logic.sortDir})]
         </span>
       {/if}
     </div>
     <div class="flex items-center gap-3">
-      <span>CELL: [R:{logic.activeRowIndex} C:{logic.activeColIndex}]</span>
+      <span>Cell: [R:{logic.activeRowIndex} C:{logic.activeColIndex}]</span>
       <span class="text-fg-primary font-bold">[DOM: {logic.visibleRows.length} rendered]</span>
     </div>
   </div>
@@ -98,7 +98,7 @@
                 }
               }}
               style={col.width ? `width: ${col.width};` : undefined}
-              class="px-3 py-2 font-bold text-fg-muted uppercase tracking-wider text-[11px] border-r border-border-subtle/50 last:border-r-0 {col.sortable
+              class="px-3 py-2 font-bold text-fg-muted text-[11px] border-r border-border-subtle/50 last:border-r-0 {col.sortable
                 ? 'cursor-pointer hover:text-fg-primary hover:bg-surface-elevated focus-visible:outline-2 focus-visible:outline-accent-interactive'
                 : ''}"
             >

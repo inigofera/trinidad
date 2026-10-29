@@ -104,15 +104,15 @@
       class="absolute z-50 left-0 right-0 mt-1 max-h-64 overflow-y-auto bg-surface-elevated border border-border-subtle shadow-xl divide-y divide-border-subtle/50 font-mono text-xs focus:outline-none"
     >
       {#if Object.keys(logic.groupedItems).length === 0}
-        <div class="p-3 text-center text-fg-muted italic">// No matching commands found</div>
+        <div class="p-3 text-center text-fg-muted italic">No matching commands found</div>
       {:else}
         {#each Object.entries(logic.groupedItems) as [groupName, groupItems] (groupName)}
           <div role="group" aria-label={groupName} class="py-1">
             <div
               role="presentation"
-              class="px-3 py-1 text-[10px] uppercase font-bold text-fg-muted tracking-wider bg-surface-canvas/40 select-none"
+              class="px-3 py-1 text-[10px] font-bold text-fg-muted bg-surface-canvas/40 select-none"
             >
-              // {groupName}
+              {groupName}
             </div>
 
             <ul class="list-none p-0 m-0">

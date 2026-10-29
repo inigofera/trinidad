@@ -88,7 +88,7 @@
 </script>
 
 <svelte:head>
-  <title>Architecture &amp; Contracts // Trinidad Design System</title>
+  <title>Architecture &amp; Contracts · Trinidad Design System</title>
 </svelte:head>
 
 <div class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-12">
@@ -128,7 +128,7 @@
         <table class="w-full text-left font-mono text-xs border border-border-subtle">
           <caption class="sr-only">Enforced CI bundle budget ledger</caption>
           <thead
-            class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
+            class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]"
           >
             <tr>
               <th scope="col" class="p-3 border-r border-border-subtle">Component</th>
@@ -167,9 +167,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left font-mono text-xs border border-border-subtle">
         <caption class="sr-only">Deterministic Rendering &amp; SSR Contracts</caption>
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
+        <thead class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]">
           <tr>
             <th scope="col" class="p-3 border-r border-border-subtle">Contract / Mechanism</th>
             <th scope="col" class="p-3 border-r border-border-subtle">Architectural Guarantee</th>
@@ -290,9 +288,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left font-mono text-xs border border-border-subtle">
         <caption class="sr-only">Component ergonomics, design and engineering notes</caption>
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
+        <thead class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]">
           <tr>
             <th scope="col" class="p-3 border-r border-border-subtle">Component</th>
             <th scope="col" class="p-3 border-r border-border-subtle">Ergonomics</th>

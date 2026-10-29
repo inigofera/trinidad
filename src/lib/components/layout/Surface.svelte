@@ -45,8 +45,8 @@
   {...rest}
 >
   {#if kicker}
-    <div class="font-mono text-xs uppercase tracking-widest text-fg-muted mb-3 select-none">
-      // {kicker}
+    <div class="font-mono text-xs text-fg-muted mb-3 select-none">
+      {kicker}
     </div>
   {/if}
   {@render children()}

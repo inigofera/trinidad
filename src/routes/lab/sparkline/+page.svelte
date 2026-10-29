@@ -11,7 +11,7 @@
   let warnThreshold = $state(70);
   let criticalThreshold = $state(85);
   let unit = $state('ms');
-  let label = $state('TELEMETRY_LATENCY_RING_BUFFER');
+  let label = $state('Telemetry latency ring buffer');
   let streaming = $state(false);
 
   // Simulated live telemetry stream

@@ -63,7 +63,7 @@
       {:else}
         <ToggleButton {variant} bind:pressed {disabled} shortcut={shortcut || undefined}>
           {label}
-          {pressed ? 'ON' : 'OFF'}
+          {pressed ? 'On' : 'Off'}
         </ToggleButton>
       {/if}
     </div>

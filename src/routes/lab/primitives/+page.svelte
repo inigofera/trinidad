@@ -313,17 +313,15 @@
 
     <div class="space-y-3 pt-1">
       <div class="space-y-0.5">
-        <span class="text-fg-muted block uppercase text-[10px] font-bold"
-          >Active Keyboard Keys:</span
-        >
+        <span class="text-fg-muted block text-[10px] font-bold">Active keyboard keys:</span>
         <span class="text-fg-primary font-semibold text-[11px] leading-snug"
           >{tabExplanations.keys}</span
         >
       </div>
 
       <div class="space-y-0.5">
-        <span class="text-fg-muted block uppercase text-[10px] font-bold"
-          >ARIA Contract &amp; DOM Mapping:</span
+        <span class="text-fg-muted block text-[10px] font-bold"
+          >ARIA contract &amp; DOM mapping:</span
         >
         <span class="text-accent-interactive font-semibold text-[11px] leading-snug"
           >{tabExplanations.aria}</span
@@ -348,14 +346,14 @@
             <div class="max-w-md mx-auto space-y-4">
               <div class="flex items-center justify-between pb-2 border-b border-border-subtle">
                 <span class="text-xs font-mono font-bold text-fg-primary"
-                  >COMPOSITE OPERATOR GATE</span
+                  >Composite operator gate</span
                 >
                 <span
                   class="text-[10px] font-mono px-2 py-0.5 rounded font-bold {labGateOpen
                     ? 'bg-status-nominal/20 text-status-nominal border border-status-nominal/30'
                     : 'bg-surface-canvas text-fg-muted border border-border-subtle'}"
                 >
-                  GATE: {labGateOpen ? 'ACTIVE & CONFINED' : 'STANDBY'}
+                  Gate: {labGateOpen ? 'Active & confined' : 'Standby'}
                 </span>
               </div>
 
@@ -397,7 +395,7 @@
                     <span
                       class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-status-nominal/20 text-status-nominal font-bold"
                     >
-                      TRAP ACTIVE
+                      Trap active
                     </span>
                   </div>
 
@@ -409,8 +407,8 @@
                   </div>
 
                   <div class="space-y-1">
-                    <span class="text-[10px] font-mono text-fg-muted uppercase"
-                      >Roving Action Toolbar (&larr; &rarr; to cycle):</span
+                    <span class="text-[10px] font-mono text-fg-muted"
+                      >Roving action toolbar (&larr; &rarr; to cycle):</span
                     >
                     <div
                       role="toolbar"
@@ -430,7 +428,7 @@
                           Announcer.announce('IMU calibration sequence started.', 'polite');
                         }}
                       >
-                        [1] Calibrate
+                        Calibrate
                       </button>
                       <button
                         type="button"
@@ -440,7 +438,7 @@
                           Announcer.announce('Telemetry cache purged successfully.', 'polite');
                         }}
                       >
-                        [2] Purge
+                        Purge
                       </button>
                       <button
                         type="button"
@@ -450,7 +448,7 @@
                           Announcer.announce('Diagnostic gate closed. Focus restored.', 'polite');
                         }}
                       >
-                        [3] Dismiss Gate
+                        Dismiss Gate
                       </button>
                     </div>
                   </div>
@@ -461,14 +459,14 @@
             <div class="max-w-md mx-auto space-y-4">
               <div class="flex items-center justify-between pb-2 border-b border-border-subtle">
                 <span class="text-xs font-mono font-bold text-fg-primary"
-                  >MODAL / TRAP BOUNDARY</span
+                  >Modal / trap boundary</span
                 >
                 <span
                   class="text-[10px] font-mono px-2 py-0.5 rounded font-bold {trapEnabled
                     ? 'bg-status-nominal/20 text-status-nominal border border-status-nominal/30'
                     : 'bg-surface-canvas text-fg-muted border border-border-subtle'}"
                 >
-                  TRAP: {trapEnabled ? 'ACTIVE (TRAPPED)' : 'STANDBY (INACTIVE)'}
+                  Trap: {trapEnabled ? 'Active (trapped)' : 'Standby (inactive)'}
                 </span>
               </div>
 
@@ -516,9 +514,9 @@
                       id="trap-select-1"
                       class="w-full px-3 py-1.5 bg-surface-elevated border border-border-subtle rounded text-fg-primary focus-visible:outline-2 focus-visible:outline-accent-interactive"
                     >
-                      <option>Channel 01 · Space Grotesk</option>
-                      <option>Channel 02 · Space Mono</option>
-                      <option>Channel 03 · Raw Scale</option>
+                      <option>Optical</option>
+                      <option>Thermal</option>
+                      <option>Inertial</option>
                     </select>
                   </div>
 
@@ -544,7 +542,7 @@
             <div class="max-w-lg mx-auto space-y-4">
               <div class="flex items-center justify-between pb-2 border-b border-border-subtle">
                 <span class="text-xs font-mono font-bold text-fg-primary"
-                  >ROVING TABINDEX TOOLBAR</span
+                  >Roving tabindex toolbar</span
                 >
                 <span class="text-[10px] font-mono text-fg-muted">
                   Orientation: [{rovingOrientation}] &middot; Loop: [{rovingLoop
@@ -589,14 +587,14 @@
                   id="roving-item-1"
                   class="px-3 py-2 rounded font-mono text-xs bg-surface-elevated border border-border-subtle text-fg-primary hover:border-accent-interactive focus-visible:outline-2 focus-visible:outline-accent-interactive transition-colors"
                 >
-                  [01] Telemetry
+                  Telemetry
                 </button>
                 <button
                   type="button"
                   id="roving-item-2"
                   class="px-3 py-2 rounded font-mono text-xs bg-surface-elevated border border-border-subtle text-fg-primary hover:border-accent-interactive focus-visible:outline-2 focus-visible:outline-accent-interactive transition-colors"
                 >
-                  [02] Actuators
+                  Actuators
                 </button>
                 <button
                   type="button"
@@ -604,21 +602,21 @@
                   disabled
                   class="px-3 py-2 rounded font-mono text-xs bg-surface-muted border border-border-subtle text-fg-muted opacity-40 cursor-not-allowed"
                 >
-                  [03] Disabled
+                  Disabled
                 </button>
                 <button
                   type="button"
                   id="roving-item-4"
                   class="px-3 py-2 rounded font-mono text-xs bg-surface-elevated border border-border-subtle text-fg-primary hover:border-accent-interactive focus-visible:outline-2 focus-visible:outline-accent-interactive transition-colors"
                 >
-                  [04] Inertial
+                  Inertial
                 </button>
                 <button
                   type="button"
                   id="roving-item-5"
                   class="px-3 py-2 rounded font-mono text-xs bg-surface-elevated border border-border-subtle text-fg-primary hover:border-accent-interactive focus-visible:outline-2 focus-visible:outline-accent-interactive transition-colors"
                 >
-                  [05] Power Bus
+                  Power Bus
                 </button>
               </div>
             </div>
@@ -626,10 +624,10 @@
             <div class="max-w-lg mx-auto space-y-4">
               <div class="flex items-center justify-between pb-2 border-b border-border-subtle">
                 <span class="text-xs font-mono font-bold text-fg-primary"
-                  >LIVE REGION ANNOUNCER (ARIA-LIVE)</span
+                  >Live region announcer (aria-live)</span
                 >
                 <span class="text-[10px] font-mono text-status-nominal font-bold">
-                  DUAL MOUNTED (POLITE + ASSERTIVE)
+                  Dual mounted (polite + assertive)
                 </span>
               </div>
 
@@ -675,9 +673,7 @@
 
               <!-- Recent Announcements Log -->
               <div class="space-y-1 font-mono text-xs">
-                <span class="text-[10px] text-fg-muted uppercase tracking-wider"
-                  >Recent Dispatch Log:</span
-                >
+                <span class="text-[10px] text-fg-muted">Recent dispatch log:</span>
                 >
                 {#if announcementLog.length === 0}
                   <div
@@ -695,7 +691,7 @@
                         <span class="truncate flex-1 font-semibold text-fg-primary">{log.text}</span
                         >
                         <span
-                          class="px-1.5 py-0.2 rounded uppercase text-[9px] font-bold {log.mode ===
+                          class="px-1.5 py-0.2 rounded text-[9px] font-bold {log.mode ===
                           'assertive'
                             ? 'bg-status-critical/20 text-status-critical'
                             : 'bg-accent-interactive/30 text-fg-primary'}"
@@ -739,7 +735,7 @@
                   }
                 }}
               >
-                {labGateOpen ? 'CONFINED (LOCKED)' : 'STANDBY'}
+                {labGateOpen ? 'Confined (locked)' : 'Standby'}
               </button>
             </div>
             <p class="text-[11px] text-fg-muted leading-relaxed">
@@ -759,7 +755,7 @@
                   : 'bg-surface-canvas text-fg-muted border border-border-subtle hover:text-fg-primary'}"
                 onclick={() => (trapEnabled = !trapEnabled)}
               >
-                {trapEnabled ? 'ENABLED (TRUE)' : 'DISABLED (FALSE)'}
+                {trapEnabled ? 'Enabled (true)' : 'Disabled (false)'}
               </button>
             </div>
             <p class="text-[11px] text-fg-muted leading-relaxed">
@@ -874,31 +870,31 @@
       <div class="font-mono text-xs space-y-3">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="p-3 bg-surface-canvas rounded border border-border-subtle">
-            <div class="text-fg-muted text-[10px] uppercase">activeElement</div>
+            <div class="text-fg-muted text-[10px]">activeElement</div>
             <div class="text-fg-primary font-bold mt-1 truncate" title={activeElementTag}>
               {activeElementTag}
             </div>
           </div>
           <div class="p-3 bg-surface-canvas rounded border border-border-subtle">
-            <div class="text-fg-muted text-[10px] uppercase">computedRole</div>
+            <div class="text-fg-muted text-[10px]">computedRole</div>
             <div class="text-accent-interactive font-bold mt-1 truncate">
               {computedRole}
             </div>
           </div>
           <div class="p-3 bg-surface-canvas rounded border border-border-subtle">
-            <div class="text-fg-muted text-[10px] uppercase">lastKeyPressed</div>
+            <div class="text-fg-muted text-[10px]">lastKeyPressed</div>
             <div class="text-status-nominal font-bold mt-1">
               {lastKeyPressed}
             </div>
           </div>
           <div class="p-3 bg-surface-canvas rounded border border-border-subtle">
-            <div class="text-fg-muted text-[10px] uppercase">announcerNodes</div>
-            <div class="text-fg-primary font-bold mt-1">2 Live Regions</div>
+            <div class="text-fg-muted text-[10px]">announcerNodes</div>
+            <div class="text-fg-primary font-bold mt-1">2 live regions</div>
           </div>
         </div>
 
         <div class="p-3 bg-surface-canvas rounded border border-border-subtle space-y-1">
-          <div class="text-fg-muted text-[10px] uppercase">ariaAttributes Map:</div>
+          <div class="text-fg-muted text-[10px]">ariaAttributes map:</div>
           <pre
             class="text-[11px] text-fg-primary overflow-x-auto p-1 leading-relaxed">{JSON.stringify(
               ariaState,
@@ -918,7 +914,7 @@
           class="text-xs text-accent-interactive hover:underline focus-visible:outline-2 focus-visible:outline-accent-interactive rounded"
           onclick={copySnippet}
         >
-          {copied ? '✓ COPIED' : '[COPY SNIPPET]'}
+          {copied ? '✓ Copied' : '[Copy snippet]'}
         </button>
       </div>
 

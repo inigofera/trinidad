@@ -7,17 +7,17 @@
     timestamp: string;
     channel: string;
     voltage: number;
-    status: 'NOMINAL' | 'WARNING' | 'CRITICAL';
+    status: 'Nominal' | 'Warning' | 'Critical';
     packetId: number;
   }
 
   function generateRows(count: number): TelemetryRecord[] {
-    const statuses: ('NOMINAL' | 'WARNING' | 'CRITICAL')[] = [
-      'NOMINAL',
-      'NOMINAL',
-      'NOMINAL',
-      'WARNING',
-      'CRITICAL'
+    const statuses: ('Nominal' | 'Warning' | 'Critical')[] = [
+      'Nominal',
+      'Nominal',
+      'Nominal',
+      'Warning',
+      'Critical'
     ];
     const channels = ['CH_01_BIAS', 'CH_02_RATE', 'CH_03_PRESSURE', 'CH_04_TEMP'];
     const result: TelemetryRecord[] = [];
@@ -53,7 +53,7 @@
     return `<script lang="ts">
   import { DataTable, type DataTableColumn } from 'trinidad-ui';
 
-  const rows = [...]; // 10,000 items
+  const rows = [...]; /* 10,000 items */
   const columns: DataTableColumn<TelemetryRecord>[] = [
     { key: 'id', header: 'Packet ID', sortable: true },
     { key: 'timestamp', header: 'Timestamp', sortable: true },

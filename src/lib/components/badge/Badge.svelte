@@ -27,7 +27,7 @@
 </script>
 
 <span
-  class="inline-flex items-center gap-1.5 px-2 py-0.5 border font-mono text-[11px] leading-tight uppercase tracking-wider select-none {variantClasses[
+  class="inline-flex items-center gap-1.5 px-2 py-0.5 border font-mono text-[11px] leading-tight select-none {variantClasses[
     variant
   ]} {className}"
   {...rest}

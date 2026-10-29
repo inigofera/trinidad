@@ -47,23 +47,23 @@
     switch (status) {
       case 'accepted':
         return {
-          label: 'ACCEPTED',
+          label: 'Accepted',
           class: 'bg-status-nominal/20 text-fg-primary border-status-nominal/50'
         };
       case 'rejected':
         return {
-          label: 'REJECTED',
+          label: 'Rejected',
           class: 'bg-status-critical/20 text-fg-primary border-status-critical/50'
         };
       case 'modified':
         return {
-          label: 'MODIFIED',
+          label: 'Modified',
           class: 'bg-accent-interactive/20 text-fg-primary border-accent-interactive/50'
         };
       case 'pending':
       default:
         return {
-          label: 'PENDING GATE',
+          label: 'Pending gate',
           class: 'bg-status-warning/20 text-fg-primary border-status-warning/50'
         };
     }
@@ -78,7 +78,7 @@
     class="flex flex-wrap items-center justify-between border-b border-border-subtle p-3 gap-3 bg-surface-canvas"
   >
     <div class="flex items-center gap-2.5">
-      <span class="font-bold text-fg-primary text-sm">// PROPOSAL: {title}</span>
+      <span class="font-bold text-fg-primary text-sm">Proposal: {title}</span>
       <span class="px-2 py-0.5 rounded text-[10px] font-bold border {statusBadge.class}">
         [{statusBadge.label}]
       </span>
@@ -114,7 +114,7 @@
     class="flex flex-wrap items-center justify-between px-3 py-2 border-b border-border-subtle bg-surface-muted/30 gap-2"
   >
     <div class="text-[11px] text-fg-muted select-none">
-      GATE DISPOSITION: Review telemetry mutation proposal before committing.
+      Gate disposition: Review telemetry mutation proposal before committing.
     </div>
 
     <div class="flex items-center gap-2">
@@ -165,7 +165,7 @@
   {#if logic.isEditing}
     <div class="p-3 bg-surface-canvas">
       <label for="diff-inline-editor" class="block text-fg-muted mb-1.5 select-none font-bold">
-        // INLINE OPERATOR EDITOR (Modify proposed payload):
+        Inline operator editor (modify proposed payload):
       </label>
       <textarea
         id="diff-inline-editor"

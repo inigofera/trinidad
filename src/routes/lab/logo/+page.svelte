@@ -250,7 +250,7 @@
           class="px-2.5 py-1 rounded bg-surface-elevated border border-border-subtle text-fg-primary hover:border-accent-interactive transition-colors flex items-center gap-1.5 cursor-pointer"
           onclick={copySnippet}
         >
-          <span>{copied ? '✓ COPIED!' : 'COPY SNIPPET'}</span>
+          <span>{copied ? '✓ Copied' : 'Copy snippet'}</span>
         </button>
       </div>
 

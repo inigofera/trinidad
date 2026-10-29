@@ -17,7 +17,7 @@
     type CommandItem
   } from '$lib';
 
-  // --- Pattern A: Portfolio Case Study Card with Nested ThemeScope ---
+  // --- Portfolio Case Study Card with Nested ThemeScope ---
   let subtreeTheme = $state<'industrial' | 'paper'>('industrial');
   let subtreeDensity = $state<'compact' | 'comfortable'>('compact');
   let pickThreshold = $state(88.5);
@@ -35,25 +35,25 @@
     return () => clearInterval(interval);
   });
 
-  // --- Pattern B: Integrated HRI & Agentic Triage Console ---
+  // --- Integrated HRI & Agentic Triage Console ---
   interface TelemetryEvent {
     id: string;
     timestamp: string;
-    subsystem: 'VISION' | 'KINEMATICS' | 'PLANNER' | 'SAFETY';
+    subsystem: 'Vision' | 'Kinematics' | 'Planner' | 'Safety';
     latencyMs: number;
-    status: 'NOMINAL' | 'WARNING' | 'CRITICAL' | 'PATCHED';
+    status: 'Nominal' | 'Warning' | 'Critical' | 'Patched';
     originalConfig: string;
     proposedConfig: string;
   }
 
   function generateTelemetryEvents(): TelemetryEvent[] {
-    const subsystems: TelemetryEvent['subsystem'][] = ['VISION', 'KINEMATICS', 'PLANNER', 'SAFETY'];
+    const subsystems: TelemetryEvent['subsystem'][] = ['Vision', 'Kinematics', 'Planner', 'Safety'];
     const events: TelemetryEvent[] = [];
 
     for (let i = 1; i <= 1000; i++) {
       const sub = subsystems[i % subsystems.length]!;
       const status: TelemetryEvent['status'] =
-        i % 5 === 0 ? 'CRITICAL' : i % 3 === 0 ? 'WARNING' : 'NOMINAL';
+        i % 5 === 0 ? 'Critical' : i % 3 === 0 ? 'Warning' : 'Nominal';
       const latency = 20 + ((i * 17) % 85);
       const id = `TEL-${String(i).padStart(4, '0')}`;
       const timestamp = `14:23:${String(i % 60).padStart(2, '0')}.${String((i * 37) % 1000).padStart(3, '0')}`;
@@ -72,7 +72,7 @@
   }
 
   let telemetryEvents = $state<TelemetryEvent[]>(generateTelemetryEvents());
-  let activeSubsystemFilter = $state<string>('ALL');
+  let activeSubsystemFilter = $state<string>('All');
   let streamPaused = $state(false);
   let warnLatency = $state(45);
   let critLatency = $state(75);
@@ -96,47 +96,47 @@
   const comboboxItems: CommandItem[] = [
     {
       id: 'filter-all',
-      label: 'Filter: ALL',
+      label: 'Filter: All',
       group: 'Subsystems',
       onSelect: () => {
-        activeSubsystemFilter = 'ALL';
-        Announcer.announce('Subsystem filter set to ALL', 'polite');
+        activeSubsystemFilter = 'All';
+        Announcer.announce('Subsystem filter set to all', 'polite');
       }
     },
     {
       id: 'filter-vision',
-      label: 'Filter: VISION',
+      label: 'Filter: Vision',
       group: 'Subsystems',
       onSelect: () => {
-        activeSubsystemFilter = 'VISION';
-        Announcer.announce('Subsystem filter set to VISION', 'polite');
+        activeSubsystemFilter = 'Vision';
+        Announcer.announce('Subsystem filter set to vision', 'polite');
       }
     },
     {
       id: 'filter-kinematics',
-      label: 'Filter: KINEMATICS',
+      label: 'Filter: Kinematics',
       group: 'Subsystems',
       onSelect: () => {
-        activeSubsystemFilter = 'KINEMATICS';
-        Announcer.announce('Subsystem filter set to KINEMATICS', 'polite');
+        activeSubsystemFilter = 'Kinematics';
+        Announcer.announce('Subsystem filter set to kinematics', 'polite');
       }
     },
     {
       id: 'filter-planner',
-      label: 'Filter: PLANNER',
+      label: 'Filter: Planner',
       group: 'Subsystems',
       onSelect: () => {
-        activeSubsystemFilter = 'PLANNER';
-        Announcer.announce('Subsystem filter set to PLANNER', 'polite');
+        activeSubsystemFilter = 'Planner';
+        Announcer.announce('Subsystem filter set to planner', 'polite');
       }
     },
     {
       id: 'filter-safety',
-      label: 'Filter: SAFETY',
+      label: 'Filter: Safety',
       group: 'Subsystems',
       onSelect: () => {
-        activeSubsystemFilter = 'SAFETY';
-        Announcer.announce('Subsystem filter set to SAFETY', 'polite');
+        activeSubsystemFilter = 'Safety';
+        Announcer.announce('Subsystem filter set to safety', 'polite');
       }
     },
     {
@@ -144,7 +144,7 @@
       label: 'Open Latest Critical Diff',
       group: 'Quick Actions',
       onSelect: () => {
-        const crit = telemetryEvents.find((e) => e.status === 'CRITICAL');
+        const crit = telemetryEvents.find((e) => e.status === 'Critical');
         if (crit) openProposalModal(crit);
       }
     },
@@ -162,12 +162,12 @@
 
   function openProposalModal(row: TelemetryEvent) {
     selectedEvent = row;
-    diffStatus = row.status === 'PATCHED' ? 'accepted' : 'pending';
+    diffStatus = row.status === 'Patched' ? 'accepted' : 'pending';
     dialogOpen = true;
   }
 
   const filteredRows = $derived(
-    activeSubsystemFilter === 'ALL'
+    activeSubsystemFilter === 'All'
       ? telemetryEvents
       : telemetryEvents.filter((e) => e.subsystem === activeSubsystemFilter)
   );
@@ -188,18 +188,18 @@
 </script>
 
 <svelte:head>
-  <title>Contextual Patterns // Trinidad Design System</title>
+  <title>Contextual Patterns · Trinidad Design System</title>
 </svelte:head>
 
 {#snippet statusSnippet(row: TelemetryEvent)}
-  {#if row.status === 'PATCHED'}
-    <Badge variant="nominal">PATCHED</Badge>
-  {:else if row.status === 'CRITICAL'}
-    <Badge variant="critical">CRITICAL</Badge>
-  {:else if row.status === 'WARNING'}
-    <Badge variant="warning">WARNING</Badge>
+  {#if row.status === 'Patched'}
+    <Badge variant="nominal">Patched</Badge>
+  {:else if row.status === 'Critical'}
+    <Badge variant="critical">Critical</Badge>
+  {:else if row.status === 'Warning'}
+    <Badge variant="warning">Warning</Badge>
   {:else}
-    <Badge variant="nominal">NOMINAL</Badge>
+    <Badge variant="nominal">Nominal</Badge>
   {/if}
 {/snippet}
 
@@ -228,7 +228,7 @@
     </p>
   </section>
 
-  <!-- Pattern 01: Portfolio Case Study with Nested ThemeScope -->
+  <!-- Portfolio Case Study with Nested ThemeScope -->
   <section>
     <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">Portfolio case study</h2>
 
@@ -267,7 +267,7 @@
         data-testid="scoped-telemetry-widget"
       >
         <div class="font-mono text-xs text-fg-muted mb-3 font-bold select-none">
-          SUBTREE SCOPE: data-theme="{subtreeTheme}" · data-density="{subtreeDensity}"
+          Subtree scope: data-theme="{subtreeTheme}" · data-density="{subtreeDensity}"
         </div>
 
         <Stack direction="vertical" gap="md">
@@ -294,7 +294,7 @@
     </Grid>
   </section>
 
-  <!-- Pattern 02: Unified HRI & Agentic Triage Console -->
+  <!-- Unified HRI & Agentic Triage Console -->
   <section>
     <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">Agentic triage console</h2>
 
@@ -316,7 +316,7 @@
 
         <div class="flex items-center gap-2 font-mono text-xs text-fg-muted">
           <span>Active Filter:</span>
-          <Badge variant={activeSubsystemFilter === 'ALL' ? 'neutral' : 'accent'}>
+          <Badge variant={activeSubsystemFilter === 'All' ? 'neutral' : 'accent'}>
             {activeSubsystemFilter}
           </Badge>
           <span class="text-fg-muted">({filteredRows.length} events)</span>
@@ -375,7 +375,7 @@
         bind:status={diffStatus}
         onResolve={({ status: newStatus }) => {
           if (selectedEvent) {
-            selectedEvent.status = newStatus === 'accepted' ? 'PATCHED' : 'CRITICAL';
+            selectedEvent.status = newStatus === 'accepted' ? 'Patched' : 'Critical';
             const idx = telemetryEvents.findIndex((e) => e.id === selectedEvent!.id);
             if (idx !== -1 && telemetryEvents[idx]) {
               telemetryEvents[idx] = { ...telemetryEvents[idx]!, status: selectedEvent.status };

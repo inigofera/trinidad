@@ -89,7 +89,7 @@
       <div
         class="mt-4 p-2.5 rounded bg-surface-elevated border border-border-subtle font-mono text-[11px] text-fg-muted"
       >
-        LAST SELECTED: <span class="text-fg-primary font-bold">{lastSelected}</span>
+        Last selected: <span class="text-fg-primary font-bold">{lastSelected}</span>
       </div>
     </div>
   {/snippet}
@@ -106,7 +106,7 @@
             : 'bg-surface-canvas text-fg-primary'}"
           onclick={() => (open = !open)}
         >
-          {open ? 'State: OPEN (Click to Close)' : 'State: CLOSED (Click to Open)'}
+          {open ? 'State: open (click to close)' : 'State: closed (click to open)'}
         </button>
       </div>
 

@@ -151,7 +151,7 @@
 
         <!-- Embedded Micro-Proof: Live Keyboard Observer -->
         <div class="font-mono text-xs space-y-2.5">
-          <div class="text-[10px] text-fg-muted uppercase">Live keyboard observer</div>
+          <div class="text-[10px] text-fg-muted">Live keyboard observer</div>
           <div class="flex flex-wrap gap-1.5">
             {#each ['Tab', 'ArrowUp', 'ArrowDown', 'Escape'] as key}
               {@const isPressed = pressedKeys.has(key)}
@@ -204,7 +204,7 @@
 
         <!-- Embedded Micro-Proof: Frame-Delta Sparkline -->
         <div class="font-mono text-xs space-y-2">
-          <div class="flex items-center justify-between text-[10px] text-fg-muted uppercase">
+          <div class="flex items-center justify-between text-[10px] text-fg-muted">
             <span>Real-time frame delta</span>
             <span class="text-status-nominal font-bold"
               >{(frameDeltas[frameDeltas.length - 1] ?? 16.6).toFixed(1)} ms</span
@@ -212,7 +212,7 @@
           </div>
           <div class="h-14">
             <Sparkline
-              label="FRAME_TIMING"
+              label="Frame timing"
               data={frameDeltas}
               min={10}
               max={30}
@@ -238,7 +238,7 @@
       <div class="overflow-x-auto font-mono text-xs">
         <table class="w-full text-left border-collapse border border-border-subtle">
           <thead>
-            <tr class="border-b border-border-subtle text-[11px] text-fg-muted uppercase">
+            <tr class="border-b border-border-subtle text-[11px] text-fg-muted">
               <th scope="col" class="py-2.5 px-4 font-bold">Component &amp; Route</th>
               <th scope="col" class="py-2.5 px-4 font-bold">Primary Trinity Focus</th>
             </tr>

@@ -60,9 +60,9 @@
       onpointerup={logic.handlePointerUp}
       onpointercancel={logic.handlePointerUp}
     >
-      <span class="font-bold">// {label}</span>
+      <span class="font-bold">{label}</span>
       {#if logic.isScrubbing}
-        <span class="text-accent-interactive text-[10px] animate-pulse">[SCRUB]</span>
+        <span class="text-accent-interactive text-[10px] animate-pulse">[Scrub]</span>
       {/if}
     </label>
 

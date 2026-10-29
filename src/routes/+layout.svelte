@@ -377,8 +377,7 @@
         Contracts
       </a>
 
-      <span
-        class="w-full mt-2 border-t border-border-subtle pb-1 pt-3 text-[10px] uppercase tracking-wider text-fg-muted"
+      <span class="w-full mt-2 border-t border-border-subtle pb-1 pt-3 text-[10px] text-fg-muted"
         >Components</span
       >
 

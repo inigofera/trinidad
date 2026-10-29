@@ -7,7 +7,7 @@
   let max = $state(100);
   let step = $state(0.5);
   let unit = $state('ms');
-  let label = $state('SAMPLING_INTERVAL');
+  let label = $state('Sampling interval');
   let disabled = $state(false);
   let invalid = $state(false);
   let errorMessage = $state('Value breaches nominal sampling threshold [max: 100ms]');

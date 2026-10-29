@@ -4,7 +4,7 @@
   import { Button } from '$lib/components/button/index.js';
 
   let open = $state(false);
-  let title = $state('OVERRIDE_TELEMETRY_CALIBRATION');
+  let title = $state('Override telemetry calibration');
   let description = $state('You are about to re-zero telemetry bias across all channels.');
 
   const generatedCode = $derived.by(() => {
@@ -85,7 +85,7 @@
             : 'bg-surface-canvas text-fg-primary'}"
           onclick={() => (open = !open)}
         >
-          {open ? 'State: OPEN (Click to Close)' : 'State: CLOSED (Click to Open)'}
+          {open ? 'State: open (click to close)' : 'State: closed (click to open)'}
         </button>
       </div>
 
