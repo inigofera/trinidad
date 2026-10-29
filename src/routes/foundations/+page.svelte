@@ -52,6 +52,46 @@
 
   const spacing = Object.entries(tokens.primitive.spacing) as Array<[string, string]>;
 
+  const spacingRows = spacing.map(([name, value]) => {
+    const rem = Number.parseFloat(value);
+    return { name, value, px: Math.round(rem * 16), pct: (rem / 4) * 100 };
+  });
+
+  const densityMetrics = densityTokenNames.map((name) => {
+    const comfortableValue = comfortable[name];
+    const compactValue = compact[name];
+    const delta = Math.round(
+      (Number.parseFloat(compactValue) / Number.parseFloat(comfortableValue) - 1) * 100
+    );
+    return { name, comfortableValue, compactValue, delta };
+  });
+
+  const densityModes = [
+    { name: 'comfortable', label: 'Comfortable' },
+    { name: 'compact', label: 'Compact' }
+  ] as const;
+
+  const densityRows = [
+    {
+      label: 'Axis load',
+      value: '4.82 kN',
+      status: 'Nominal',
+      tone: 'text-status-nominal'
+    },
+    {
+      label: 'Torque drift',
+      value: '0.12 Nm',
+      status: 'Warning',
+      tone: 'text-status-warning'
+    },
+    {
+      label: 'Encoder lock',
+      value: 'Engaged',
+      status: 'Nominal',
+      tone: 'text-status-nominal'
+    }
+  ];
+
   const fontFamilies = [
     {
       token: '--font-sans',
@@ -118,7 +158,7 @@
 </script>
 
 <svelte:head>
-  <title>Foundations // Trinidad Design System</title>
+  <title>Foundations · Trinidad Design System</title>
 </svelte:head>
 
 <div class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-12">
@@ -167,9 +207,7 @@
         <caption class="sr-only"
           >Semantic color tokens across the paper and industrial themes</caption
         >
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
+        <thead class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]">
           <tr>
             <th scope="col" class="p-3 border-r border-border-subtle">Token</th>
             <th scope="col" class="p-3 border-r border-border-subtle">Paper</th>
@@ -212,9 +250,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left font-mono text-xs border border-border-subtle">
         <caption class="sr-only">Status color tokens and their meanings</caption>
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
+        <thead class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]">
           <tr>
             <th scope="col" class="p-3 border-r border-border-subtle">Token</th>
             <th scope="col" class="p-3 border-r border-border-subtle">State</th>
@@ -252,9 +288,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left font-mono text-xs border border-border-subtle">
         <caption class="sr-only">Font family tokens and specimens</caption>
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
+        <thead class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]">
           <tr>
             <th scope="col" class="p-3 border-r border-border-subtle">Token</th>
             <th scope="col" class="p-3 border-r border-border-subtle">Specimen</th>
@@ -290,9 +324,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left font-mono text-xs border border-border-subtle">
         <caption class="sr-only">Font size tokens, Tailwind utilities, and specimens</caption>
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
+        <thead class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]">
           <tr>
             <th scope="col" class="p-3 border-r border-border-subtle">Token</th>
             <th scope="col" class="p-3 border-r border-border-subtle">Size</th>
@@ -326,9 +358,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left font-mono text-xs border border-border-subtle">
         <caption class="sr-only">Font weight tokens, Tailwind utilities, and specimens</caption>
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
+        <thead class="bg-surface-canvas text-fg-primary border-b border-border-subtle text-[11px]">
           <tr>
             <th scope="col" class="p-3 border-r border-border-subtle">Token</th>
             <th scope="col" class="p-3 border-r border-border-subtle">Value</th>
@@ -371,49 +401,169 @@
   <section>
     <h2 class="text-xl font-mono font-bold text-fg-primary mb-4">Spacing &amp; density</h2>
     <p class="text-sm text-fg-muted leading-relaxed max-w-3xl mb-6">
-      A 4px-based spacing scale governs layout rhythm. Density swaps the control and row metrics
-      without changing the layout structure.
+      A 4px-based spacing scale governs layout rhythm. The density axis swaps six control and row
+      metrics without changing markup, structure, or component APIs.
     </p>
 
-    <h3 class="text-sm font-mono font-bold text-fg-primary mb-3">Density metrics</h3>
-    <div class="overflow-x-auto">
-      <table class="w-full text-left font-mono text-xs border border-border-subtle">
-        <caption class="sr-only">Density token values for comfortable and compact modes</caption>
-        <thead
-          class="bg-surface-canvas text-fg-primary border-b border-border-subtle uppercase text-[11px] tracking-wider"
-        >
-          <tr>
-            <th scope="col" class="p-3 border-r border-border-subtle">Token</th>
-            <th scope="col" class="p-3 border-r border-border-subtle">Comfortable</th>
-            <th scope="col" class="p-3">Compact</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-border-subtle/60 bg-surface-elevated">
-          {#each densityTokenNames as name}
-            <tr>
-              <th scope="row" class="p-3 border-r border-border-subtle font-bold text-fg-primary">
-                --{name}
-              </th>
-              <td class="p-3 border-r border-border-subtle text-fg-primary">{comfortable[name]}</td>
-              <td class="p-3 text-fg-primary">{compact[name]}</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
+    <h3 class="text-sm font-mono font-bold text-fg-primary mb-1">Density comparator</h3>
+    <p class="text-xs text-fg-muted leading-relaxed max-w-3xl mb-4">
+      The same telemetry card rendered under each density mode. Control height, row rhythm, padding,
+      type size, and gaps all compress from one attribute.
+    </p>
 
-    <h3 class="text-sm font-mono font-bold text-fg-primary mt-8 mb-3">Spacing scale</h3>
-    <div class="space-y-2">
-      {#each spacing as [name, value]}
-        <div class="flex flex-wrap items-center gap-3">
-          <code class="w-28 shrink-0 text-[10px] font-mono text-fg-muted">--spacing-{name}</code>
-          <div class="h-2 w-16 shrink-0 rounded-sm bg-surface-muted" aria-hidden="true">
-            <div class="h-full rounded-sm bg-accent-interactive" style:width={value}></div>
+    <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-2">
+      {#each densityModes as mode}
+        <div class="overflow-hidden rounded-card border border-border-subtle bg-surface-elevated">
+          <div
+            class="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle bg-surface-canvas px-4 py-2.5"
+          >
+            <span class="flex items-center gap-2 font-mono text-[11px] font-bold text-fg-primary">
+              <span class="h-2 w-2 rounded-full bg-accent-interactive" aria-hidden="true"></span>
+              {mode.label}
+            </span>
+            <code class="font-mono text-[10px] text-fg-muted">data-density="{mode.name}"</code>
           </div>
-          <span class="w-16 text-[10px] font-mono text-fg-primary">{value}</span>
-          <span class="text-[10px] font-mono text-fg-muted">p-{name}</span>
+
+          <div data-density={mode.name} class="bg-surface-elevated p-[var(--control-px)]">
+            <div
+              class="overflow-hidden rounded-control border border-border-subtle bg-surface-canvas"
+            >
+              <div
+                class="flex h-[var(--row-height)] items-center justify-between gap-2 border-b border-border-subtle px-[var(--control-px)]"
+              >
+                <span
+                  class="truncate font-mono text-[length:var(--font-size-ui)] font-bold tracking-wide text-fg-primary"
+                >
+                  CH-04 / Arm servo
+                </span>
+                <span
+                  class="inline-flex shrink-0 items-center gap-1.5 font-mono text-[10px] text-status-nominal"
+                >
+                  <span class="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true"></span>
+                  Nominal
+                </span>
+              </div>
+
+              <div class="flex items-center gap-[var(--gap-ui)] p-[var(--control-px)]">
+                <div
+                  class="flex h-[var(--control-height)] min-w-0 flex-1 items-center justify-between gap-2 border border-border-subtle bg-surface-elevated px-[var(--control-px)]"
+                >
+                  <span class="truncate font-mono text-[10px] text-fg-muted"> Torque limit </span>
+                  <span
+                    class="shrink-0 font-mono text-[length:var(--font-size-ui)] text-fg-primary"
+                  >
+                    12.5 <span class="text-[0.75em] text-fg-muted">Nm</span>
+                  </span>
+                </div>
+                <span
+                  class="inline-flex h-[var(--control-height)] shrink-0 items-center justify-center rounded-control border border-transparent bg-accent-interactive px-[var(--control-px)] font-mono text-[length:var(--font-size-ui)] font-bold text-accent-contrast"
+                >
+                  Arm
+                </span>
+              </div>
+
+              <div class="border-t border-border-subtle">
+                {#each densityRows as row}
+                  <div
+                    class="flex h-[var(--row-height)] items-center gap-[var(--gap-ui)] border-b border-border-subtle px-[var(--control-px)] last:border-b-0"
+                  >
+                    <span
+                      class="min-w-0 flex-1 truncate font-mono text-[length:var(--font-size-ui)] text-fg-primary"
+                    >
+                      {row.label}
+                    </span>
+                    <span class="hidden font-mono text-[10px] text-fg-muted sm:inline">
+                      {row.value}
+                    </span>
+                    <span
+                      class="inline-flex shrink-0 items-center gap-1 font-mono text-[10px] {row.tone}"
+                    >
+                      <span class="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true"></span>
+                      {row.status}
+                    </span>
+                  </div>
+                {/each}
+              </div>
+            </div>
+          </div>
         </div>
       {/each}
+    </div>
+
+    <div class="mt-8 mb-3 flex flex-wrap items-baseline justify-between gap-2">
+      <h3 class="text-sm font-mono font-bold text-fg-primary">Density token deltas</h3>
+      <span class="font-mono text-[10px] text-fg-muted">comfortable → compact</span>
+    </div>
+    <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6">
+      {#each densityMetrics as metric}
+        <div class="rounded-card border border-border-subtle bg-surface-elevated p-3">
+          <div class="flex items-baseline justify-between gap-2">
+            <code class="truncate font-mono text-[10px] text-fg-muted">--{metric.name}</code>
+            <span class="shrink-0 font-mono text-[10px] font-bold text-fg-primary">
+              {metric.delta}%
+            </span>
+          </div>
+          <div class="mt-1.5 flex items-baseline justify-between gap-1 font-mono">
+            <span class="text-[10px] text-fg-muted">{metric.comfortableValue}</span>
+            <span class="text-[9px] text-fg-muted" aria-hidden="true">→</span>
+            <span class="text-[11px] font-bold text-fg-primary">{metric.compactValue}</span>
+          </div>
+        </div>
+      {/each}
+    </div>
+
+    <h3 class="text-sm font-mono font-bold text-fg-primary mt-8 mb-1">Spacing scale</h3>
+    <p class="text-xs text-fg-muted leading-relaxed max-w-3xl mb-4">
+      Each step lands on the 4px grid. Bars are drawn at 2× scale so the progression from hairline
+      gap to section break stays legible.
+    </p>
+
+    <div class="overflow-hidden rounded-card border border-border-subtle bg-surface-elevated">
+      <div
+        class="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle bg-surface-canvas px-4 py-2.5"
+      >
+        <span class="font-mono text-[10px] font-bold text-fg-primary"> 4px base rhythm </span>
+        <span class="font-mono text-[10px] text-fg-muted">
+          0 – 64px · <code class="text-fg-primary">--spacing-*</code>
+        </span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <div class="min-w-[680px] p-4">
+          <div class="flex gap-3">
+            <div
+              class="flex h-32 w-10 shrink-0 flex-col justify-between pb-0 text-right font-mono text-[10px] text-fg-muted"
+              aria-hidden="true"
+            >
+              <span>64px</span>
+              <span>48</span>
+              <span>32</span>
+              <span>16</span>
+              <span>0</span>
+            </div>
+
+            <div class="flex flex-1 items-end gap-2">
+              {#each spacingRows as row}
+                <div class="group flex min-w-0 flex-1 flex-col">
+                  <div class="flex h-32 items-end">
+                    <div
+                      class="w-full rounded-t-sm border border-b-0 border-accent-interactive/40 bg-accent-interactive/50 transition-colors group-hover:bg-accent-interactive/80"
+                      style:height={`${row.pct}%`}
+                      title={`--spacing-${row.name}: ${row.value} (${row.px}px)`}
+                    ></div>
+                  </div>
+                  <div class="mt-2 border-t border-border-subtle pt-2 text-center font-mono">
+                    <div class="text-[11px] font-bold text-fg-primary">{row.name}</div>
+                    <div class="text-[10px] text-fg-muted">{row.value}</div>
+                    <div class="text-[10px] text-fg-muted">{row.px}px</div>
+                    <div class="mt-0.5 text-[10px] text-fg-muted">p-{row.name}</div>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <h3 class="text-sm font-mono font-bold text-fg-primary mt-8 mb-3">Radius</h3>
