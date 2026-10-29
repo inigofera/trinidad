@@ -42,6 +42,25 @@
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+
+  /* Primitives: Line Height */
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Primitives: Aspect Ratio */
+  --aspect-video: 16 / 9;
+  --aspect-wide: 21 / 9;
+  --aspect-photo: 4 / 3;
+  --aspect-square: 1 / 1;
+
+  /* Primitives: Shadow */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-floating: 0 8px 24px -4px rgba(0, 0, 0, 0.12);
 
   /* Primitives: Spacing */
   --spacing-1: 0.25rem;

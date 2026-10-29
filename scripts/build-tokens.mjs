@@ -88,6 +88,30 @@ if (tokens.primitive['font-size']) {
   }
 }
 
+if (tokens.primitive['line-height']) {
+  cssLines.push('');
+  cssLines.push('  /* Primitives: Line Height */');
+  for (const [name, token] of Object.entries(tokens.primitive['line-height'])) {
+    cssLines.push(`  --leading-${name}: ${token.$value};`);
+  }
+}
+
+if (tokens.primitive['aspect-ratio']) {
+  cssLines.push('');
+  cssLines.push('  /* Primitives: Aspect Ratio */');
+  for (const [name, token] of Object.entries(tokens.primitive['aspect-ratio'])) {
+    cssLines.push(`  --aspect-${name}: ${token.$value};`);
+  }
+}
+
+if (tokens.primitive.shadow) {
+  cssLines.push('');
+  cssLines.push('  /* Primitives: Shadow */');
+  for (const [name, token] of Object.entries(tokens.primitive.shadow)) {
+    cssLines.push(`  --shadow-${name}: ${token.$value};`);
+  }
+}
+
 if (tokens.primitive.spacing) {
   cssLines.push('');
   cssLines.push('  /* Primitives: Spacing */');

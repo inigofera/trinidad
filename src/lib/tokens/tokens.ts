@@ -38,7 +38,26 @@ export const tokens = {
       lg: '1.125rem',
       xl: '1.25rem',
       '2xl': '1.5rem',
-      '3xl': '1.875rem'
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '3.75rem'
+    },
+    'line-height': {
+      tight: '1.15',
+      snug: '1.3',
+      normal: '1.5',
+      relaxed: '1.65'
+    },
+    'aspect-ratio': {
+      video: '16 / 9',
+      wide: '21 / 9',
+      photo: '4 / 3',
+      square: '1 / 1'
+    },
+    shadow: {
+      subtle: '0 1px 3px rgba(0, 0, 0, 0.05)',
+      floating: '0 8px 24px -4px rgba(0, 0, 0, 0.12)'
     },
     spacing: {
       '1': '0.25rem',
